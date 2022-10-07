@@ -1,21 +1,23 @@
 export default class Bullet {
     constructor(options) {
-        // this.speed = options.speed;
-        this.vel = options.vel
+        this.pos = options.pos;
+        this.speed = options.speed;
+        this.angle = options.angle;
         this.tank = options.tank;
-        this.pos = [this.tank.barrelPos[0] + 19, this.tank.barrelPos[1] + 35];
     }
 
     draw(ctx) {
         let bullet = new Image();
         bullet.src = 'images/bullets/bulletBlue3.png';
-        ctx.drawImage(bullet, this.pos[0], this.pos[1]);
+        ctx.save();
+        ctx.translate(this.pos[0], this.pos[1]);
+        ctx.rotate(this.angle - (Math.PI / 2));
+        ctx.drawImage(bullet, 0, 0);
+        ctx.restore();
     }
 
     move() {
-        // this.pos[0] += this.speed * Math.cos(this.tank.angle);
-        // this.pos[1] += this.speed * Math.sin(this.tank.angle);
-        this.pos[0] += this.vel[0];
-        this.pos[1] += this.vel[1];
+        this.pos[0] += this.speed * Math.cos(this.angle);
+        this.pos[1] += this.speed * Math.sin(this.angle);
     }
 }

@@ -6,7 +6,7 @@ export default class Game {
         this.level = 1;
         this.playerTank = new Tank({pos: [100, 100], game: this});
         this.enemyTanks = [];
-        this.bullets = new Bullet({vel: [0, 0], tank: this.playerTank});
+        this.bullets = [];
         this.cursorPos = [];
         this.bindEventListeners();
     }
@@ -61,7 +61,7 @@ export default class Game {
                 if (e.code === 'KeyW') tank.vel[2] = 0;
                 if (e.code === 'KeyS') tank.vel[3] = 0;
             });
-            document.addEventListener('click', tank.shoot);
+            document.addEventListener('click', tank.shoot.bind(tank));
         })
     }
 }

@@ -1,5 +1,4 @@
 import Bullet from "./bullet";
-import Game from "./game";
 
 export default class Tank {
     constructor(options) {
@@ -18,7 +17,7 @@ export default class Tank {
         ctx.drawImage(body, this.bodyPos[0], this.bodyPos[1]);
         ctx.save();
         ctx.translate(this.barrelPos[0] + 20, this.barrelPos[1] + 20);
-        ctx.rotate(this.angle - (Math.PI / 2));
+        ctx.rotate(this.angle);
         ctx.drawImage(barrel, -5, -5);
         ctx.restore();
     }
@@ -32,11 +31,12 @@ export default class Tank {
         this.bodyPos[0] += this.vel[1];
         this.bodyPos[1] += this.vel[2];
         this.bodyPos[1] += this.vel[3];
-        this.angle = Math.atan2(this.game.cursorPos[1] - this.barrelPos[1], this.game.cursorPos[0] - this.barrelPos[0]);
+        this.angle = Math.atan2(this.game.cursorPos[1] - this.barrelPos[1], this.game.cursorPos[0] - this.barrelPos[0]) - (Math.PI / 2);
     }
 
     shoot() {
-        const bullet = new Bullet({speed: 3, tank: this});
+        // console.log(this);
+        const bullet = new Bullet({pos: [this.barrelPos[0] + 20, this.barrelPos[1] + 20], speed: 3, angle: this.angle + (Math.PI / 2), tank: this});
         this.game.add(bullet);
     }
 }
