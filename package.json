@@ -1,0 +1,37 @@
+{
+  "name": "tanks",
+  "version": "1.0.0",
+  "description": "Bombs Away is based off of Wii Play's minigame, Tanks! Each level of Tanks! plays out on a rectangular map that is sectioned off by walls and houses the player's tank and a certain number of enemy tanks. The player completes the level by destroying all enemy tanks without losing all of its lives. This simulation will introduce different variations of tanks and reward the player with coins for destroying enemy tanks. <br></br>",
+  "main": "index.js",
+  "browserslist": [
+    "defaults"
+  ],
+  "scripts": {
+    "start": "webpack --watch --mode=development",
+    "build": "webpack --mode=production"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/btsuda11/Tanks.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/btsuda11/Tanks/issues"
+  },
+  "homepage": "https://github.com/btsuda11/Tanks#readme",
+  "dependencies": {
+    "@babel/core": "^7.19.3",
+    "@babel/preset-env": "^7.19.3",
+    "babel-loader": "^8.2.5",
+    "core-js": "^3.25.5",
+    "css-loader": "^6.7.1",
+    "mini-css-extract-plugin": "^2.6.1",
+    "regenerator-runtime": "^0.13.9",
+    "sass": "^1.55.0",
+    "sass-loader": "^13.1.0",
+    "webpack": "^5.74.0",
+    "webpack-cli": "^4.10.0"
+  }
+}

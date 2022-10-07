@@ -18,7 +18,7 @@ In addition, this project will include:
 <br></br>
 
 # Wireframe
-![Alt text](/wireframe.png?raw=true "Optional Title")
+![Alt text](./images/wireframe.png?raw=true "Optional Title")
 <br></br>
 
 * Nav Links will include links to the About modal, this project's GitHub repository, and my LinkedIn.
