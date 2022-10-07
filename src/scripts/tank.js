@@ -5,23 +5,9 @@ export default class Tank {
     constructor(options) {
         this.barrelPos = options.pos;
         this.bodyPos = options.pos;
-        this.angle = options.angle;
+        // this.angle = 0;
         this.vel = [0, 0, 0, 0]; // [vx(left), vx(right), vy(up), vy(down)]
         this.game = options.game;
-
-        addEventListener('keydown', e => {
-            if (e.code === 'KeyA') this.vel[0] = -1;
-            if (e.code === 'KeyD') this.vel[1] = 1;
-            if (e.code === 'KeyW') this.vel[2] = -1;
-            if (e.code === 'KeyS') this.vel[3] = 1;
-        });
-        addEventListener('keyup', e => {
-            if (e.code === 'KeyA') this.vel[0] = 0;
-            if (e.code === 'KeyD') this.vel[1] = 0;
-            if (e.code === 'KeyW') this.vel[2] = 0;
-            if (e.code === 'KeyS') this.vel[3] = 0;
-        });
-        addEventListener('click', this.shoot);
     }
 
     draw(ctx) {
@@ -42,6 +28,7 @@ export default class Tank {
         this.bodyPos[0] += this.vel[1];
         this.bodyPos[1] += this.vel[2];
         this.bodyPos[1] += this.vel[3];
+        // this.angle = atan2(mouseY - this.barrelPos[0], mouseX - this.barrelPos[1]);
     }
 
     shoot() {

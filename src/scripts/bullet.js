@@ -3,12 +3,13 @@ export default class Bullet {
         // this.speed = options.speed;
         this.vel = options.vel
         this.tank = options.tank;
-        this.pos = [this.tank.barrelPos[0] + 21, this.tank.barrelPos[1] + 45];
+        this.pos = [this.tank.barrelPos[0] + 19, this.tank.barrelPos[1] + 35];
     }
 
     draw(ctx) {
-        ctx.arc(this.pos[0], this.pos[1], 3, 0, Math.PI * 2);
-        ctx.fill();
+        let bullet = new Image();
+        bullet.src = 'images/bullets/bulletBlue3.png';
+        ctx.drawImage(bullet, this.pos[0], this.pos[1]);
     }
 
     move() {

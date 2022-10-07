@@ -1,5 +1,5 @@
 canvas {
-    border: 1px solid black;
+    /* border: 1px solid black; */
     background-image: url('/images/wood_tile.jpeg');
     background-size: 100% 100%;
     opacity: 1;

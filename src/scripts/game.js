@@ -4,9 +4,11 @@ import Tank from "./tank";
 export default class Game {
     constructor() {
         this.level = 1;
-        this.playerTank = new Tank({pos: [100, 100], vel: [0, 0], game: this});
+        this.playerTank = new Tank({pos: [100, 100], game: this});
         this.enemyTanks = [];
         this.bullets = new Bullet({vel: [0, 0], tank: this.playerTank});
+        this.cursorPos = [];
+        this.bindEventListeners();
     }
 
     add(object) {
@@ -31,10 +33,35 @@ export default class Game {
     }
 
     static get DIM_X() {
-        return 1000;
+        return window.innerWidth;
     }
 
     static get DIM_Y() {
-        return 750;
+        return window.innerHeight;
+    }
+
+    mouseOnPage(e) {
+        // console.log(e)
+        this.cursorPos = [e.clientX, e.clientY];
+        // console.log(this.cursorPos);
+    }
+
+    bindEventListeners() {
+        document.addEventListener('mousemove', (e) => this.mouseOnPage(e));
+        [].concat(this.playerTank, this.enemyTanks).forEach(tank => {
+            document.addEventListener('keydown', e => {
+                if (e.code === 'KeyA') tank.vel[0] = -1;
+                if (e.code === 'KeyD') tank.vel[1] = 1;
+                if (e.code === 'KeyW') tank.vel[2] = -1;
+                if (e.code === 'KeyS') tank.vel[3] = 1;
+            });
+            document.addEventListener('keyup', e => {
+                if (e.code === 'KeyA') tank.vel[0] = 0;
+                if (e.code === 'KeyD') tank.vel[1] = 0;
+                if (e.code === 'KeyW') tank.vel[2] = 0;
+                if (e.code === 'KeyS') tank.vel[3] = 0;
+            });
+            document.addEventListener('click', tank.shoot);
+        })
     }
 }

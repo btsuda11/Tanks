@@ -140,7 +140,7 @@ table {
   !*** css ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[1].use[1]!./src/styles/canvas.css ***!
   \*****************************************************************************************************/
 canvas {
-    border: 1px solid black;
+    /* border: 1px solid black; */
     background-image: url('/images/wood_tile.jpeg');
     background-size: 100% 100%;
     opacity: 1;
