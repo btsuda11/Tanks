@@ -8,10 +8,10 @@ export default class Bullet {
 
     draw(ctx) {
         let bullet = new Image();
-        bullet.src = 'images/bullets/bulletBlue3.png';
+        bullet.src = 'images/bullets/bulletBlue2.png';
         ctx.save();
         ctx.translate(this.pos[0], this.pos[1]);
-        ctx.rotate(this.angle - (Math.PI / 2));
+        ctx.rotate(this.angle - ((3 * Math.PI )/ 2));
         ctx.drawImage(bullet, 0, 0);
         ctx.restore();
     }

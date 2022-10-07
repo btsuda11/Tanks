@@ -1,10 +1,11 @@
 import Bullet from "./bullet";
 import Tank from "./tank";
+import Function from "./util"
 
 export default class Game {
     constructor() {
         this.level = 1;
-        this.playerTank = new Tank({pos: [100, 100], game: this});
+        this.playerTank = new Tank({pos: [100, 100], game: this, type: 'player'});
         this.enemyTanks = [];
         this.bullets = [];
         this.cursorPos = [];
@@ -33,11 +34,11 @@ export default class Game {
     }
 
     static get DIM_X() {
-        return window.innerWidth;
+        return 1000;
     }
 
     static get DIM_Y() {
-        return window.innerHeight;
+        return 700;
     }
 
     mouseOnPage(e) {
@@ -61,7 +62,7 @@ export default class Game {
                 if (e.code === 'KeyW') tank.vel[2] = 0;
                 if (e.code === 'KeyS') tank.vel[3] = 0;
             });
-            document.addEventListener('click', tank.shoot.bind(tank));
+            document.addEventListener('click', tank.shoot.myThrottle(tank, 2000));
         })
     }
 }

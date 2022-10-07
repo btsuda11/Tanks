@@ -1,4 +1,5 @@
 import Bullet from "./bullet";
+import Function from "./util";
 
 export default class Tank {
     constructor(options) {
@@ -7,6 +8,13 @@ export default class Tank {
         this.angle = 0;
         this.vel = [0, 0, 0, 0]; // [vx(left), vx(right), vy(up), vy(down)]
         this.game = options.game;
+        this.type = options.type;
+
+        if (this.type === 'player') {
+            this.maxBullets = 5;
+        } else if (this.type === 'sand') {
+            this.maxBullets = 1;
+        }
     }
 
     draw(ctx) {
