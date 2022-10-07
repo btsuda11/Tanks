@@ -10,7 +10,7 @@ export default class Tank {
         ctx.fillRect(this.pos[0], this.pos[1], 40, 40);
     }
 
-    move(vel) {
+    move(vel = [0, 0]) {
         this.pos[0] += vel[0];
         this.pos[1] += vel[1];
     }

@@ -7,14 +7,14 @@ export default class Game {
         this.enemyTanks = [];
     }
 
-    draw() {
-        ctx.clearRect(0, 0, canvas.width, canvas.height);
-        this.allObjects.forEach(object => {
-            object.draw();
+    draw(ctx) {
+        ctx.clearRect(0, 0, 1000, 750);
+        this.allObjects().forEach(object => {
+            object.draw(ctx);
         });
     }
 
     allObjects() {
-        this.enemyTanks.slice().concat(this.playerTank);
+        return this.enemyTanks.slice().concat(this.playerTank);
     }
 }
