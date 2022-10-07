@@ -32,7 +32,6 @@ This project will be implemented with the following technologies:
 * the `Canvas API` to render the game board
 * `Webpack` to bundle the source JavaScript code
 * `npm` to manage project dependencies
-* `keymaster` library to bind keyboard shortcuts
 * sprites to render the tanks, bullets, and animations
 <br></br>
 
