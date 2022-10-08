@@ -1,13 +1,14 @@
 import Bullet from "./bullet";
 import PlayerTank from "./player_tank";
 import EnemyTank from "./enemy_tank";
+import Tank from "./tank";
 import Function from "./util";
 
 export default class Game {
     constructor() {
         this.level = 1;
         this.playerTank = new PlayerTank({pos: [100, 100], game: this});
-        this.enemyTanks = [];
+        this.enemyTanks = [new EnemyTank({pos: [700, 700], game: this, type: 'red'})];
         this.bullets = [];
         this.cursorPos = [];
         this.bindEventListeners();
@@ -21,13 +22,46 @@ export default class Game {
         }
     }
 
-    update(ctx) {
+    draw(ctx) {
         ctx.clearRect(0, 0, Game.DIM_X, Game.DIM_Y);
         this.allObjects().forEach(object => {
-            object.move();
             object.draw(ctx);
         });
+    }
+
+    moveObjects() {
+        this.allObjects().forEach(object => {
+            object.move();
+        });
+    }
+
+    update(ctx) {
+        this.moveObjects();
+        // this.checkCollisions();
+        this.draw(ctx);
         requestAnimationFrame(() => this.update(ctx));
+    }
+
+    checkCollisions() {
+        for (let i = 0; i < this.bullets.length; i++) {
+            for (let j = 0; j < this.allObjects().length; j++) {
+                console.log(this.bullets);
+                if (this.bullets[i] !== this.allObjects()[i]) {
+                    console.log(this.allObjects());
+                    if (this.bullets[i].hasHit(this.allObjects()[i])) {
+                        this.bullets[i].hits(this.allObjects()[i]);
+                    }
+                }
+            }
+        }
+    }
+
+    remove(object) {
+        if (object instanceof Bullet) {
+            this.bullets.splice(this.bullets.indexOf(object), 1);
+        } else if (object instanceof Tank) {
+            this.enemyTanks.splice(this.enemyTanks.indexOf(object), 1);
+        }
     }
 
     allObjects() {
