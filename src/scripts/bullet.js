@@ -20,4 +20,10 @@ export default class Bullet {
         this.pos[0] += this.speed * Math.cos(this.angle);
         this.pos[1] += this.speed * Math.sin(this.angle);
     }
+
+    hasHit(otherObject) {
+        if (this.pos[0] + 12 >= otherObject.pos[0] || this.pos[0] - 12 <= otherObject[0] + otherObject.width) { return true; }
+        if (this.pos[1] + 12 >= otherObject.pos[1] || this.pos[1] - 12 <= otherObject[1] + otherObject.height) { return true; }
+        else { return false };
+    }
 }

@@ -139,6 +139,12 @@ table {
 /*!*****************************************************************************************************!*\
   !*** css ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[1].use[1]!./src/styles/canvas.css ***!
   \*****************************************************************************************************/
+body {
+    /* display: flex;
+    flex-direction: column;
+    align-items: center; */
+}
+
 canvas {
     /* border: 1px solid black; */
     background-image: url('/images/wood_tile.jpeg');

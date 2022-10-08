@@ -34,11 +34,11 @@ export default class Game {
     }
 
     static get DIM_X() {
-        return 1000;
+        return window.innerWidth;
     }
 
     static get DIM_Y() {
-        return 700;
+        return window.innerHeight;
     }
 
     mouseOnPage(e) {

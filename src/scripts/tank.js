@@ -8,6 +8,13 @@ export default class Tank {
         this.bodyPos = options.pos;
         this.angle = 0;
         this.vel = [0, 0, 0, 0]; // [vx(left), vx(right), vy(up), vy(down)]
+        this.body = new Image();
+        this.body.src = 'images/tanks/tankBody_blue_outline.png';
+        this.height = this.body.height;
+        this.width = this.body.width;
+        this.barrel = new Image();
+        this.barrel.src = 'images/tanks/tankBlue_barrel2_outline.png';
+
         this.game = options.game;
         this.type = options.type;
 
@@ -19,15 +26,11 @@ export default class Tank {
     }
 
     draw(ctx) {
-        let body = new Image();
-        let barrel = new Image();
-        body.src = 'images/tanks/tankBody_blue_outline.png'
-        barrel.src = 'images/tanks/tankBlue_barrel2_outline.png';
-        ctx.drawImage(body, this.bodyPos[0], this.bodyPos[1]);
+        ctx.drawImage(this.body, this.bodyPos[0], this.bodyPos[1]);
         ctx.save();
         ctx.translate(this.barrelPos[0] + 20, this.barrelPos[1] + 20);
         ctx.rotate(this.angle);
-        ctx.drawImage(barrel, -5, -5);
+        ctx.drawImage(this.barrel, -5, -5);
         ctx.restore();
     }
 
@@ -47,17 +50,22 @@ export default class Tank {
     checkBounds() {
         if (this.bodyPos[0] < 0) {
             this.vel[0] = 0;
-        } else if (this.bodyPos[1] < 0) {
+        }
+        if (this.bodyPos[1] < 0) {
             this.vel[2] = 0;
-        } else if (this.bodyPos[0] + 42.5 > Game.DIM_X) {
+        }
+        if (this.bodyPos[0] + 42.5 > Game.DIM_X) {
             this.vel[1] = 0;
-        } else if (this.bodyPos[1] + 44 > Game.DIM_Y) {
+        }
+        if (this.bodyPos[1] + 44 > Game.DIM_Y) {
             this.vel[3] = 0;
         }
     }
 
     shoot() {
         // console.log(this);
+        console.log(this.height)
+        console.log(this.width);
         const bullet = new Bullet({pos: [this.barrelPos[0] + 20, this.barrelPos[1] + 20], speed: 3, angle: this.angle + (Math.PI / 2), tank: this});
         this.game.add(bullet);
     }
