@@ -2,6 +2,7 @@ import Bullet from "./bullet";
 import PlayerTank from "./player_tank";
 import EnemyTank from "./enemy_tank";
 import Tank from "./tank";
+import Wall from "./wall";
 import Function from "./util";
 
 export default class Game {
@@ -10,6 +11,7 @@ export default class Game {
         this.playerTank = new PlayerTank({pos: [100, 100], game: this});
         this.enemyTanks = [new EnemyTank({pos: [700, 700], game: this, type: 'red'})];
         this.bullets = [];
+        this.walls = [new Wall(75, 750, [250, 200]), new Wall(75, 750, [400, 550])];
         this.cursorPos = [];
         this.bindEventListeners();
     }
@@ -30,7 +32,7 @@ export default class Game {
     }
 
     moveObjects() {
-        this.allObjects().forEach(object => {
+        [].concat(this.playerTank, this.enemyTanks, this.bullets).forEach(object => {
             object.move();
         });
     }
@@ -65,7 +67,7 @@ export default class Game {
     }
 
     allObjects() {
-        return [].concat(this.playerTank, this.enemyTanks, this.bullets);
+        return [].concat(this.playerTank, this.enemyTanks, this.bullets, this.walls);
     }
 
     static get DIM_X() {
