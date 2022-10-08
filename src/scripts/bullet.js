@@ -8,10 +8,10 @@ export default class Bullet {
 
     draw(ctx) {
         let bullet = new Image();
-        bullet.src = 'images/bullets/bulletBlue2.png';
+        bullet.src = 'images/bullets/bulletDark2.png';
         ctx.save();
         ctx.translate(this.pos[0], this.pos[1]);
-        ctx.rotate(this.angle - ((3 * Math.PI )/ 2));
+        ctx.rotate(this.angle - ((3 * Math.PI) / 2));
         ctx.drawImage(bullet, 0, 0);
         ctx.restore();
     }
@@ -23,7 +23,7 @@ export default class Bullet {
 
     hasHit(otherObject) {
         if (this.pos[0] + 12 >= otherObject.pos[0] || this.pos[0] - 12 <= otherObject[0] + otherObject.width) { return true; }
-        if (this.pos[1] + 12 >= otherObject.pos[1] || this.pos[1] - 12 <= otherObject[1] + otherObject.height) { return true; }
+        else if (this.pos[1] + 12 >= otherObject.pos[1] || this.pos[1] - 12 <= otherObject[1] + otherObject.height) { return true; }
         else { return false };
     }
 }

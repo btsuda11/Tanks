@@ -1,11 +1,12 @@
 import Bullet from "./bullet";
-import Tank from "./tank";
-import Function from "./util"
+import PlayerTank from "./player_tank";
+import EnemyTank from "./enemy_tank";
+import Function from "./util";
 
 export default class Game {
     constructor() {
         this.level = 1;
-        this.playerTank = new Tank({pos: [100, 100], game: this, type: 'player'});
+        this.playerTank = new PlayerTank({pos: [100, 100], game: this});
         this.enemyTanks = [];
         this.bullets = [];
         this.cursorPos = [];
@@ -13,7 +14,7 @@ export default class Game {
     }
 
     add(object) {
-        if (object instanceof Tank) {
+        if (object instanceof EnemyTank) {
             this.enemyTanks.push(object);
         } else if (object instanceof Bullet) {
             this.bullets.push(object);
@@ -49,20 +50,18 @@ export default class Game {
 
     bindEventListeners() {
         document.addEventListener('mousemove', (e) => this.mouseOnPage(e));
-        [].concat(this.playerTank, this.enemyTanks).forEach(tank => {
-            document.addEventListener('keydown', e => {
-                if (e.code === 'KeyA') tank.vel[0] = -1;
-                if (e.code === 'KeyD') tank.vel[1] = 1;
-                if (e.code === 'KeyW') tank.vel[2] = -1;
-                if (e.code === 'KeyS') tank.vel[3] = 1;
-            });
-            document.addEventListener('keyup', e => {
-                if (e.code === 'KeyA') tank.vel[0] = 0;
-                if (e.code === 'KeyD') tank.vel[1] = 0;
-                if (e.code === 'KeyW') tank.vel[2] = 0;
-                if (e.code === 'KeyS') tank.vel[3] = 0;
-            });
-            document.addEventListener('click', tank.shoot.myThrottle(tank, 2000));
-        })
+        document.addEventListener('keydown', e => {
+                if (e.code === 'KeyA') this.playerTank.vel[0] = -1;
+                if (e.code === 'KeyD') this.playerTank.vel[1] = 1;
+                if (e.code === 'KeyW') this.playerTank.vel[2] = -1;
+                if (e.code === 'KeyS') this.playerTank.vel[3] = 1;
+        });
+        document.addEventListener('keyup', e => {
+                if (e.code === 'KeyA') this.playerTank.vel[0] = 0;
+                if (e.code === 'KeyD') this.playerTank.vel[1] = 0;
+                if (e.code === 'KeyW') this.playerTank.vel[2] = 0;
+                if (e.code === 'KeyS') this.playerTank.vel[3] = 0;
+        });
+        document.addEventListener('click', this.playerTank.shoot.myThrottle(this.playerTank, 2000));
     }
 }
