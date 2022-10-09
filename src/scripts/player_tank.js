@@ -19,6 +19,8 @@ export default class PlayerTank extends Tank {
 
     move() {
         this.checkBounds();
+        // this.game.walls.forEach(wall => this.checkWall(wall));
+        // this.checkWall(this.game.walls[0]);
         this.barrelPos[0] += this.vel[0];
         this.barrelPos[0] += this.vel[1];
         this.barrelPos[1] += this.vel[2];

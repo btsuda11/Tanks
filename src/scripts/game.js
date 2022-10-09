@@ -8,10 +8,11 @@ import Function from "./util";
 export default class Game {
     constructor() {
         this.level = 1;
-        this.playerTank = new PlayerTank({pos: [100, 100], game: this});
-        this.enemyTanks = [new EnemyTank({pos: [700, 700], game: this, type: 'red'})];
+        this.playerTank = new PlayerTank({pos: [150, 650], game: this});
+        this.enemyTanks = [new EnemyTank({pos: [1250, 125], game: this, type: 'red'})];
         this.bullets = [];
         this.walls = [new Wall(75, 750, [250, 200]), new Wall(75, 750, [400, 550])];
+        // this.walls = [new Wall(75, 750, [250, 200])];
         this.cursorPos = [];
         this.bindEventListeners();
     }

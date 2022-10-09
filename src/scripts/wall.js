@@ -6,7 +6,9 @@ export default class Wall {
     }
 
     draw(ctx) {
-        ctx.fillStyle = 'black';
-        ctx.fillRect(this.pos[0], this.pos[1], this.width, this.height);
+        let wall = new Image();
+        wall.src = 'images/wooden_wall.png';
+        ctx.drawImage(wall, this.pos[0], this.pos[1], this.width, this.height);
+        // ctx.fillRect(this.pos[0], this.pos[1], this.width, this.height);
     }
 }

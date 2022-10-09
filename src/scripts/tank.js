@@ -1,5 +1,6 @@
 import Bullet from "./bullet";
 import Game from "./game";
+import Wall from "./wall"
 import Function from "./util";
 
 export default class Tank {
@@ -34,6 +35,21 @@ export default class Tank {
             this.vel[1] = 0;
         }
         if (this.bodyPos[1] + 44 > Game.DIM_Y) {
+            this.vel[3] = 0;
+        }
+    }
+
+    checkWall(wall) {
+        if (this.bodyPos[0] <= wall.pos[0] + wall.width && (this.bodyPos[1] + this.height > wall.pos[1] && this.bodyPos[1] < wall.pos[1] + wall.height)) {
+            this.vel[0] = 0;
+        }
+        if (this.bodyPos[1] < wall.pos[1] + wall.height && (this.bodyPos[0] + this.width > wall.pos[0] && this.bodyPos[0] < wall.pos[0] + wall.width)) {
+            this.vel[2] = 0;
+        }
+        if (this.bodyPos[0] + this.width > wall.pos[0] && (this.bodyPos[1] + this.height > wall.pos[1] && this.bodyPos[1] < wall.pos[1] + wall.height)) {
+            this.vel[1] = 0;
+        }
+        if (this.bodyPos[1] + this.height > wall.pos[1] && (this.bodyPos[0] + this.width > wall.pos[0] && this.bodyPos[0] < wall.pos[0] + wall.width)) {
             this.vel[3] = 0;
         }
     }
