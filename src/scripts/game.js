@@ -40,7 +40,7 @@ export default class Game {
 
     update(ctx) {
         this.moveObjects();
-        this.checkCollisions();
+        // this.checkCollisions();
         this.draw(ctx);
         requestAnimationFrame(() => this.update(ctx));
     }
