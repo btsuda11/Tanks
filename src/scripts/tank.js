@@ -40,17 +40,29 @@ export default class Tank {
     }
 
     checkWall(wall) {
-        if (this.bodyPos[0] <= wall.pos[0] + wall.width && (this.bodyPos[1] + this.height > wall.pos[1] && this.bodyPos[1] < wall.pos[1] + wall.height)) {
-            this.vel[0] = 0;
-        }
-        if (this.bodyPos[1] < wall.pos[1] + wall.height && (this.bodyPos[0] + this.width > wall.pos[0] && this.bodyPos[0] < wall.pos[0] + wall.width)) {
-            this.vel[2] = 0;
-        }
-        if (this.bodyPos[0] + this.width > wall.pos[0] && (this.bodyPos[1] + this.height > wall.pos[1] && this.bodyPos[1] < wall.pos[1] + wall.height)) {
+        // if (this.bodyPos[0] <= wall.pos[0] + wall.width && (this.bodyPos[1] + this.height > wall.pos[1] && this.bodyPos[1] < wall.pos[1] + wall.height)) {
+        //     this.vel[0] = 0;
+        // }
+        // if (this.bodyPos[1] < wall.pos[1] + wall.height && (this.bodyPos[0] + this.width > wall.pos[0] && this.bodyPos[0] < wall.pos[0] + wall.width)) {
+        //     this.vel[2] = 0;
+        // }
+        // if (this.bodyPos[0] + this.width > wall.pos[0] && (this.bodyPos[1] + this.height > wall.pos[1] && this.bodyPos[1] < wall.pos[1] + wall.height)) {
+        //     this.vel[1] = 0;
+        // }
+        // if (this.bodyPos[1] + this.height > wall.pos[1] && (this.bodyPos[0] + this.width > wall.pos[0] && this.bodyPos[0] < wall.pos[0] + wall.width)) {
+        //     this.vel[3] = 0;
+        // }
+        if (wall.pos[0] <= this.bodyPos[0] + this.width) {
             this.vel[1] = 0;
         }
-        if (this.bodyPos[1] + this.height > wall.pos[1] && (this.bodyPos[0] + this.width > wall.pos[0] && this.bodyPos[0] < wall.pos[0] + wall.width)) {
+        if (this.bodyPos[0] <= wall.width + wall.pos[0]) {
+            this.vel[0] = 0;
+        }
+        if (wall.pos[1] <= this.bodyPos[1] + this.height) {
             this.vel[3] = 0;
+        }
+        if (this.bodyPos[1] <= wall.height + wall.pos[1]) {
+            this.vel[2] = 0;
         }
     }
 
