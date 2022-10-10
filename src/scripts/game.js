@@ -11,16 +11,21 @@ export default class Game {
         this.level = 1;
         this.playerTank = new PlayerTank({pos: [150, 650], game: this});
         this.enemyTanks = [new EnemyTank({pos: [1250, 125], game: this, type: 'red'})];
+        this.tanks = [this.playerTank].concat(this.enemyTanks);
         this.bullets = [];
         this.walls = [new Wall(75, 750, [250, 200]), new Wall(75, 750, [400, 550])];
         this.cursorPos = [];
         this.missionScreen = document.getElementsByClassName('mission-screen')[0];
+        this.missionHeader = document.getElementsByClassName('mission')[0];
+        this.enemyTanksHeader = document.getElementsByClassName('enemy-tanks')[0];
         this.bindEventListeners();
     }
 
     startLevel() {
         // if this.enemyTanks.length === 0, endLevel => this.level++, startLevel(this.level)
         // this.missionScreen.style.display = 'block';
+        this.missionHeader.innerHTML = `Mission ${this.level}`;
+        this.enemyTanksHeader.innerHTML = `Enemy Tanks: ${this.enemyTanks.length}`;
         setTimeout(() => {
             this.missionScreen.classList.remove('mission-screen');
             this.missionScreen.classList.add('hidden');
@@ -52,19 +57,20 @@ export default class Game {
     update(ctx) {
         this.step();
         this.draw(ctx);
-        requestAnimationFrame(() => this.update(ctx));
+        this.frameID = requestAnimationFrame(() => this.update(ctx));
     }
 
     checkCollisions() {
+        // console.log(this.tanks);
         for (let i = 0; i < this.bullets.length; i++) {
-            for (let j = 0; j < this.enemyTanks.length; j++) {
+            for (let j = 0; j < this.tanks.length; j++) {
                 // if (this.bullets[i] !== this.allObjects()[j]) {
                 //     if (this.bullets[i].hasHit(this.allObjects()[j])) {
                 //         this.bullets[i].hits(this.allObjects()[j]);
                 //     }
                 // }
-                if (this.bullets[i].hasHit(this.enemyTanks[j])) {
-                    this.bullets[i].hits(this.enemyTanks[j]);
+                if (this.bullets[i].hasHit(this.tanks[j])) {
+                    this.bullets[i].hits(this.tanks[j]);
                 }
             }
         }
@@ -79,12 +85,12 @@ export default class Game {
         if (object instanceof Bullet) {
             this.bullets.splice(this.bullets.indexOf(object), 1);
         } else if (object instanceof Tank) {
-            this.enemyTanks.splice(this.enemyTanks.indexOf(object), 1);
+            this.tanks.splice(this.tanks.indexOf(object), 1);
         }
     }
 
     allObjects() {
-        return [].concat(this.playerTank, this.enemyTanks, this.bullets, this.walls);
+        return [].concat(this.tanks, this.bullets, this.walls);
     }
 
     static get DIM_X() {

@@ -38,10 +38,10 @@ export default class Tank {
     }
 
     hittingWall(wall) {
-        if ((this.bodyPos[0] < wall.pos[0] + wall.width && this.bodyPos[0] + this.width > wall.pos[0]) && (this.bodyPos[1] + this.height > wall.pos[1] && this.bodyPos[1] < wall.pos[1] + wall.height)) {
+        if ((this.bodyPos[0] + 2 < wall.pos[0] + wall.width && this.bodyPos[0] + this.width - 2 > wall.pos[0]) && (this.bodyPos[1] + this.height - 2 > wall.pos[1] && this.bodyPos[1] + 2 < wall.pos[1] + wall.height)) {
             return true;
         }
-        else if ((this.bodyPos[1] < wall.pos[1] + wall.height && this.bodyPos[1] + this.height > wall.pos[1]) && (this.bodyPos[0] + this.width > wall.pos[0] && this.bodyPos[0] < wall.pos[0] + wall.width)) {
+        else if ((this.bodyPos[1] + 2 < wall.pos[1] + wall.height && this.bodyPos[1] + this.height - 2 > wall.pos[1]) && (this.bodyPos[0] + this.width - 2 > wall.pos[0] && this.bodyPos[0] + 2 < wall.pos[0] + wall.width)) {
             return true;
         } else {
             return false;
@@ -49,7 +49,7 @@ export default class Tank {
     }
 
     shoot() {
-        const bullet = new Bullet({pos: [this.barrelPos[0] + 20, this.barrelPos[1] + 20], speed: 3, angle: this.angle + (Math.PI / 2), tank: this});
+        const bullet = new Bullet({pos: [this.barrelPos[0] + 20, this.barrelPos[1] + 100], speed: 3, angle: this.angle + (Math.PI / 2), tank: this});
         this.game.add(bullet);
     }
 }

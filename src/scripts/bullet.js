@@ -23,21 +23,39 @@ export default class Bullet {
     }
 
     move() {
-        if (this.pos[0] < 0) {
-            this.vel[0] = -(this.vel[0]);
-        }
-        if (this.pos[1] < 0) {
-            this.vel[1] = -(this.vel[1]);
-        }
-        if (this.pos[0] + this.width > Game.DIM_X) {
-            this.vel[0] = -(this.vel[0]);
-        }
-        if (this.pos[1] + this.height > Game.DIM_Y) {
-            this.vel[1] = -(this.vel[1]);
-        }
+        this.checkRicochet();
 
         this.pos[0] += this.vel[0];
         this.pos[1] += this.vel[1];
+    }
+
+    checkRicochet() {
+        this.tank.game.walls.forEach(wall => {
+            if ((this.pos[0] <= wall.pos[0] + wall.width && this.pos[0] + this.width >= wall.pos[0]) && (this.pos[1] + this.height >= wall.pos[1] && this.pos[1] <= wall.pos[1] + wall.height)) {
+                this.vel[0] = -(this.vel[0]);
+                this.angle = -(this.angle);
+            }
+            if ((this.pos[1] <= wall.pos[1] + wall.height && this.pos[1] + this.height >= wall.pos[1]) && (this.pos[0] + this.width >= wall.pos[0] && this.pos[0] <= wall.pos[0] + wall.width)) {
+                this.vel[1] = -(this.vel[1]);
+                this.angle = -(this.angle);
+            }
+        });
+        if (this.pos[0] < 0) {
+            this.vel[0] = -(this.vel[0]);
+            this.angle = -(this.angle);
+        }
+        if (this.pos[1] < 0) {
+            this.vel[1] = -(this.vel[1]);
+            this.angle = -(this.angle);
+        }
+        if (this.pos[0] + this.width > Game.DIM_X) {
+            this.vel[0] = -(this.vel[0]);
+            this.angle = -(this.angle);
+        }
+        if (this.pos[1] + this.height > Game.DIM_Y) {
+            this.vel[1] = -(this.vel[1]);
+            this.angle = -(this.angle);
+        }
     }
 
     hasHit(otherObject) {
