@@ -2,13 +2,12 @@ import Game from "./game";
 
 export default class GameView {
     constructor(ctx) {
-        this.game = new Game();
         this.ctx = ctx;
-        this.cursorPos = [];
-        // this.missionScreen = document.getElementsByClassName('mission-screen')[0];
+        this.game = new Game(this.ctx);
+        this.start();
     }
     
     start() {
-        this.game.update(this.ctx);
+        this.game.startLevel();
     }
 }

@@ -7,5 +7,4 @@ document.addEventListener("DOMContentLoaded", () => {
     canvas.width = Game.DIM_X;
     const ctx = canvas.getContext('2d');
     let view = new GameView(ctx);
-    view.start();
 })

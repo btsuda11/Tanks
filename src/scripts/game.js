@@ -6,14 +6,26 @@ import Wall from "./wall";
 import Function from "./util";
 
 export default class Game {
-    constructor() {
+    constructor(ctx) {
+        this.ctx = ctx;
         this.level = 1;
         this.playerTank = new PlayerTank({pos: [150, 650], game: this});
         this.enemyTanks = [new EnemyTank({pos: [1250, 125], game: this, type: 'red'})];
         this.bullets = [];
         this.walls = [new Wall(75, 750, [250, 200]), new Wall(75, 750, [400, 550])];
         this.cursorPos = [];
+        this.missionScreen = document.getElementsByClassName('mission-screen')[0];
         this.bindEventListeners();
+    }
+
+    startLevel() {
+        // if this.enemyTanks.length === 0, endLevel => this.level++, startLevel(this.level)
+        // this.missionScreen.style.display = 'block';
+        setTimeout(() => {
+            this.missionScreen.classList.remove('mission-screen');
+            this.missionScreen.classList.add('hidden');
+        }, 10000)
+        this.update(this.ctx);
     }
 
     add(object) {

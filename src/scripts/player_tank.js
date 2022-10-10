@@ -1,3 +1,4 @@
+import Game from "./game";
 import Tank from "./tank";
 
 export default class PlayerTank extends Tank {
@@ -21,16 +22,17 @@ export default class PlayerTank extends Tank {
 
     move() {
         this.checkBounds();
-        // this.game.walls.forEach(wall => this.checkWall(wall));
-        // this.checkWall(this.game.walls[0]);
+
         this.barrelPos[0] += this.vel[0];
         this.barrelPos[0] += this.vel[1];
         this.barrelPos[1] += this.vel[2];
         this.barrelPos[1] += this.vel[3];
+
         this.bodyPos[0] += this.vel[0];
         this.bodyPos[0] += this.vel[1];
         this.bodyPos[1] += this.vel[2];
         this.bodyPos[1] += this.vel[3];
         this.angle = Math.atan2(this.game.cursorPos[1] - this.barrelPos[1], this.game.cursorPos[0] - this.barrelPos[0]) - (Math.PI / 1.95);
+        // this.game.walls.forEach(wall => this.hittingWall(wall));
     }
 }
