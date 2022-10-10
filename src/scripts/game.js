@@ -50,28 +50,29 @@ export default class Game {
     }
 
     update(ctx) {
-        this.moveObjects();
-        this.checkCollisions();
+        this.step();
         this.draw(ctx);
         requestAnimationFrame(() => this.update(ctx));
     }
 
     checkCollisions() {
         for (let i = 0; i < this.bullets.length; i++) {
-            // for (let j = 0; j < this.allObjects().length; j++) {
-            //     // console.log(this.bullets);
-            //     if (this.bullets[i] !== this.allObjects()[i]) {
-            //         // console.log(this.allObjects());
-            //         if (this.bullets[i].hasHit(this.allObjects()[i])) {
-            //             this.bullets[i].hits(this.allObjects()[i]);
-            //         }
-            //     }
-            // }
-            // console.log(this.bullets[i].hasHit(this.enemyTanks[0]));
-            if (this.bullets[i].hasHit(this.enemyTanks[0])) {
-                this.bullets[i].hits(this.enemyTanks[0]);
+            for (let j = 0; j < this.enemyTanks.length; j++) {
+                // if (this.bullets[i] !== this.allObjects()[j]) {
+                //     if (this.bullets[i].hasHit(this.allObjects()[j])) {
+                //         this.bullets[i].hits(this.allObjects()[j]);
+                //     }
+                // }
+                if (this.bullets[i].hasHit(this.enemyTanks[j])) {
+                    this.bullets[i].hits(this.enemyTanks[j]);
+                }
             }
         }
+    }
+
+    step() {
+        this.moveObjects();
+        this.checkCollisions();
     }
 
     remove(object) {

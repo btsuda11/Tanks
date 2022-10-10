@@ -22,17 +22,25 @@ export default class PlayerTank extends Tank {
 
     move() {
         this.checkBounds();
-
+        let oldBodyPos = this.bodyPos;
+        let oldBarrelPos = this.barrelPos;
+        
         this.barrelPos[0] += this.vel[0];
         this.barrelPos[0] += this.vel[1];
         this.barrelPos[1] += this.vel[2];
         this.barrelPos[1] += this.vel[3];
-
+        
         this.bodyPos[0] += this.vel[0];
         this.bodyPos[0] += this.vel[1];
         this.bodyPos[1] += this.vel[2];
         this.bodyPos[1] += this.vel[3];
         this.angle = Math.atan2(this.game.cursorPos[1] - this.barrelPos[1], this.game.cursorPos[0] - this.barrelPos[0]) - (Math.PI / 1.95);
-        // this.game.walls.forEach(wall => this.hittingWall(wall));
+        
+        this.game.walls.forEach(wall => {
+            if (this.hittingWall(wall)) {
+                this.bodyPos = oldBodyPos;
+                this.barrelPos = oldBarrelPos;
+            }
+        });
     }
 }
