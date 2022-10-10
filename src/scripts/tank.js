@@ -12,8 +12,6 @@ export default class Tank {
         this.body = new Image();
         this.barrel = new Image();
         this.game = options.game;
-        this.height = this.body.height;
-        this.width = this.body.width;
     }
 
     draw(ctx) {

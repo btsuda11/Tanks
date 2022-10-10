@@ -12,7 +12,6 @@ export default class Game {
         this.enemyTanks = [new EnemyTank({pos: [1250, 125], game: this, type: 'red'})];
         this.bullets = [];
         this.walls = [new Wall(75, 750, [250, 200]), new Wall(75, 750, [400, 550])];
-        // this.walls = [new Wall(75, 750, [250, 200])];
         this.cursorPos = [];
         this.bindEventListeners();
     }
@@ -40,7 +39,7 @@ export default class Game {
 
     update(ctx) {
         this.moveObjects();
-        // this.checkCollisions();
+        this.checkCollisions();
         this.draw(ctx);
         requestAnimationFrame(() => this.update(ctx));
     }

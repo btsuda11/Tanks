@@ -6,6 +6,8 @@ export default class Bullet {
         this.speed = options.speed;
         this.angle = options.angle;
         this.tank = options.tank;
+        this.height = 12;
+        this.width = 8;
     }
 
     draw(ctx) {
@@ -25,19 +27,28 @@ export default class Bullet {
 
     hasHit(otherObject) {
         if (otherObject instanceof Tank) {
-            if (((this.pos[1] + this.height) < (otherObject.bodyPos[1])) ||
-                (this.pos[1] > (otherObject.bodyPos[1] + otherObject.height)) ||
-                ((this.pos[0] + this.width) < otherObject.bodyPos[0]) ||
-                (this.pos[0] > (otherObject.bodyPos[0] + otherObject.width))) {
+            // console.log(this.pos);
+            // console.log(otherObject.bodyPos);
+            // console.log(otherObject);
+            // console.log(this);
+            // console.log(this.height);
+            // console.log(this.width);
+            // console.log(otherObject.height);
+            // console.log(otherObject.width);
+
+            if ((this.pos[1] + this.height >= otherObject.bodyPos[1]) ||
+                (this.pos[1] <= otherObject.bodyPos[1] + otherObject.height) ||
+                (this.pos[0] + this.width > otherObject.bodyPos[0]) ||
+                (this.pos[0] <= otherObject.bodyPos[0] + otherObject.width)) {
                 return true;
             } else {
                 return false;
             }
         } else if (otherObject instanceof Bullet) {
-            if (((this.pos[1] + this.height) < (otherObject.pos[1])) ||
-                (this.pos[1] > (otherObject.pos[1] + otherObject.height)) ||
-                ((this.pos[0] + this.width) < otherObject.pos[0]) ||
-                (this.pos[0] > (otherObject.pos[0] + otherObject.width))) {
+            if (((this.pos[1] + this.height) >= (otherObject.pos[1])) ||
+                (this.pos[1] <= (otherObject.pos[1] + otherObject.height)) ||
+                ((this.pos[0] + this.width) >= otherObject.pos[0]) ||
+                (this.pos[0] <= (otherObject.pos[0] + otherObject.width))) {
                 return true;
             } else {
                 return false;

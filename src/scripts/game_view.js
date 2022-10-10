@@ -5,6 +5,7 @@ export default class GameView {
         this.game = new Game();
         this.ctx = ctx;
         this.cursorPos = [];
+        // this.missionScreen = document.getElementsByClassName('mission-screen')[0];
     }
     
     start() {
