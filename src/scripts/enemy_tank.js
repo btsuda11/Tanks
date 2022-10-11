@@ -1,4 +1,5 @@
 import Tank from "./tank";
+import Bullet from "./bullet"
 
 export default class EnemyTank extends Tank {
     constructor(options) {
@@ -9,12 +10,22 @@ export default class EnemyTank extends Tank {
             this.barrel.src = 'images/tanks/tankRed_barrel2_outline.png';
             this.maxBullets = 1;
             this.maxMines = 0;
+            this.height = this.body.height;
+            this.width = this.body.width;
         }
-        this.height = this.body.height;
-        this.width = this.body.width;
-        // setInterval(() => {
-        //     if (this.state === 'alive' || this.game.state === 'game over') this.shoot();
-        // }, 1000);
+        if (this.type === 'green') {
+            this.body.src = 'images/tanks/tankBody_green_outline.png';
+            this.barrel.src = 'images/tanks/tankGreen_barrel2_outline.png';
+            this.maxBullets = 2;
+            this.maxMines = 0;
+            this.height = this.body.height;
+            this.width = this.body.width;
+        }
+        setInterval(() => {
+            if (this.state === 'alive' || this.game.state === 'game over') {
+                this.shoot();
+            }
+        }, 1500);
     }
 
     draw(ctx) {
@@ -60,5 +71,17 @@ export default class EnemyTank extends Tank {
                 this.vel[3] = 0;
             }
         });
+    }
+
+    shoot() {
+        let bullet;
+        let x = 50 * Math.cos(this.angle + (Math.PI / 2));
+        let y = 50 * Math.sin(this.angle + (Math.PI / 2));
+        if (this.type === 'red') {
+            bullet = new Bullet({ pos: [this.barrelPos[0] + 20 + x, this.barrelPos[1] + 20 + y], speed: 3, angle: this.angle + (Math.PI / 2), tank: this });
+        } else if (this.type === 'green') {
+            bullet = new Bullet({ pos: [this.barrelPos[0] + 20 + x, this.barrelPos[1] + 20 + y], speed: 6, angle: this.angle + (Math.PI / 2), tank: this });
+        }
+        this.game.add(bullet);
     }
 }

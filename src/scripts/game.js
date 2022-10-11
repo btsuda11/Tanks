@@ -15,13 +15,16 @@ export default class Game {
             this.enemyTanks = [new EnemyTank({pos: [1250, 125], game: this, type: 'red'})];
             this.tanks = [this.playerTank].concat(this.enemyTanks);
             this.walls = [new Wall(75, 750, [250, 200]), new Wall(75, 750, [400, 550])];
+        } else if (this.level === 2) {
+            this.enemyTanks = [new EnemyTank({pos: [1000, 125], game: this, type: 'green'}), new EnemyTank({pos: [1250, 375], game: this, type: 'green'})];
+            this.tanks = [this.playerTank].concat(this.enemyTanks);
+            this.walls = [new Wall(75, 150, [125, 500]), new Wall(75, 75, [200, 575]), new Wall(75, 150, [1150, 200]), new Wall(75, 75, [1150, 125])];
         }
         this.bullets = [];
         this.mines = [];
         this.cursorPos = [];
         this.missionScreen = document.getElementsByClassName('mission-screen')[0];
         this.missionHeader = document.getElementsByClassName('mission')[0];
-        this.missionFailed = document.getElementsByClassName('mission-failed')[0];
         this.enemyTanksHeader = document.getElementsByClassName('enemy-tanks')[0];
         // this.frame = 0;
         // this.music = document.getElementsByClassName('music')[0];
@@ -35,26 +38,31 @@ export default class Game {
         this.missionHeader.innerHTML = `Mission ${this.level}`;
         this.enemyTanksHeader.innerHTML = `Enemy Tanks: ${this.enemyTanks.length}`;
         setTimeout(() => {
-            this.missionScreen.classList.remove('mission-screen');
-            this.missionScreen.classList.add('hidden');
+            this.missionScreen.style.display = 'none';
         }, 10000);
         this.update(this.ctx);
-        if (this.enemyTanks.length === 0) {
-            this.endLevel();
-        }
     }
 
     endLevel() {
-        console.log('next level');
-        this.level++;
-        this.startLevel();
+        cancelAnimationFrame(this.frameID);
+        let missionCleared = document.getElementsByClassName('mission-cleared')[0];
+        setTimeout(() => {
+            missionCleared.style.display = 'block';
+            setTimeout(() => {
+                missionCleared.style.display = 'none';
+            }, 10000);
+            this.level++;
+            this.startLevel();
+        })
     }
 
     gameOver() {
+        cancelAnimationFrame(this.frameID);
+        let missionFailed = document.getElementsByClassName('mission-failed')[0];
         this.state = 'game over';
-        this.missionFailed.style.display = 'block';
+        missionFailed.style.display = 'block';
         setTimeout(() => {
-            this.missionFailed.style.display = 'none';
+            missionFailed.style.display = 'none';
         }, 10000);
     }
 
@@ -171,5 +179,9 @@ export default class Game {
         document.addEventListener('keydown', e => {
             if (e.code === 'Space') this.playerTank.placeMine();
         });
+    }
+
+    removeEventListeners() {
+
     }
 }
