@@ -82,7 +82,9 @@ export default class Bullet {
     }
 
     hits(otherObject) {
-        this.tank.game.remove(this);
-        this.tank.game.remove(otherObject);
+        if (otherObject !== this.tank) {
+            this.tank.game.remove(this);
+            this.tank.game.remove(otherObject);
+        }
     }
 }

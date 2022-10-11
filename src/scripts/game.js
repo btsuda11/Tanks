@@ -20,12 +20,14 @@ export default class Game {
         this.missionScreen = document.getElementsByClassName('mission-screen')[0];
         this.missionHeader = document.getElementsByClassName('mission')[0];
         this.enemyTanksHeader = document.getElementsByClassName('enemy-tanks')[0];
+        // this.music = document.getElementsByClassName('music')[0];
         this.bindEventListeners();
     }
 
     startLevel() {
         // if this.enemyTanks.length === 0, endLevel => this.level++, startLevel(this.level)
         // this.missionScreen.style.display = 'block';
+        // this.music.play();
         this.missionHeader.innerHTML = `Mission ${this.level}`;
         this.enemyTanksHeader.innerHTML = `Enemy Tanks: ${this.enemyTanks.length}`;
         setTimeout(() => {

@@ -50,7 +50,7 @@ export default class Tank {
     }
 
     shoot() {
-        const bullet = new Bullet({pos: [this.barrelPos[0], this.barrelPos[1]], speed: 3, angle: this.angle + (Math.PI / 2), tank: this});
+        const bullet = new Bullet({pos: [this.barrelPos[0] + 20, this.barrelPos[1] + 20], speed: 3, angle: this.angle + (Math.PI / 2), tank: this});
         this.game.add(bullet);
     }
 

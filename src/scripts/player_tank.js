@@ -8,6 +8,8 @@ export default class PlayerTank extends Tank {
         this.barrel.src = 'images/tanks/tankBlue_barrel2_outline.png';
         this.height = this.body.height;
         this.width = this.body.width;
+        this.barrelHeight = this.barrel.height;
+        this.barrelWidth = this.barrel.width;
         this.maxBullets = 5;
     }
 
