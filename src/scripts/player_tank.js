@@ -25,9 +25,6 @@ export default class PlayerTank extends Tank {
 
     move() {
         this.checkBounds();
-
-        let oldBodyPos = this.bodyPos;
-        let oldBarrelPos = this.barrelPos;
         
         this.barrelPos[0] += this.vel[0];
         this.barrelPos[0] += this.vel[1];

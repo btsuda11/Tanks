@@ -12,6 +12,7 @@ export default class Tank {
         this.vel = [0, 0, 0, 0]; // [vx(left), vx(right), vy(up), vy(down)]
         this.body = new Image();
         this.barrel = new Image();
+        this.state = 'alive';
         this.game = options.game;
     }
 

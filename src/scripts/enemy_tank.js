@@ -12,6 +12,9 @@ export default class EnemyTank extends Tank {
         }
         this.height = this.body.height;
         this.width = this.body.width;
+        setInterval(() => {
+            if (this.state === 'alive' || this.game.state === 'game over') this.shoot();
+        }, 1000);
     }
 
     draw(ctx) {
@@ -36,6 +39,26 @@ export default class EnemyTank extends Tank {
         this.bodyPos[1] += this.vel[2];
         this.bodyPos[1] += this.vel[3];
         let playerCenter = [this.game.playerTank.bodyPos[0] + (this.game.playerTank.width / 2), this.game.playerTank.bodyPos[1] + (this.game.playerTank.height / 2)];
-        this.angle = Math.atan2(playerCenter[1] - this.barrelPos[1], playerCenter[0] - this.barrelPos[0]) - (Math.PI / 2.1);
+        this.angle = Math.atan2(playerCenter[1] - this.barrelPos[1], playerCenter[0] - this.barrelPos[0]) - (Math.PI / 1.95);
+
+        this.game.walls.forEach(wall => {
+            if (this.hittingWall(wall) && this.vel[0] < 0) {
+                this.barrelPos[0] -= (2 * this.vel[0]);
+                this.bodyPos[0] -= (2 * this.vel[0]);
+                this.vel[0] = 0;
+            } else if (this.hittingWall(wall) && this.vel[1] > 0) {
+                this.barrelPos[0] -= (2 * this.vel[1]);
+                this.bodyPos[0] -= (2 * this.vel[1]);
+                this.vel[1] = 0;
+            } else if (this.hittingWall(wall) && this.vel[2] < 0) {
+                this.barrelPos[1] -= (2 * this.vel[2]);
+                this.bodyPos[1] -= (2 * this.vel[2]);
+                this.vel[2] = 0;
+            } else if (this.hittingWall(wall) && this.vel[3] > 0) {
+                this.barrelPos[1] -= (2 * this.vel[3]);
+                this.bodyPos[1] -= (2 * this.vel[3]);
+                this.vel[3] = 0;
+            }
+        });
     }
 }

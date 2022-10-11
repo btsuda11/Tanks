@@ -19,6 +19,7 @@ export default class Game {
         this.cursorPos = [];
         this.missionScreen = document.getElementsByClassName('mission-screen')[0];
         this.missionHeader = document.getElementsByClassName('mission')[0];
+        this.missionFailed = document.getElementsByClassName('mission-failed')[0];
         this.enemyTanksHeader = document.getElementsByClassName('enemy-tanks')[0];
         // this.frame = 0;
         // this.music = document.getElementsByClassName('music')[0];
@@ -42,8 +43,17 @@ export default class Game {
     }
 
     endLevel() {
+        console.log('next level');
         this.level++;
         this.startLevel();
+    }
+
+    gameOver() {
+        this.state = 'game over';
+        this.missionFailed.style.display = 'block';
+        setTimeout(() => {
+            this.missionFailed.style.display = 'none';
+        }, 10000);
     }
 
     add(object) {
@@ -83,11 +93,6 @@ export default class Game {
                     this.bullets[i].hits(this.tanks[j]);
                 }
             }
-            for (let j = 0; j < this.mines.length; j++) {
-                if (this.bullets[i].hasHit(this.mines[j])) {
-                    this.bullets[i].hits(this.mines[j]);
-                }
-            }
             for (let j = 0; j < this.bullets.length; j++) {
                 if (this.bullets[i] !== this.bullets[j]) {
                     if (this.bullets[i].hasHit(this.bullets[j])) {
@@ -95,14 +100,11 @@ export default class Game {
                     }
                 }
             }
-            // for (let j = 0; j < this.allObjects().length; j++) {
-            //     console.log(this.allObjects());
-            //     if (this.bullets[i] !== this.allObjects()[j]) {
-            //         if (this.bullets[i].hasHit(this.allObjects()[j])) {
-            //             this.bullets[i].hits(this.allObjects()[j]);
-            //         }
-            //     }
-            // }
+            for (let j = 0; j < this.mines.length; j++) {
+                if (this.bullets[i].hasHit(this.mines[j])) {
+                    this.bullets[i].hits(this.mines[j]);
+                }
+            }
         }
     }
 
@@ -115,8 +117,18 @@ export default class Game {
         if (object instanceof Bullet) {
             this.bullets.splice(this.bullets.indexOf(object), 1);
         } else if (object instanceof Tank) {
+            if (object instanceof PlayerTank) {
+                this.gameOver();
+            } else {
+                this.enemyTanks.splice(this.enemyTanks.indexOf(object), 1);
+            }
             this.tanks.splice(this.tanks.indexOf(object), 1);
+            if (this.enemyTanks.length === 0) {
+                this.endLevel();
+            }
         } else if (object instanceof Mine) {
+            console.log(this.mines, 'mines');
+            console.log(this.mines.indexOf(object), 'mine index')
             this.mines.splice(this.mines.indexOf(object), 1);
         }
     }

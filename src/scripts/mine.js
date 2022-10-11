@@ -8,7 +8,10 @@ export default class Mine {
         this.ctx = ctx;
         this.radius = 60;
         // this.loadExplosion();
-        setTimeout(() => this.explode(), 10000);
+        this.timeoutID = setTimeout(() => {
+            this.explode();
+            console.log('boom');
+        }, 10000);
     }
 
     draw(ctx) {
@@ -25,14 +28,17 @@ export default class Mine {
         // for (let i = 0; i < this.explosion.length; i++) {
         //     this.ctx.drawImage(this.explosion[index], this.pos[0], this.pos[1]);
         // }
-        this.tank.game.tanks.forEach(tank => {
-            if (this.inRadius(tank)) {
-                tank.game.remove(this);
-                tank.game.remove(tank);
+        for (let i = 0; i < this.tank.game.tanks.length; i++) {
+            console.log(this.tank.game.tanks[i])
+            if (this.inRadius(this.tank.game.tanks[i])) {
+                this.tank.game.remove(this);
+                this.tank.game.remove(this.tank.game.tanks[i]);
+                return;
             } else {
-                tank.game.remove(this);
+                this.tank.game.remove(this);
+                return;
             }
-        });
+        }
     }
 
     inRadius(object) {
