@@ -11,11 +11,13 @@ export default class Game {
         this.ctx = ctx;
         this.level = 1;
         this.playerTank = new PlayerTank({pos: [150, 650], game: this});
-        this.enemyTanks = [new EnemyTank({pos: [1250, 125], game: this, type: 'red'})];
-        this.tanks = [this.playerTank].concat(this.enemyTanks);
+        if (this.level === 1) {
+            this.enemyTanks = [new EnemyTank({pos: [1250, 125], game: this, type: 'red'})];
+            this.tanks = [this.playerTank].concat(this.enemyTanks);
+            this.walls = [new Wall(75, 750, [250, 200]), new Wall(75, 750, [400, 550])];
+        }
         this.bullets = [];
         this.mines = [];
-        this.walls = [new Wall(75, 750, [250, 200]), new Wall(75, 750, [400, 550])];
         this.cursorPos = [];
         this.missionScreen = document.getElementsByClassName('mission-screen')[0];
         this.missionHeader = document.getElementsByClassName('mission')[0];

@@ -26,6 +26,7 @@ export default class Bullet {
     }
 
     move() {
+        // console.log(this.vel);
         this.checkRicochet();
 
         this.pos[0] += this.vel[0];
@@ -37,17 +38,31 @@ export default class Bullet {
             this.tank.game.remove(this);
         }
         this.tank.game.walls.forEach(wall => {
+            // if ((this.pos[0] === wall.pos[0] + wall.width + 20) && (this.pos[1] + this.height >= wall.pos[1] && this.pos[1] <= wall.pos[1] + wall.height)) {
+            //     // this.vel[0] = -(this.vel[0]);
+            //     // this.angle = -(this.angle);
+            //     // this.numRicochets++;
+            //     console.log('hit left')
+            // } else if ((this.pos[0] + this.width === wall.pos[0] - 20) && (this.pos[1] + this.height >= wall.pos[1] && this.pos[1] <= wall.pos[1] + wall.height)) {
+            //     // this.vel[0] = -(this.vel[0]);
+            //     // this.angle = -(this.angle);
+            //     // this.numRicochets++;
+            //     console.log('hit right')
+            // } else if ((this.pos[0] + this.width >= wall.pos[0] && this.pos[0] <= wall.pos[0] + wall.width) && (this.pos[1] + this.height === wall.pos[1] - 20)) {
+            //     // this.vel[1] = -(this.vel[1]);
+            //     // this.angle = -(this.angle);
+            //     // this.numRicochets++;
+            //     console.log('hit top')
+            // } else if ((this.pos[0] + this.width >= wall.pos[0] && this.pos[0] <= wall.pos[0] + wall.width) && (this.pos[1] === wall.pos[1] + wall.height + 20)) {
+            //     // this.vel[1] = -(this.vel[1]);
+            //     // this.angle = -(this.angle);
+            //     // this.numRicochets++;
+            //     console.log('hit bottom')
+            // }
             if ((this.pos[0] <= wall.pos[0] + wall.width && this.pos[0] + this.width >= wall.pos[0]) && (this.pos[1] + this.height >= wall.pos[1] && this.pos[1] <= wall.pos[1] + wall.height)) {
-                this.vel[0] = -(this.vel[0]);
+                this.vel[1] = -(this.vel[1]);
                 this.angle = -(this.angle);
                 this.numRicochets++;
-            }
-            else if ((this.pos[1] <= wall.pos[1] + wall.height && this.pos[1] + this.height >= wall.pos[1]) && (this.pos[0] + this.width >= wall.pos[0] && this.pos[0] <= wall.pos[0] + wall.width)) {
-                // debugger;
-                // console.log('hit')
-                // this.vel[1] = -(this.vel[1]);
-                // this.angle = -(this.angle);
-                // this.numRicochets++;
             }
         });
         if (this.pos[0] < 0) {
@@ -92,8 +107,8 @@ export default class Bullet {
                 return false;
             }
         } else if (otherObject instanceof Mine) {
-            let distX = otherObject.pos[0] - this.pos[0] - (this.width / 2);
-            let distY = otherObject.pos[1] - this.pos[1] - (this.height / 2);
+            let distX = Math.abs(otherObject.pos[0] - this.pos[0] - (this.width / 2));
+            let distY = Math.abs(otherObject.pos[1] - this.pos[1] - (this.height / 2));
 
             if (distX > (this.width / 2) + 8) return false;
             if (distY > (this.height / 2) + 8) return false;
