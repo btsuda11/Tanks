@@ -11,6 +11,7 @@ export default class PlayerTank extends Tank {
         this.barrelHeight = this.barrel.height;
         this.barrelWidth = this.barrel.width;
         this.maxBullets = 5;
+        this.maxMines = 1;
     }
 
     draw(ctx) {

@@ -1,5 +1,7 @@
 import Tank from "./tank";
+import Mine from "./mine";
 import Game from "./game";
+import Wall from "./wall";
 
 export default class Bullet {
     constructor(options) {
@@ -31,31 +33,39 @@ export default class Bullet {
     }
 
     checkRicochet() {
+        if (this.numRicochets >= 2) {
+            this.tank.game.remove(this);
+        }
         this.tank.game.walls.forEach(wall => {
             if ((this.pos[0] <= wall.pos[0] + wall.width && this.pos[0] + this.width >= wall.pos[0]) && (this.pos[1] + this.height >= wall.pos[1] && this.pos[1] <= wall.pos[1] + wall.height)) {
                 this.vel[0] = -(this.vel[0]);
                 this.angle = -(this.angle);
+                this.numRicochets++;
             }
-            if ((this.pos[1] <= wall.pos[1] + wall.height && this.pos[1] + this.height >= wall.pos[1]) && (this.pos[0] + this.width >= wall.pos[0] && this.pos[0] <= wall.pos[0] + wall.width)) {
-                this.vel[1] = -(this.vel[1]);
-                this.angle = -(this.angle);
-            }
+            // else if ((this.pos[1] <= wall.pos[1] + wall.height && this.pos[1] + this.height >= wall.pos[1]) && (this.pos[0] + this.width >= wall.pos[0] && this.pos[0] <= wall.pos[0] + wall.width)) {
+            //     this.vel[1] = -(this.vel[1]);
+            //     this.angle = -(this.angle);
+            // }
         });
         if (this.pos[0] < 0) {
             this.vel[0] = -(this.vel[0]);
             this.angle = -(this.angle);
+            this.numRicochets++;
         }
         if (this.pos[1] < 0) {
             this.vel[1] = -(this.vel[1]);
             this.angle = -(this.angle);
+            this.numRicochets++;
         }
         if (this.pos[0] + this.width > Game.DIM_X) {
             this.vel[0] = -(this.vel[0]);
             this.angle = -(this.angle);
+            this.numRicochets++;
         }
         if (this.pos[1] + this.height > Game.DIM_Y) {
             this.vel[1] = -(this.vel[1]);
             this.angle = -(this.angle);
+            this.numRicochets++;
         }
     }
 
@@ -78,13 +88,28 @@ export default class Bullet {
             } else {
                 return false;
             }
+        } else if (otherObject instanceof Mine) {
+            let distX = otherObject.pos[0] - this.pos[0] - (this.width / 2);
+            let distY = otherObject.pos[1] - this.pos[1] - (this.height / 2);
+
+            if (distX > (this.width / 2) + 8) return false;
+            if (distY > (this.height / 2) + 8) return false;
+            if (distX <= (this.width / 2)) {
+                return true;
+            }
+            if (distY <= (this.height / 2)) {
+                return true;
+            }
+            return (((distX - (this.width / 2)) ** 2) + ((distY - (this.height / 2)) ** 2) <= 8 ** 2);
         }
     }
 
     hits(otherObject) {
-        if (otherObject !== this.tank) {
-            this.tank.game.remove(this);
-            this.tank.game.remove(otherObject);
+        if (otherObject instanceof Mine) {
+            otherObject.explode();
         }
+
+        this.tank.game.remove(this);
+        this.tank.game.remove(otherObject);
     }
 }

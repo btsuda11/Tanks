@@ -8,6 +8,7 @@ export default class EnemyTank extends Tank {
             this.body.src = 'images/tanks/tankBody_red_outline.png';
             this.barrel.src = 'images/tanks/tankRed_barrel2_outline.png';
             this.maxBullets = 1;
+            this.maxMines = 0;
         }
         this.height = this.body.height;
         this.width = this.body.width;

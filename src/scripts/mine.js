@@ -1,8 +1,11 @@
+import Tank from "./tank";
+import Bullet from "./bullet";
+
 export default class Mine {
     constructor(pos, tank) {
         this.pos = pos;
         this.tank = tank;
-        this.radius = 50;
+        this.radius = 60;
         setTimeout(() => this.explode(), 10000);
     }
 
@@ -26,17 +29,24 @@ export default class Mine {
         });
     }
 
-    inRadius(tank) {
-        let distX = this.pos[0] - tank.bodyPos[0] - (tank.width / 2);
-        let distY = this.pos[1] - tank.bodyPos[1] - (tank.height / 2);
-        if (distX > (tank.width / 2) + this.radius) return false;
-        if (distY > (tank.height / 2) + this.radius) return false;
-        if (distX <= (tank.width / 2)) {
+    inRadius(object) {
+        let distX, distY;
+        if (object instanceof Tank) {
+            distX = this.pos[0] - object.bodyPos[0] - (object.width / 2);
+            distY = this.pos[1] - object.bodyPos[1] - (object.height / 2);
+        } else if (object instanceof Bullet) {
+            distX = this.pos[0] - object.pos[0] - (object.width / 2);
+            distY = this.pos[1] - object.pos[1] - (object.height / 2);
+        }
+
+        if (distX > (object.width / 2) + this.radius) return false;
+        if (distY > (object.height / 2) + this.radius) return false;
+        if (distX <= (object.width / 2)) {
             return true;
         }
-        if (distY <= (tank.height / 2)) {
+        if (distY <= (object.height / 2)) {
             return true;
         }
-        return (((distX - (tank.width / 2)) ** 2) + ((distY - (tank.height / 2)) ** 2) <= this.radius ** 2);
+        return (((distX - (object.width / 2)) ** 2) + ((distY - (object.height / 2)) ** 2) <= this.radius ** 2);
     }
 }

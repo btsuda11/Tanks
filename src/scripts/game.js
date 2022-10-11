@@ -68,15 +68,23 @@ export default class Game {
 
     checkCollisions() {
         for (let i = 0; i < this.bullets.length; i++) {
+            // for (let j = 0; j < this.bullets.length; j++) {
+            //     if (this.bullets[i] !== this.bullets[j]) {
+            //         if (this.bullets[i].hasHit(this.bullets[j])) {
+            //             this.bullets[i].hits(this.bullets[j]);
+            //         }
+            //     }
+            // }
             for (let j = 0; j < this.tanks.length; j++) {
-                if (this.bullets[i] !== this.allObjects()[j]) {
-                    if (this.bullets[i].hasHit(this.allObjects()[j])) {
-                        this.bullets[i].hits(this.allObjects()[j]);
-                    }
+                if (this.bullets[i].hasHit(this.tanks[j])) {
+                    this.bullets[i].hits(this.tanks[j]);
                 }
-                // if (this.bullets[i].hasHit(this.tanks[j])) {
-                //     this.bullets[i].hits(this.tanks[j]);
-                // }
+            }
+            for (let j = 0; j < this.mines.length; j++) {
+                if (this.bullets[i].hasHit(this.mines[j])) {
+                    this.bullets[i].hits(this.mines[j]);
+                }
+                
             }
         }
     }
