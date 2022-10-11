@@ -29,7 +29,8 @@ export default class Mine {
         //     this.ctx.drawImage(this.explosion[index], this.pos[0], this.pos[1]);
         // }
         for (let i = 0; i < this.tank.game.tanks.length; i++) {
-            console.log(this.tank.game.tanks[i])
+            console.log(this.tank.game.tanks[i]);
+            console.log(this.inRadius(this.tank.game.tanks[i]))
             if (this.inRadius(this.tank.game.tanks[i])) {
                 this.tank.game.remove(this);
                 this.tank.game.remove(this.tank.game.tanks[i]);
