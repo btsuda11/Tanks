@@ -45,6 +45,7 @@ export default class Bullet {
             // else if ((this.pos[1] <= wall.pos[1] + wall.height && this.pos[1] + this.height >= wall.pos[1]) && (this.pos[0] + this.width >= wall.pos[0] && this.pos[0] <= wall.pos[0] + wall.width)) {
             //     this.vel[1] = -(this.vel[1]);
             //     this.angle = -(this.angle);
+            //     this.numRicochets++;
             // }
         });
         if (this.pos[0] < 0) {
@@ -101,7 +102,7 @@ export default class Bullet {
                 return true;
             }
             return (((distX - (this.width / 2)) ** 2) + ((distY - (this.height / 2)) ** 2) <= 8 ** 2);
-        }
+        } 
     }
 
     hits(otherObject) {

@@ -58,8 +58,8 @@ export default class Tank {
     }
 
     placeMine() {
-        const mine = new Mine([this.bodyPos[0] + 20, this.bodyPos[1] + 20], this);
         if (this.game.mines.length < this.maxMines) {
+            const mine = new Mine([this.bodyPos[0] + 20, this.bodyPos[1] + 20], this);
             this.game.add(mine);
         }
     }

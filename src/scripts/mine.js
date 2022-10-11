@@ -2,10 +2,12 @@ import Tank from "./tank";
 import Bullet from "./bullet";
 
 export default class Mine {
-    constructor(pos, tank) {
+    constructor(pos, tank, ctx) {
         this.pos = pos;
         this.tank = tank;
+        this.ctx = ctx;
         this.radius = 60;
+        // this.loadExplosion();
         setTimeout(() => this.explode(), 10000);
     }
 
@@ -19,6 +21,10 @@ export default class Mine {
     }
 
     explode() {
+        // let index = (this.tank.game.frame / 5) % 5;
+        // for (let i = 0; i < this.explosion.length; i++) {
+        //     this.ctx.drawImage(this.explosion[index], this.pos[0], this.pos[1]);
+        // }
         this.tank.game.tanks.forEach(tank => {
             if (this.inRadius(tank)) {
                 tank.game.remove(this);
@@ -49,4 +55,18 @@ export default class Mine {
         }
         return (((distX - (object.width / 2)) ** 2) + ((distY - (object.height / 2)) ** 2) <= this.radius ** 2);
     }
+
+    // loadExplosion() {
+    //     let frame1 = new Image();
+    //     let frame2 = new Image();
+    //     let frame3 = new Image();
+    //     let frame4 = new Image();
+    //     let frame5 = new Image();
+    //     frame1.src = '/images/explosion/explosion1.png';
+    //     frame2.src = '/images/explosion/explosion2.png';
+    //     frame3.src = '/images/explosion/explosion3.png';
+    //     frame4.src = '/images/explosion/explosion4.png';
+    //     frame5.src = '/images/explosion/explosion5.png';
+    //     this.explosion = [frame1, frame2, frame3, frame4, frame5];
+    // }
 }

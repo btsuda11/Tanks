@@ -20,6 +20,7 @@ export default class Game {
         this.missionScreen = document.getElementsByClassName('mission-screen')[0];
         this.missionHeader = document.getElementsByClassName('mission')[0];
         this.enemyTanksHeader = document.getElementsByClassName('enemy-tanks')[0];
+        // this.frame = 0;
         // this.music = document.getElementsByClassName('music')[0];
         this.bindEventListeners();
     }
@@ -33,8 +34,16 @@ export default class Game {
         setTimeout(() => {
             this.missionScreen.classList.remove('mission-screen');
             this.missionScreen.classList.add('hidden');
-        }, 10000)
+        }, 10000);
         this.update(this.ctx);
+        if (this.enemyTanks.length === 0) {
+            this.endLevel();
+        }
+    }
+
+    endLevel() {
+        this.level++;
+        this.startLevel();
     }
 
     add(object) {
@@ -63,18 +72,12 @@ export default class Game {
     update(ctx) {
         this.step();
         this.draw(ctx);
+        // this.frame++;
         this.frameID = requestAnimationFrame(() => this.update(ctx));
     }
 
     checkCollisions() {
         for (let i = 0; i < this.bullets.length; i++) {
-            // for (let j = 0; j < this.bullets.length; j++) {
-            //     if (this.bullets[i] !== this.bullets[j]) {
-            //         if (this.bullets[i].hasHit(this.bullets[j])) {
-            //             this.bullets[i].hits(this.bullets[j]);
-            //         }
-            //     }
-            // }
             for (let j = 0; j < this.tanks.length; j++) {
                 if (this.bullets[i].hasHit(this.tanks[j])) {
                     this.bullets[i].hits(this.tanks[j]);
@@ -84,8 +87,22 @@ export default class Game {
                 if (this.bullets[i].hasHit(this.mines[j])) {
                     this.bullets[i].hits(this.mines[j]);
                 }
-                
             }
+            for (let j = 0; j < this.bullets.length; j++) {
+                if (this.bullets[i] !== this.bullets[j]) {
+                    if (this.bullets[i].hasHit(this.bullets[j])) {
+                        this.bullets[i].hits(this.bullets[j]);
+                    }
+                }
+            }
+            // for (let j = 0; j < this.allObjects().length; j++) {
+            //     console.log(this.allObjects());
+            //     if (this.bullets[i] !== this.allObjects()[j]) {
+            //         if (this.bullets[i].hasHit(this.allObjects()[j])) {
+            //             this.bullets[i].hits(this.allObjects()[j]);
+            //         }
+            //     }
+            // }
         }
     }
 
