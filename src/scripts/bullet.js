@@ -10,6 +10,7 @@ export default class Bullet {
         this.tank = options.tank;
         this.height = 12;
         this.width = 8;
+        this.numRicochets = 0;
     }
 
     draw(ctx) {

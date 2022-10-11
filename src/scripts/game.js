@@ -3,6 +3,7 @@ import PlayerTank from "./player_tank";
 import EnemyTank from "./enemy_tank";
 import Tank from "./tank";
 import Wall from "./wall";
+import Mine from "./mine";
 import Function from "./util";
 
 export default class Game {
@@ -13,6 +14,7 @@ export default class Game {
         this.enemyTanks = [new EnemyTank({pos: [1250, 125], game: this, type: 'red'})];
         this.tanks = [this.playerTank].concat(this.enemyTanks);
         this.bullets = [];
+        this.mines = [];
         this.walls = [new Wall(75, 750, [250, 200]), new Wall(75, 750, [400, 550])];
         this.cursorPos = [];
         this.missionScreen = document.getElementsByClassName('mission-screen')[0];
@@ -38,6 +40,8 @@ export default class Game {
             this.enemyTanks.push(object);
         } else if (object instanceof Bullet) {
             this.bullets.push(object);
+        } else if (object instanceof Mine) {
+            this.mines.push(object);
         }
     }
 
@@ -61,17 +65,16 @@ export default class Game {
     }
 
     checkCollisions() {
-        // console.log(this.tanks);
         for (let i = 0; i < this.bullets.length; i++) {
             for (let j = 0; j < this.tanks.length; j++) {
-                // if (this.bullets[i] !== this.allObjects()[j]) {
-                //     if (this.bullets[i].hasHit(this.allObjects()[j])) {
-                //         this.bullets[i].hits(this.allObjects()[j]);
-                //     }
-                // }
-                if (this.bullets[i].hasHit(this.tanks[j])) {
-                    this.bullets[i].hits(this.tanks[j]);
+                if (this.bullets[i] !== this.allObjects()[j]) {
+                    if (this.bullets[i].hasHit(this.allObjects()[j])) {
+                        this.bullets[i].hits(this.allObjects()[j]);
+                    }
                 }
+                // if (this.bullets[i].hasHit(this.tanks[j])) {
+                //     this.bullets[i].hits(this.tanks[j]);
+                // }
             }
         }
     }
@@ -86,11 +89,13 @@ export default class Game {
             this.bullets.splice(this.bullets.indexOf(object), 1);
         } else if (object instanceof Tank) {
             this.tanks.splice(this.tanks.indexOf(object), 1);
+        } else if (object instanceof Mine) {
+            this.mines.splice(this.mines.indexOf(object), 1);
         }
     }
 
     allObjects() {
-        return [].concat(this.tanks, this.bullets, this.walls);
+        return [].concat(this.tanks, this.bullets, this.walls, this.mines);
     }
 
     static get DIM_X() {
@@ -122,5 +127,8 @@ export default class Game {
                 if (e.code === 'KeyS') this.playerTank.vel[3] = 0;
         });
         document.addEventListener('click', this.playerTank.shoot.myThrottle(this.playerTank, 2000));
+        document.addEventListener('keydown', e => {
+            if (e.code === 'Space') this.playerTank.placeMine();
+        });
     }
 }
