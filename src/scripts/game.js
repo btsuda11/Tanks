@@ -23,23 +23,28 @@ export default class Game {
         this.bullets = [];
         this.mines = [];
         this.cursorPos = [];
-        this.missionScreen = document.getElementsByClassName('mission-screen')[0];
-        this.missionHeader = document.getElementsByClassName('mission')[0];
-        this.enemyTanksHeader = document.getElementsByClassName('enemy-tanks')[0];
+        this.getDOMElements();
         // this.music = document.getElementsByClassName('music')[0];
         this.bindEventListeners();
     }
 
+    showInstructions() {
+        this.startScreen.style.display = 'none';
+        this.instructions.style.display = 'block';
+    }
+
     startLevel() {
         // if this.enemyTanks.length === 0, endLevel => this.level++, startLevel(this.level)
-        // this.missionScreen.style.display = 'block';
         // this.music.play();
+        this.canvas.style.display = 'block';
+        this.startScreen.style.display = 'none';
+        this.missionScreen.style.display = 'block';
         this.missionHeader.innerHTML = `Mission ${this.level}`;
         this.enemyTanksHeader.innerHTML = `Enemy Tanks: ${this.enemyTanks.length}`;
         setTimeout(() => {
             this.missionScreen.style.display = 'none';
+            this.update(this.ctx);
         }, 10000);
-        this.update(this.ctx);
     }
 
     endLevel() {
@@ -157,6 +162,12 @@ export default class Game {
     }
 
     bindEventListeners() {
+        this.startButton.addEventListener('click', () => this.startLevel());
+        this.howToButton.addEventListener('click', () => this.showInstructions());
+        this.instructions.addEventListener('click', () => {
+            this.instructions.style.display = 'none';
+            this.startScreen.style.display = 'block';
+        });
         document.addEventListener('mousemove', (e) => this.mouseOnPage(e));
         document.addEventListener('keydown', e => {
                 if (e.code === 'KeyA') this.playerTank.vel[0] = -1;
@@ -174,6 +185,17 @@ export default class Game {
         document.addEventListener('keydown', e => {
             if (e.code === 'Space') this.playerTank.placeMine();
         });
+    }
+
+    getDOMElements() {
+        this.canvas = document.querySelector('#game-canvas');
+        this.missionScreen = document.getElementsByClassName('mission-screen')[0];
+        this.missionHeader = document.getElementsByClassName('mission')[0];
+        this.enemyTanksHeader = document.getElementsByClassName('enemy-tanks')[0];
+        this.startScreen = document.querySelector('#start-screen');
+        this.startButton = document.querySelector('#start-button');
+        this.howToButton = document.querySelector('#how-to-button');
+        this.instructions = document.querySelector('#how-to');
     }
 
     removeEventListeners() {

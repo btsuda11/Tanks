@@ -19,6 +19,14 @@
     <img class="explosion" src="/images/explosion/explosion4.png" hidden>
     <img class="explosion" src="/images/explosion/explosion5.png" hidden>
 
+    <div id="start-screen">
+        <h1>Tanks</h1>
+        <input id="start-button" type="button" value="New Game">
+        <input id="how-to-button" type="button" value="How-To-Play">
+    </div>
+    <div id="how-to" style="display: none;">
+        <h1>Instructions</h1>
+    </div>
     <div class="mission-screen">
         <h2 class="mission"></h2>
         <h3 class="enemy-tanks"></h3>
@@ -29,7 +37,7 @@
     <div class="mission-cleared">
         <h2>Mission Cleared!</h2>
     </div>
-    <canvas id="game-canvas"></canvas>
+    <canvas id="game-canvas" style="display: none;"></canvas>
 </body>
 
 </html>

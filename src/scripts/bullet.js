@@ -34,12 +34,12 @@ export default class Bullet {
     }
 
     checkRicochet() {
-        let allowedRicochets;
-        if (this.tank.type === 'player') {allowedRicochets = 2}
-        else if (this.tank.type === 'red') {allowedRicochets = 2}
-        else if (this.tank.type === 'green') {allowedRicochets = 1}
+        // let allowedRicochets;
+        // if (this.tank.type === 'player') {allowedRicochets = 2}
+        // else if (this.tank.type === 'red') {allowedRicochets = 2}
+        // else if (this.tank.type === 'green') {allowedRicochets = 1};
 
-        if (this.numRicochets >= allowedRicochets) {
+        if (this.numRicochets >= 2) {
             this.tank.game.remove(this);
         }
         this.tank.game.walls.forEach(wall => {
