@@ -15,7 +15,7 @@ export default class Game {
         this.mines = [];
         this.cursorPos = [];
         this.getDOMElements();
-        this.bindEventListeners();
+        this.bindClickListeners();
     }
 
     showInstructions() {
@@ -36,26 +36,34 @@ export default class Game {
     }
 
     startLevel() {
-        // this.music[0].play();
-        this.canvas.style.display = 'block';
+        this.bindGameKeys();
         this.populateLevel();
-        this.startScreen.style.display = 'none';
-        // this.missionScreen.style.display = 'block';
         this.missionHeader.innerHTML = `Mission ${this.level}`;
         this.enemyTanksHeader.innerHTML = `Enemy Tanks: ${this.enemyTanks.length}`;
+        this.gameMission.children[0].innerHTML = `Mission ${this.level}`;
+        this.music[0].play();
+        this.canvas.style.display = 'block';
+        this.startScreen.style.display = 'none';
+        this.missionScreen.style.display = 'block';
         setTimeout(() => {
             this.missionScreen.style.display = 'none';
             setTimeout(() => {
-                this.gameMission.children[0].innerHTML = `Mission ${this.level}`;
                 this.gameMission.style.display = 'block';
-            }, 3000);
-        }, 1000);
-        this.update(this.ctx);
+                this.update(this.ctx);
+            }, 2000);
+        }, 5000);
+    }
+
+    returnHome() {
+        this.endScreen[0].style.display = 'none';
+        this.canvas.style.display = 'none';
+        this.startScreen.style.display = 'block';
     }
 
     endLevel() {
+        this.removeGameKeys();
         cancelAnimationFrame(this.frameID);
-        // this.music[1].play();
+        this.music[1].play();
         let missionCleared = document.getElementsByClassName('mission-cleared')[0];
         missionCleared.style.display = 'block';
         this.level++;
@@ -66,15 +74,28 @@ export default class Game {
     }
 
     gameOver() {
+        this.removeGameKeys();
+        this.music[0].pause();
         cancelAnimationFrame(this.frameID);
-        let missionFailed = document.getElementsByClassName('mission-failed')[0];
         this.state = 'game over';
-        missionFailed.style.display = 'block';
+        this.gameMission.style.display = 'none';
+        this.missionFailed[0].style.display = 'block';
         setTimeout(() => {
-            missionFailed.style.display = 'none';
-            let newGame = new Game(this.ctx);
-            newGame.startLevel();
-        }, 10000);
+            this.missionFailed[0].style.display = 'none';
+            this.endScreen[0].style.display = 'flex';
+        }, 5000);
+    }
+
+    // newGame() {
+    //     let newGame = new Game(this.ctx);
+    //     newGame.startLevel();
+    // }
+
+    playAgain() {
+        this.endScreen[0].style.display = 'none';
+        this.canvas.style.display = 'none';
+        let newGame = new Game(this.ctx);
+        newGame.startLevel();
     }
 
     add(object) {
@@ -109,6 +130,7 @@ export default class Game {
     checkCollisions() {
         for (let i = 0; i < this.bullets.length; i++) {
             for (let j = 0; j < this.tanks.length; j++) {
+                // console.log(this.bullets[i].hasHit(this.tanks[j]))
                 if (this.bullets[i].hasHit(this.tanks[j]) ) {
                     this.bullets[i].hits(this.tanks[j]);
                 }
@@ -169,13 +191,18 @@ export default class Game {
         // console.log(this.cursorPos);
     }
 
-    bindEventListeners() {
+    bindClickListeners() {
         this.startButton.addEventListener('click', () => this.startLevel());
+        this.returnHomeButton.addEventListener('click', () => this.returnHome());
+        this.playAgainButton.addEventListener('click', () => this.playAgain());
         this.howToButton.addEventListener('click', () => this.showInstructions());
         this.instructions.addEventListener('click', () => {
             this.instructions.style.display = 'none';
             this.startScreen.style.display = 'block';
         });
+    }
+
+    bindGameKeys() {
         document.addEventListener('mousemove', (e) => this.mouseOnPage(e));
         document.addEventListener('keydown', e => {
                 if (e.code === 'KeyA') this.playerTank.vel[0] = -1;
@@ -203,12 +230,31 @@ export default class Game {
         this.startScreen = document.querySelector('#start-screen');
         this.startButton = document.querySelector('#start-button');
         this.howToButton = document.querySelector('#how-to-button');
+        this.missionFailed = document.getElementsByClassName('mission-failed');
+        this.endScreen = document.getElementsByClassName('end-screen');
+        this.playAgainButton = this.endScreen[0].children[0];
+        this.returnHomeButton = this.endScreen[0].children[1];
         this.instructions = document.querySelector('#how-to');
         this.gameMission = document.querySelector('#game-mission');
         this.music = document.getElementsByClassName('music');
     }
 
-    removeEventListeners() {
-
+    removeGameKeys() {
+        document.removeEventListener('keydown', e => {
+            if (e.code === 'KeyA') this.playerTank.vel[0] = -1;
+            if (e.code === 'KeyD') this.playerTank.vel[1] = 1;
+            if (e.code === 'KeyW') this.playerTank.vel[2] = -1;
+            if (e.code === 'KeyS') this.playerTank.vel[3] = 1;
+        });
+        document.removeEventListener('keyup', e => {
+            if (e.code === 'KeyA') this.playerTank.vel[0] = 0;
+            if (e.code === 'KeyD') this.playerTank.vel[1] = 0;
+            if (e.code === 'KeyW') this.playerTank.vel[2] = 0;
+            if (e.code === 'KeyS') this.playerTank.vel[3] = 0;
+        });
+        document.removeEventListener('click', this.playerTank.shoot.myThrottle(this.playerTank, 2000));
+        document.removeEventListener('keydown', e => {
+            if (e.code === 'Space') this.playerTank.placeMine();
+        });
     }
 }
