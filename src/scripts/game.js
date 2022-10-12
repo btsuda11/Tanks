@@ -16,11 +16,22 @@ export default class Game {
         this.cursorPos = [];
         this.getDOMElements();
         this.bindClickListeners();
+        this.bindGameKeys = this.bindGameKeys.bind(this);
+        this.update = this.update.bind(this);
     }
 
     showInstructions() {
         this.startScreen.style.display = 'none';
         this.instructions.style.display = 'block';
+    }
+
+    resetStats() {
+        this.tanks.forEach(tank => {
+            tank.vel = [0, 0, 0, 0];
+        })
+        this.playerTank.bodyPos = [150, 650];
+        this.playerTank.barrelPos = [150, 650];
+        this.bullets = [];
     }
 
     populateLevel() {
@@ -37,13 +48,14 @@ export default class Game {
 
     startLevel() {
         this.populateLevel();
+        if (this.level === 2) this.resetStats();
         this.missionHeader.innerHTML = `Mission ${this.level}`;
         this.enemyTanksHeader.innerHTML = `Enemy Tanks: ${this.enemyTanks.length}`;
         this.gameMission.children[0].innerHTML = `Mission ${this.level}`;
         this.music[0].play();
         this.canvas.style.display = 'block';
         this.startScreen.style.display = 'none';
-        this.missionScreen.style.display = 'block';
+        // this.missionScreen.style.display = 'block';
         setTimeout(() => {
             this.missionScreen.style.display = 'none';
             this.draw(this.ctx);
@@ -53,8 +65,8 @@ export default class Game {
                 setTimeout(() => this.start.style.display = 'none', 2000);
                 this.bindGameKeys();
                 this.update(this.ctx);
-            }, 3400);
-        }, 4000);
+            }, 1000);
+        }, 1000);
     }
 
     returnHome() {
@@ -62,7 +74,7 @@ export default class Game {
         this.music[2].currentTime = 0;
         this.endScreen[0].style.display = 'none';
         this.canvas.style.display = 'none';
-        this.startScreen.style.display = 'block';
+        this.startScreen.style.display = 'flex';
     }
 
     endLevel() {
@@ -75,8 +87,6 @@ export default class Game {
         let missionCleared = document.getElementsByClassName('mission-cleared')[0];
         missionCleared.style.display = 'block';
         this.level++;
-        console.log(this.tanks)
-        console.log(this.bullets)
         setTimeout(() => {
             missionCleared.style.display = 'none';
             this.startLevel();
@@ -144,23 +154,28 @@ export default class Game {
     }
 
     checkCollisions() {
+        // console.log(this.bullets)
         for (let i = 0; i < this.bullets.length; i++) {
             for (let j = 0; j < this.tanks.length; j++) {
+                console.log(j)
                 // console.log(this.bullets[i].hasHit(this.tanks[j]))
                 if (this.bullets[i].hasHit(this.tanks[j]) && !(this.bullets[i].tank instanceof EnemyTank && this.tanks[j] instanceof EnemyTank)) {
                     this.bullets[i].hits(this.tanks[j]);
+                    return;
                 }
             }
             for (let j = 0; j < this.bullets.length; j++) {
                 if (this.bullets[i] !== this.bullets[j]) {
                     if (this.bullets[i].hasHit(this.bullets[j])) {
                         this.bullets[i].hits(this.bullets[j]);
+                        return;
                     }
                 }
             }
             for (let j = 0; j < this.mines.length; j++) {
                 if (this.bullets[i].hasHit(this.mines[j])) {
                     this.bullets[i].hits(this.mines[j]);
+                    return;
                 }
             }
         }
@@ -214,7 +229,7 @@ export default class Game {
         this.howToButton.addEventListener('click', () => this.showInstructions());
         this.instructions.addEventListener('click', () => {
             this.instructions.style.display = 'none';
-            this.startScreen.style.display = 'block';
+            this.startScreen.style.display = 'flex';
         });
     }
 

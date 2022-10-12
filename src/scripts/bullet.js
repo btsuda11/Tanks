@@ -85,11 +85,30 @@ export default class Bullet {
 
     hasHit(otherObject) {
         if (otherObject instanceof Tank) {
-            if ((this.pos[0] <= otherObject.bodyPos[0] + otherObject.width && this.pos[0] + this.width >= otherObject.bodyPos[0]) && (this.pos[1] + this.height >= otherObject.bodyPos[1] && this.pos[1] <= otherObject.bodyPos[1] + otherObject.height)) {
-                return true;
-            }
-            else if ((this.pos[1] <= otherObject.bodyPos[1] + otherObject.height && this.pos[1] + this.height >= otherObject.bodyPos[1]) && (this.pos[0] + this.width >= otherObject.bodyPos[0] && this.pos[0] <= otherObject.bodyPos[0] + otherObject.width)) {
-                return true;
+            if ((this.pos[0] <= otherObject.bodyPos[0] + otherObject.width + 10 
+                && this.pos[0] >= otherObject.bodyPos[0] + otherObject.width) 
+                    && (this.pos[1] + this.height >= otherObject.bodyPos[1] 
+                && this.pos[1] <= otherObject.bodyPos[1] + otherObject.height)) {
+                    console.log('right')
+                    return true;
+            } else if ((this.pos[0] + this.width >= otherObject.bodyPos[0] - 10 
+                && this.pos[0] + this.width <= otherObject.bodyPos[0]) 
+                    && (this.pos[1] + this.height >= otherObject.bodyPos[1] 
+                && this.pos[1] <= otherObject.bodyPos[1] + otherObject.height)) {
+                    console.log('left')
+                    return true;
+            } else if ((this.pos[0] + this.width >= otherObject.bodyPos[0] 
+                && this.pos[0] <= otherObject.bodyPos[0] + otherObject.width) 
+                    && (this.pos[1] + this.height >= otherObject.bodyPos[1] - 10 
+                && this.pos[1] + this.height <= otherObject.bodyPos[1])) {
+                    console.log('top')
+                    return true;
+            } else if ((this.pos[0] + this.width >= otherObject.bodyPos[0] 
+                && this.pos[0] <= otherObject.bodyPos[0] + otherObject.width) 
+                    && (this.pos[1] <= otherObject.bodyPos[1] + otherObject.height + 10 
+                && this.pos[1] >= otherObject.bodyPos[1] + otherObject.height)) {
+                    console.log('bottom')
+                    return true;
             } else {
                 return false;
             }
