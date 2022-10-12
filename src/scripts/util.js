@@ -13,3 +13,14 @@ export default Function.prototype.myThrottle = function(ctx, interval) {
         }
     }
 }
+
+export const Util = {
+    scale(vec, m) {
+        return [vec[0] * m, 0, vec[1] * m, 0];
+    },
+
+    randomVec() {
+        const deg = 2 * Math.PI * Math.random();
+        return Util.scale([Math.sin(deg), Math.cos(deg)], 1);
+    }
+}

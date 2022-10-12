@@ -7,7 +7,8 @@ export default class Mine {
         this.tank = tank;
         this.ctx = ctx;
         this.radius = 60;
-        // this.loadExplosion();
+        this.exploded = false;
+        this.explosion = document.getElementsByClassName('explosion');
         this.timeoutID = setTimeout(() => {
             this.explode();
         }, 10000);
@@ -20,13 +21,25 @@ export default class Mine {
         ctx.fill();
         ctx.strokeStyle = 'black';
         ctx.stroke();
+        // if (this.exploded) {
+        //     this.ctx.drawImage(this.explosion[0], 0, 0, 60, 60, this.pos[0], this.pos[1], 60, 60);
+        // }
     }
 
     explode() {
-        // let index = (this.tank.game.frame / 5) % 5;
-        // for (let i = 0; i < this.explosion.length; i++) {
+        // console.log(this.explosion[0])
+
+        // this.drawExplosion();
+        // console.log(this.explosion)
+        // let index = Math.floor(this.tank.game.frame / 5) % 4;
+        // setInterval(() => {
         //     this.ctx.drawImage(this.explosion[index], this.pos[0], this.pos[1]);
-        // }
+        // })
+        
+        // console.log(index);
+        
+        this.exploded = true;
+        
         for (let i = 0; i < this.tank.game.tanks.length; i++) {
             if (this.inRadius(this.tank.game.tanks[i])) {
                 this.tank.game.remove(this);
@@ -62,17 +75,16 @@ export default class Mine {
         return (((distX - (object.width / 2)) ** 2) + ((distY - (object.height / 2)) ** 2) <= this.radius ** 2);
     }
 
-    // loadExplosion() {
-    //     let frame1 = new Image();
-    //     let frame2 = new Image();
-    //     let frame3 = new Image();
-    //     let frame4 = new Image();
-    //     let frame5 = new Image();
-    //     frame1.src = '/images/explosion/explosion1.png';
-    //     frame2.src = '/images/explosion/explosion2.png';
-    //     frame3.src = '/images/explosion/explosion3.png';
-    //     frame4.src = '/images/explosion/explosion4.png';
-    //     frame5.src = '/images/explosion/explosion5.png';
-    //     this.explosion = [frame1, frame2, frame3, frame4, frame5];
-    // }
+    async drawExplosion() {
+        // console.log(this.explosion);
+        for (let i = 0; i < this.explosion.length; i++) {
+            // this.explosion[i].style.display = 'block';
+            await this.timeout(1000);
+            this.ctx.drawImage(this.explosion[i], 0, 0, 60, 60, this.pos[0], this.pos[1], 60, 60);
+        }
+    }
+
+    timeout = (ms) => {
+        return new Promise(resolve => setTimeout(resolve, ms));
+    }
 }

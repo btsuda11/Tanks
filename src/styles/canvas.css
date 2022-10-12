@@ -55,7 +55,6 @@ canvas {
     50% { opacity: 1 }
 }
 
-.hidden {
+/* .explosion {
     display: none;
-    opacity: 0;
-}
+} */

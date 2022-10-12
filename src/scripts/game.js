@@ -26,7 +26,6 @@ export default class Game {
         this.missionScreen = document.getElementsByClassName('mission-screen')[0];
         this.missionHeader = document.getElementsByClassName('mission')[0];
         this.enemyTanksHeader = document.getElementsByClassName('enemy-tanks')[0];
-        // this.frame = 0;
         // this.music = document.getElementsByClassName('music')[0];
         this.bindEventListeners();
     }
@@ -46,14 +45,12 @@ export default class Game {
     endLevel() {
         cancelAnimationFrame(this.frameID);
         let missionCleared = document.getElementsByClassName('mission-cleared')[0];
+        missionCleared.style.display = 'block';
         setTimeout(() => {
-            missionCleared.style.display = 'block';
-            setTimeout(() => {
-                missionCleared.style.display = 'none';
-            }, 10000);
-            this.level++;
-            this.startLevel();
-        })
+            missionCleared.style.display = 'none';
+        }, 10000);
+        this.level++;
+        this.startLevel();
     }
 
     gameOver() {
@@ -92,7 +89,6 @@ export default class Game {
     update(ctx) {
         this.step();
         this.draw(ctx);
-        // this.frame++;
         this.frameID = requestAnimationFrame(() => this.update(ctx));
     }
 
@@ -137,8 +133,6 @@ export default class Game {
                 this.endLevel();
             }
         } else if (object instanceof Mine) {
-            console.log(this.mines, 'mines');
-            console.log(this.mines.indexOf(object), 'mine index')
             this.mines.splice(this.mines.indexOf(object), 1);
         }
     }

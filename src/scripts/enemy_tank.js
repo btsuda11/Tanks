@@ -1,5 +1,6 @@
 import Tank from "./tank";
 import Bullet from "./bullet"
+import { Util } from "./util";
 
 export default class EnemyTank extends Tank {
     constructor(options) {
@@ -38,8 +39,36 @@ export default class EnemyTank extends Tank {
     }
 
     move() {
-        this.checkBounds();
+        // console.log(this.distToPlayer());
 
+        if (Math.abs(this.distToPlayer()[1]) < Math.abs(this.distToPlayer()[0])) {
+            // console.log(this.distToPlayer()[0], 'xcomp');
+            // console.log(this.distToPlayer()[1], 'ycomp');
+            if (this.distToPlayer()[1] > 0) {
+                this.vel[3] = 0.75;
+            } else if (this.distToPlayer()[1] < 0) {
+                this.vel[2] = -0.75;
+            }
+        } else if (Math.abs(this.distToPlayer()[0]) < Math.abs(this.distToPlayer()[1])) {
+            if (this.distToPlayer()[0] > 0) {
+                this.vel[1] = 0.75;
+            } else if (this.distToPlayer()[0] < 0) {
+                this.vel[0] = -0.75;
+            }
+        }
+
+
+        // console.log(this.vel);
+        // if (Math.abs(this.distToPlayer()[1] < 5)) {
+        //     let randomIndex = Math.floor(Math.random() * 3) + 0;
+        //     let randomVel = [-1, 1];
+        //     if (randomIndex === 0 || randomIndex === 2) {
+        //         this.vel[randomIndex] = randomVel[Math.floor(Math.random() * randomVel.length)];
+        //     }
+        // }
+
+        this.checkBounds();
+        
         this.barrelPos[0] += this.vel[0];
         this.barrelPos[0] += this.vel[1];
         this.barrelPos[1] += this.vel[2];
@@ -71,6 +100,9 @@ export default class EnemyTank extends Tank {
                 this.vel[3] = 0;
             }
         });
+
+        this.vel = [0, 0, 0, 0];
+    
     }
 
     shoot() {
@@ -83,5 +115,12 @@ export default class EnemyTank extends Tank {
             bullet = new Bullet({ pos: [this.barrelPos[0] + 20 + x, this.barrelPos[1] + 20 + y], speed: 6, angle: this.angle + (Math.PI / 2), tank: this });
         }
         this.game.add(bullet);
+    }
+
+    distToPlayer() {
+        let x = (this.game.playerTank.bodyPos[0] - this.bodyPos[0]);
+        let y = (this.game.playerTank.bodyPos[1] - this.bodyPos[1]);
+        let h = Math.sqrt((x ** 2) + (y ** 2));
+        return [x, y, h]; // [x(component), y(component), actual distance]
     }
 }
