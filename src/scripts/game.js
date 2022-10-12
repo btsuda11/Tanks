@@ -58,13 +58,15 @@ export default class Game {
     }
 
     returnHome() {
+        this.music[2].pause();
+        this.music[2].currentTime = 0;
         this.endScreen[0].style.display = 'none';
         this.canvas.style.display = 'none';
         this.startScreen.style.display = 'block';
     }
 
     endLevel() {
-        this.removeGameKeys();
+        // this.removeGameKeys();
         cancelAnimationFrame(this.frameID);
         this.music[0].pause();
         this.music[0].currentTime = 0;
@@ -73,15 +75,20 @@ export default class Game {
         let missionCleared = document.getElementsByClassName('mission-cleared')[0];
         missionCleared.style.display = 'block';
         this.level++;
+        console.log(this.tanks)
+        console.log(this.bullets)
         setTimeout(() => {
             missionCleared.style.display = 'none';
             this.startLevel();
         }, 5000);
     }
 
+    
+
     gameOver() {
-        this.removeGameKeys();
+        // this.removeGameKeys();
         this.music[0].pause();
+        this.music[2].play();
         this.music[0].currentTime = 0;
         cancelAnimationFrame(this.frameID);
         this.state = 'game over';
@@ -100,6 +107,8 @@ export default class Game {
 
     playAgain() {
         this.music[0].currentTime = 0;
+        this.music[2].pause();
+        this.music[2].currentTime = 0;
         this.endScreen[0].style.display = 'none';
         this.canvas.style.display = 'none';
         this.newGame();
@@ -138,7 +147,7 @@ export default class Game {
         for (let i = 0; i < this.bullets.length; i++) {
             for (let j = 0; j < this.tanks.length; j++) {
                 // console.log(this.bullets[i].hasHit(this.tanks[j]))
-                if (this.bullets[i].hasHit(this.tanks[j]) ) {
+                if (this.bullets[i].hasHit(this.tanks[j]) && !(this.bullets[i].tank instanceof EnemyTank && this.tanks[j] instanceof EnemyTank)) {
                     this.bullets[i].hits(this.tanks[j]);
                 }
             }

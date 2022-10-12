@@ -24,8 +24,16 @@
 }
 
 .end-screen {
+    width: 100vw;
+    height: 100vh;
     position: absolute;
     flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.end-screen > input {
+    margin: 30px;
 }
 
 input[type='button'] {
@@ -37,7 +45,6 @@ input[type='button'] {
     font-size: 24px;
     border: 2px solid #0066b2;
     outline: 1px solid lightgray;
-    
 }
 
 input[type='button']:hover {
