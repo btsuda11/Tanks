@@ -7,6 +7,7 @@ export default class EnemyTank extends Tank {
     constructor(options) {
         super(options);
         this.type = options.type;
+        this.allowedRicochets = 1;
         if (this.type === 'red') {
             this.body.src = 'images/tanks/tankBody_red_outline.png';
             this.barrel.src = 'images/tanks/tankRed_barrel2_outline.png';
@@ -23,11 +24,11 @@ export default class EnemyTank extends Tank {
             this.height = this.body.height;
             this.width = this.body.width;
         }
-        // setInterval(() => {
-        //     if (this.state === 'alive' || this.game.state === 'game over') {
-        //         this.shoot();
-        //     }
-        // }, 1500);
+        setInterval(() => {
+            if (this.state === 'alive' || this.game.state === 'game over') {
+                this.shoot();
+            }
+        }, 1500);
     }
 
     draw(ctx) {
@@ -40,9 +41,9 @@ export default class EnemyTank extends Tank {
     }
 
     move() {
-        console.log(this.distToPlayer());
+        // console.log(this.distToPlayer());
 
-        if (Math.abs(this.distToPlayer()[1]) < Math.abs(this.distToPlayer()[0]) && this.distToPlayer()[2] > 300) {
+        if (Math.abs(this.distToPlayer()[1]) < Math.abs(this.distToPlayer()[0]) && this.distToPlayer()[2] > 200) {
             // console.log(this.distToPlayer()[0], 'xcomp');
             // console.log(this.distToPlayer()[1], 'ycomp');
             if (this.distToPlayer()[1] > 0) {
@@ -50,32 +51,11 @@ export default class EnemyTank extends Tank {
             } else if (this.distToPlayer()[1] < 0) {
                 this.vel[2] = -0.75;
             }
-            console.log('first')
-        } else if (Math.abs(this.distToPlayer()[0]) < Math.abs(this.distToPlayer()[1]) && this.distToPlayer()[2] > 300) {
+        } else if (Math.abs(this.distToPlayer()[0]) < Math.abs(this.distToPlayer()[1]) && this.distToPlayer()[2] > 200) {
             if (this.distToPlayer()[0] > 0) {
                 this.vel[1] = 0.75;
             } else if (this.distToPlayer()[0] < 0) {
                 this.vel[0] = -0.75;
-            }
-            console.log('second')
-        }
-
-
-        if (this.distToPlayer()[2] < 300) {
-            if (this.game.playerTank.vel === [-1, 0, 0, 0]) {
-                if (this.bodyPos[1] + this.height < Game.DIM_Y) {
-                    this.vel = [0, 0, 0, 1];
-                }
-            } else if (this.game.playerTank.vel === [0, 1, 0, 0]) {
-                if (this.bodyPos[1] + this.height < Game.DIM_Y) {
-                    this.vel = [0, 0, 0, 1];
-                } else {
-                    this.vel = [0, 0, -1, 0];
-                }
-            } else if (this.game.playerTank.vel === [0, 0, -1, 0]) {
-
-            } else if (this.game.playerTank.vel === [0, 0, 0, 1]) {
-
             }
         }
 

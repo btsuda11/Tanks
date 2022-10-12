@@ -96,9 +96,7 @@ export default class Game {
     checkCollisions() {
         for (let i = 0; i < this.bullets.length; i++) {
             for (let j = 0; j < this.tanks.length; j++) {
-                // console.log(this.bullets[i].hasHit(this.tanks[j]))
-                // console.log(this.tanks)
-                if (this.bullets[i].hasHit(this.tanks[j])) {
+                if (this.bullets[i].hasHit(this.tanks[j]) && (!(this.bullets[i].tank instanceof EnemyTank && this.tanks[j] instanceof EnemyTank))) {
                     this.bullets[i].hits(this.tanks[j]);
                 }
             }
