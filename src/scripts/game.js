@@ -11,20 +11,10 @@ export default class Game {
         this.ctx = ctx;
         this.level = 1;
         this.playerTank = new PlayerTank({pos: [150, 650], game: this});
-        if (this.level === 1) {
-            this.enemyTanks = [new EnemyTank({pos: [1250, 125], game: this, type: 'red'})];
-            this.tanks = [this.playerTank].concat(this.enemyTanks);
-            this.walls = [new Wall(75, 750, [250, 200]), new Wall(75, 750, [400, 550])];
-        } else if (this.level === 2) {
-            this.enemyTanks = [new EnemyTank({pos: [1000, 125], game: this, type: 'green'}), new EnemyTank({pos: [1250, 375], game: this, type: 'green'})];
-            this.tanks = [this.playerTank].concat(this.enemyTanks);
-            this.walls = [new Wall(75, 150, [125, 500]), new Wall(75, 75, [200, 575]), new Wall(75, 150, [1150, 200]), new Wall(75, 75, [1150, 125])];
-        }
         this.bullets = [];
         this.mines = [];
         this.cursorPos = [];
         this.getDOMElements();
-        // this.music = document.getElementsByClassName('music')[0];
         this.bindEventListeners();
     }
 
@@ -33,10 +23,22 @@ export default class Game {
         this.instructions.style.display = 'block';
     }
 
+    populateLevel() {
+        if (this.level === 1) {
+            this.enemyTanks = [new EnemyTank({pos: [1250, 125], game: this, type: 'red'})];
+            this.tanks = [this.playerTank].concat(this.enemyTanks);
+            this.walls = [new Wall(75, 750, [250, 200]), new Wall(75, 750, [400, 550])];
+        } else if (this.level === 2) {
+            this.enemyTanks = [new EnemyTank({pos: [700, 125], game: this, type: 'green'}), new EnemyTank({pos: [1250, 500], game: this, type: 'green'})];
+            this.tanks = [this.playerTank].concat(this.enemyTanks);
+            this.walls = [new Wall(75, 150, [125, 500]), new Wall(75, 75, [200, 575]), new Wall(75, 150, [1150, 200]), new Wall(75, 75, [1150, 125])];
+        }
+    }
+
     startLevel() {
-        // if this.enemyTanks.length === 0, endLevel => this.level++, startLevel(this.level)
-        // this.music.play();
+        // this.music[0].play();
         this.canvas.style.display = 'block';
+        this.populateLevel();
         this.startScreen.style.display = 'none';
         // this.missionScreen.style.display = 'block';
         this.missionHeader.innerHTML = `Mission ${this.level}`;
@@ -47,19 +49,20 @@ export default class Game {
                 this.gameMission.children[0].innerHTML = `Mission ${this.level}`;
                 this.gameMission.style.display = 'block';
             }, 3000);
-        }, 10000);
+        }, 1000);
         this.update(this.ctx);
     }
 
     endLevel() {
         cancelAnimationFrame(this.frameID);
+        // this.music[1].play();
         let missionCleared = document.getElementsByClassName('mission-cleared')[0];
         missionCleared.style.display = 'block';
+        this.level++;
         setTimeout(() => {
             missionCleared.style.display = 'none';
-        }, 10000);
-        this.level++;
-        this.startLevel();
+            this.startLevel();
+        }, 7000);
     }
 
     gameOver() {
@@ -69,8 +72,9 @@ export default class Game {
         missionFailed.style.display = 'block';
         setTimeout(() => {
             missionFailed.style.display = 'none';
+            let newGame = new Game(this.ctx);
+            newGame.startLevel();
         }, 10000);
-        this.startLevel();
     }
 
     add(object) {
@@ -105,7 +109,7 @@ export default class Game {
     checkCollisions() {
         for (let i = 0; i < this.bullets.length; i++) {
             for (let j = 0; j < this.tanks.length; j++) {
-                if (this.bullets[i].hasHit(this.tanks[j]) && (!(this.bullets[i].tank instanceof EnemyTank && this.tanks[j] instanceof EnemyTank))) {
+                if (this.bullets[i].hasHit(this.tanks[j]) ) {
                     this.bullets[i].hits(this.tanks[j]);
                 }
             }
@@ -201,6 +205,7 @@ export default class Game {
         this.howToButton = document.querySelector('#how-to-button');
         this.instructions = document.querySelector('#how-to');
         this.gameMission = document.querySelector('#game-mission');
+        this.music = document.getElementsByClassName('music');
     }
 
     removeEventListeners() {

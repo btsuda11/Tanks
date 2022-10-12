@@ -43,31 +43,26 @@ export default class Bullet {
             this.tank.game.remove(this);
         }
         this.tank.game.walls.forEach(wall => {
-            // if ((this.pos[0] === wall.pos[0] + wall.width + 20) && (this.pos[1] + this.height >= wall.pos[1] && this.pos[1] <= wall.pos[1] + wall.height)) {
-            //     // this.vel[0] = -(this.vel[0]);
-            //     // this.angle = -(this.angle);
-            //     // this.numRicochets++;
-            //     console.log('hit left')
-            // } else if ((this.pos[0] + this.width === wall.pos[0] - 20) && (this.pos[1] + this.height >= wall.pos[1] && this.pos[1] <= wall.pos[1] + wall.height)) {
-            //     // this.vel[0] = -(this.vel[0]);
-            //     // this.angle = -(this.angle);
-            //     // this.numRicochets++;
-            //     console.log('hit right')
-            // } else if ((this.pos[0] + this.width >= wall.pos[0] && this.pos[0] <= wall.pos[0] + wall.width) && (this.pos[1] + this.height === wall.pos[1] - 20)) {
-            //     // this.vel[1] = -(this.vel[1]);
-            //     // this.angle = -(this.angle);
-            //     // this.numRicochets++;
-            //     console.log('hit top')
-            // } else if ((this.pos[0] + this.width >= wall.pos[0] && this.pos[0] <= wall.pos[0] + wall.width) && (this.pos[1] === wall.pos[1] + wall.height + 20)) {
-            //     // this.vel[1] = -(this.vel[1]);
-            //     // this.angle = -(this.angle);
-            //     // this.numRicochets++;
-            //     console.log('hit bottom')
-            // }
-            if ((this.pos[0] <= wall.pos[0] + wall.width && this.pos[0] + this.width >= wall.pos[0]) && (this.pos[1] + this.height >= wall.pos[1] && this.pos[1] <= wall.pos[1] + wall.height)) {
+            if ((this.pos[0] <= wall.pos[0] + wall.width + 5 && this.pos[0] >= wall.pos[0] + wall.width) && (this.pos[1] + this.height >= wall.pos[1] && this.pos[1] <= wall.pos[1] + wall.height)) {
+                this.vel[0] = -(this.vel[0]);
+                this.angle = -(this.angle);
+                this.numRicochets++;
+                console.log('hit left')
+            } else if ((this.pos[0] + this.width >= wall.pos[0] - 5 && this.pos[0] + this.width <= wall.pos[0]) && (this.pos[1] + this.height >= wall.pos[1] && this.pos[1] <= wall.pos[1] + wall.height)) {
+                this.vel[0] = -(this.vel[0]);
+                this.angle = -(this.angle);
+                this.numRicochets++;
+                console.log('hit right')
+            } else if ((this.pos[0] + this.width >= wall.pos[0] && this.pos[0] <= wall.pos[0] + wall.width) && (this.pos[1] + this.height >= wall.pos[1] - 5 && this.pos[1] + this.height <= wall.pos[1])) {
                 this.vel[1] = -(this.vel[1]);
                 this.angle = -(this.angle);
                 this.numRicochets++;
+                console.log('hit top')
+            } else if ((this.pos[0] + this.width >= wall.pos[0] && this.pos[0] <= wall.pos[0] + wall.width) && (this.pos[1] <= wall.pos[1] + wall.height + 5 && this.pos[1] >= wall.pos[1] + wall.height)) {
+                this.vel[1] = -(this.vel[1]);
+                this.angle = -(this.angle);
+                this.numRicochets++;
+                console.log('hit bottom')
             }
         });
         if (this.pos[0] < 0) {

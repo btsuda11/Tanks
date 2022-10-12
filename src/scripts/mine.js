@@ -7,8 +7,8 @@ export default class Mine {
         this.tank = tank;
         this.ctx = ctx;
         this.radius = 60;
-        this.exploded = false;
-        this.explosion = document.getElementsByClassName('explosion');
+        // this.exploded = false;
+        // this.explosion = document.getElementsByClassName('explosion');
         this.timeoutID = setTimeout(() => {
             this.explode();
         }, 10000);
@@ -35,7 +35,7 @@ export default class Mine {
         // setInterval(() => {
         //     this.ctx.drawImage(this.explosion[index], this.pos[0], this.pos[1]);
         // })
-        
+
         // console.log(index);
         
         this.exploded = true;

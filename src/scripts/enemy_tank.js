@@ -24,11 +24,11 @@ export default class EnemyTank extends Tank {
             this.height = this.body.height;
             this.width = this.body.width;
         }
-        // setInterval(() => {
-        //     if (this.state === 'alive' || this.game.state === 'game over') {
-        //         this.shoot();
-        //     }
-        // }, 1500);
+        setInterval(() => {
+            if (this.state === 'alive' || this.game.state === 'game over') {
+                this.shoot();
+            }
+        }, 1500);
     }
 
     draw(ctx) {
