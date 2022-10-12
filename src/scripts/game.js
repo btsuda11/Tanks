@@ -38,13 +38,17 @@ export default class Game {
         // this.music.play();
         this.canvas.style.display = 'block';
         this.startScreen.style.display = 'none';
-        this.missionScreen.style.display = 'block';
+        // this.missionScreen.style.display = 'block';
         this.missionHeader.innerHTML = `Mission ${this.level}`;
         this.enemyTanksHeader.innerHTML = `Enemy Tanks: ${this.enemyTanks.length}`;
         setTimeout(() => {
             this.missionScreen.style.display = 'none';
-            this.update(this.ctx);
+            setTimeout(() => {
+                this.gameMission.children[0].innerHTML = `Mission ${this.level}`;
+                this.gameMission.style.display = 'block';
+            }, 3000);
         }, 10000);
+        this.update(this.ctx);
     }
 
     endLevel() {
@@ -189,13 +193,14 @@ export default class Game {
 
     getDOMElements() {
         this.canvas = document.querySelector('#game-canvas');
-        this.missionScreen = document.getElementsByClassName('mission-screen')[0];
-        this.missionHeader = document.getElementsByClassName('mission')[0];
-        this.enemyTanksHeader = document.getElementsByClassName('enemy-tanks')[0];
+        this.missionScreen = document.querySelector('.mission-screen');
+        this.missionHeader = document.querySelector('.mission');
+        this.enemyTanksHeader = document.querySelector('.enemy-tanks');
         this.startScreen = document.querySelector('#start-screen');
         this.startButton = document.querySelector('#start-button');
         this.howToButton = document.querySelector('#how-to-button');
         this.instructions = document.querySelector('#how-to');
+        this.gameMission = document.querySelector('#game-mission');
     }
 
     removeEventListeners() {
