@@ -39,15 +39,27 @@ export default class Tank {
         }
     }
 
-    hittingWall(wall) {
-        if ((this.bodyPos[0] + 2 < wall.pos[0] + wall.width && this.bodyPos[0] + this.width - 2 > wall.pos[0]) && (this.bodyPos[1] + this.height - 2 > wall.pos[1] && this.bodyPos[1] + 2 < wall.pos[1] + wall.height)) {
-            return true;
-        }
-        else if ((this.bodyPos[1] + 2 < wall.pos[1] + wall.height && this.bodyPos[1] + this.height - 2 > wall.pos[1]) && (this.bodyPos[0] + this.width - 2 > wall.pos[0] && this.bodyPos[0] + 2 < wall.pos[0] + wall.width)) {
-            return true;
+    hittingObject(object) {
+        if (object instanceof Wall) {
+            if ((this.bodyPos[0] + 2 < object.pos[0] + object.width && this.bodyPos[0] + this.width - 2 > object.pos[0]) && (this.bodyPos[1] + this.height - 2 > object.pos[1] && this.bodyPos[1] + 2 < object.pos[1] + object.height)) {
+                return true;
+            }
+            else if ((this.bodyPos[1] + 2 < object.pos[1] + object.height && this.bodyPos[1] + this.height - 2 > object.pos[1]) && (this.bodyPos[0] + this.width - 2 > object.pos[0] && this.bodyPos[0] + 2 < object.pos[0] + object.width)) {
+                return true;
+            } else {
+                return false;
+            }
         } else {
-            return false;
+            if ((this.bodyPos[0] + 2 < object.bodyPos[0] + object.width && this.bodyPos[0] + this.width - 2 > object.bodyPos[0]) && (this.bodyPos[1] + this.height - 2 > object.bodyPos[1] && this.bodyPos[1] + 2 < object.bodyPos[1] + object.height)) {
+                return true;
+            }
+            else if ((this.bodyPos[1] + 2 < object.bodyPos[1] + object.height && this.bodyPos[1] + this.height - 2 > object.bodyPos[1]) && (this.bodyPos[0] + this.width - 2 > object.bodyPos[0] && this.bodyPos[0] + 2 < object.bodyPos[0] + object.width)) {
+                return true;
+            } else {
+                return false;
+            }
         }
+        
     }
 
     shoot() {

@@ -1,6 +1,7 @@
 import Tank from "./tank";
 import Bullet from "./bullet"
 import { Util } from "./util";
+import Game from "./game";
 
 export default class EnemyTank extends Tank {
     constructor(options) {
@@ -22,11 +23,11 @@ export default class EnemyTank extends Tank {
             this.height = this.body.height;
             this.width = this.body.width;
         }
-        setInterval(() => {
-            if (this.state === 'alive' || this.game.state === 'game over') {
-                this.shoot();
-            }
-        }, 1500);
+        // setInterval(() => {
+        //     if (this.state === 'alive' || this.game.state === 'game over') {
+        //         this.shoot();
+        //     }
+        // }, 1500);
     }
 
     draw(ctx) {
@@ -39,9 +40,9 @@ export default class EnemyTank extends Tank {
     }
 
     move() {
-        // console.log(this.distToPlayer());
+        console.log(this.distToPlayer());
 
-        if (Math.abs(this.distToPlayer()[1]) < Math.abs(this.distToPlayer()[0])) {
+        if (Math.abs(this.distToPlayer()[1]) < Math.abs(this.distToPlayer()[0]) && this.distToPlayer()[2] > 300) {
             // console.log(this.distToPlayer()[0], 'xcomp');
             // console.log(this.distToPlayer()[1], 'ycomp');
             if (this.distToPlayer()[1] > 0) {
@@ -49,23 +50,34 @@ export default class EnemyTank extends Tank {
             } else if (this.distToPlayer()[1] < 0) {
                 this.vel[2] = -0.75;
             }
-        } else if (Math.abs(this.distToPlayer()[0]) < Math.abs(this.distToPlayer()[1])) {
+            console.log('first')
+        } else if (Math.abs(this.distToPlayer()[0]) < Math.abs(this.distToPlayer()[1]) && this.distToPlayer()[2] > 300) {
             if (this.distToPlayer()[0] > 0) {
                 this.vel[1] = 0.75;
             } else if (this.distToPlayer()[0] < 0) {
                 this.vel[0] = -0.75;
             }
+            console.log('second')
         }
 
 
-        // console.log(this.vel);
-        // if (Math.abs(this.distToPlayer()[1] < 5)) {
-        //     let randomIndex = Math.floor(Math.random() * 3) + 0;
-        //     let randomVel = [-1, 1];
-        //     if (randomIndex === 0 || randomIndex === 2) {
-        //         this.vel[randomIndex] = randomVel[Math.floor(Math.random() * randomVel.length)];
-        //     }
-        // }
+        if (this.distToPlayer()[2] < 300) {
+            if (this.game.playerTank.vel === [-1, 0, 0, 0]) {
+                if (this.bodyPos[1] + this.height < Game.DIM_Y) {
+                    this.vel = [0, 0, 0, 1];
+                }
+            } else if (this.game.playerTank.vel === [0, 1, 0, 0]) {
+                if (this.bodyPos[1] + this.height < Game.DIM_Y) {
+                    this.vel = [0, 0, 0, 1];
+                } else {
+                    this.vel = [0, 0, -1, 0];
+                }
+            } else if (this.game.playerTank.vel === [0, 0, -1, 0]) {
+
+            } else if (this.game.playerTank.vel === [0, 0, 0, 1]) {
+
+            }
+        }
 
         this.checkBounds();
         
@@ -82,19 +94,19 @@ export default class EnemyTank extends Tank {
         this.angle = Math.atan2(playerCenter[1] - this.barrelPos[1], playerCenter[0] - this.barrelPos[0]) - (Math.PI / 1.95);
 
         this.game.walls.forEach(wall => {
-            if (this.hittingWall(wall) && this.vel[0] < 0) {
+            if (this.hittingObject(wall) && this.vel[0] < 0) {
                 this.barrelPos[0] -= (2 * this.vel[0]);
                 this.bodyPos[0] -= (2 * this.vel[0]);
                 this.vel[0] = 0;
-            } else if (this.hittingWall(wall) && this.vel[1] > 0) {
+            } else if (this.hittingObject(wall) && this.vel[1] > 0) {
                 this.barrelPos[0] -= (2 * this.vel[1]);
                 this.bodyPos[0] -= (2 * this.vel[1]);
                 this.vel[1] = 0;
-            } else if (this.hittingWall(wall) && this.vel[2] < 0) {
+            } else if (this.hittingObject(wall) && this.vel[2] < 0) {
                 this.barrelPos[1] -= (2 * this.vel[2]);
                 this.bodyPos[1] -= (2 * this.vel[2]);
                 this.vel[2] = 0;
-            } else if (this.hittingWall(wall) && this.vel[3] > 0) {
+            } else if (this.hittingObject(wall) && this.vel[3] > 0) {
                 this.barrelPos[1] -= (2 * this.vel[3]);
                 this.bodyPos[1] -= (2 * this.vel[3]);
                 this.vel[3] = 0;

@@ -61,6 +61,7 @@ export default class Game {
         setTimeout(() => {
             missionFailed.style.display = 'none';
         }, 10000);
+        this.startLevel();
     }
 
     add(object) {
@@ -95,6 +96,8 @@ export default class Game {
     checkCollisions() {
         for (let i = 0; i < this.bullets.length; i++) {
             for (let j = 0; j < this.tanks.length; j++) {
+                // console.log(this.bullets[i].hasHit(this.tanks[j]))
+                // console.log(this.tanks)
                 if (this.bullets[i].hasHit(this.tanks[j])) {
                     this.bullets[i].hits(this.tanks[j]);
                 }
