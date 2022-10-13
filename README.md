@@ -48,7 +48,7 @@ bindGameKeys() {
         if (e.code === 'KeyS') this.playerTank.vel[3] = 0;
     });
     ...
-}
+};
 ```
 <br>
 
@@ -77,8 +77,8 @@ explode() {
         } 
     }
     this.tank.game.remove(this);
-}
-```
+};
+
 <br>
 
 ## **Enemy Tank Movement**
@@ -103,7 +103,7 @@ move() {
         }
     }
     ...
-}
+};
 ```
 <br>
 
