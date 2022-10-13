@@ -3,7 +3,7 @@ body {
 }
 
 canvas {
-    background-image: url('images/wood_tile.jpeg');
+    background-image: url('../images/wood_tile.jpeg');
     background-size: 100% 100%;
     opacity: 1;
 }
@@ -32,7 +32,7 @@ canvas {
 
 .mission-screen > div {
     width: 100%;
-    background-image: url('images/mission-background.jpeg');
+    background-image: url('../images/mission-background.jpeg');
     border-top: #f5c71a 8px solid;
     border-bottom: #f5c71a 8px solid;
     position: absolute;
@@ -45,7 +45,7 @@ canvas {
 
 #game-mission {
     width: 25%;
-    background-image: url('images/mission-background.jpeg');
+    background-image: url('../images/mission-background.jpeg');
     padding: 5px;
     font-size: 32px;
     color: lightyellow;
