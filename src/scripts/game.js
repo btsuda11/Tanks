@@ -68,7 +68,7 @@ export default class Game {
                 setTimeout(() => this.start.style.display = 'none', 2000);
                 this.bindGameKeys();
                 this.update(this.ctx);
-            }, 1000);
+            }, 3400);
         }, 4000); // if increased any more, this set timeout will mess up the collision animation
     }
 
