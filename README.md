@@ -31,6 +31,7 @@ A tank shooting game built with JavaScript, HTML, and CSS based off of Wii Play'
 * Barrel of tank rotates to cursor location by using a separate tank barrel and body image and trigonometric angles.
 <br>
 <br>
+
 ```javascript
 // src/scripts/game.js
 bindGameKeys() {
@@ -50,6 +51,7 @@ bindGameKeys() {
     ...
 };
 ```
+
 <br>
 
 ## **Mine Placement and Detonation**
@@ -58,6 +60,7 @@ bindGameKeys() {
 * Expanded the radius of the mine so that will destroy all tanks in a given radius.
 <br>
 <br>
+
 ```javascript
 // src/scripts/mine.js
 constructor() {
@@ -78,6 +81,7 @@ explode() {
     }
     this.tank.game.remove(this);
 };
+```
 
 <br>
 
@@ -85,6 +89,7 @@ explode() {
 * Will move according to player tank location in the direction that will reach the player tank quicker.
 <br>
 <br>
+
 ```javascript
 // src/scripts.enemy_tank.js
 move() {
@@ -105,6 +110,7 @@ move() {
     ...
 };
 ```
+
 <br>
 
 # Technologies, Libraries, APIs
