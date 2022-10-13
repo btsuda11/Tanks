@@ -25,7 +25,7 @@ export default class Game {
 
     showInstructions() {
         this.startScreen.style.display = 'none';
-        this.instructions.style.display = 'block';
+        this.instructions.style.display = 'flex';
     }
 
     resetStats() {
@@ -69,7 +69,7 @@ export default class Game {
                 this.bindGameKeys();
                 this.update(this.ctx);
             }, 1000);
-        }, 4000);
+        }, 4000); // if increased any more, this set timeout will mess up the collision animation
     }
 
     returnHome() {
