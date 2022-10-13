@@ -1,6 +1,3 @@
-/*!****************************************************************************************************!*\
-  !*** css ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[1].use[1]!./src/styles/reset.css ***!
-  \****************************************************************************************************/
 /* http://meyerweb.com/eric/tools/css/reset/ 
    v2.0 | 20110126
    License: none (public domain)
@@ -131,15 +128,12 @@ table {
     border-collapse: collapse;
     border-spacing: 0;
 }
-/*!***************************************************************************************************!*\
-  !*** css ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[1].use[1]!./src/styles/game.css ***!
-  \***************************************************************************************************/
 body {
     font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
 }
 
 canvas {
-    background-image: url('/images/wood_tile.jpeg');
+    background-image: url('images/wood_tile.jpeg');
     background-size: 100% 100%;
     opacity: 1;
 }
@@ -168,7 +162,7 @@ canvas {
 
 .mission-screen > div {
     width: 100%;
-    background-image: url('/images/mission-background.jpeg');
+    background-image: url('images/mission-background.jpeg');
     border-top: #f5c71a 8px solid;
     border-bottom: #f5c71a 8px solid;
     position: absolute;
@@ -181,7 +175,7 @@ canvas {
 
 #game-mission {
     width: 25%;
-    background-image: url('/images/mission-background.jpeg');
+    background-image: url('images/mission-background.jpeg');
     padding: 5px;
     font-size: 32px;
     color: lightyellow;
@@ -206,9 +200,6 @@ h1, h2, h3, h4 {
 /* .explosion {
     display: none;
 } */
-/*!***********************************************************************************************************!*\
-  !*** css ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[1].use[1]!./src/styles/start_screen.css ***!
-  \***********************************************************************************************************/
 #how-to {
     height: 100vh;
     width: 100vw;
@@ -246,12 +237,9 @@ h1, h2, h3, h4 {
     0%, 100% {opacity: 0}
     50% {opacity: 1}
 }
-/*!*********************************************************************************************************!*\
-  !*** css ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[1].use[1]!./src/styles/end_screen.css ***!
-  \*********************************************************************************************************/
 .mission-failed {
     width: 100%;
-    background-image: url('/images/mission-failed.jpeg');
+    background-image: url('images/mission-failed.jpeg');
     background-size: 100% 100%;
     font-size: 32px;
     color: #4682B4;
@@ -264,7 +252,7 @@ h1, h2, h3, h4 {
 
 .mission-cleared {
     width: 100%;
-    background-image: url('/images/mission-state.png');
+    background-image: url('images/mission-state.png');
     font-size: 32px;
     color: #f5c71a;
     text-shadow: 4px 4px 4px #000000;
@@ -301,7 +289,6 @@ input[type='button'] {
 input[type='button']:hover {
     background-color: #89CFF0;
 }
-/*!*************************************************************************************************************************************!*\
-  !*** css ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[1].use[1]!./node_modules/sass-loader/dist/cjs.js!./src/index.scss ***!
-  \*************************************************************************************************************************************/
 
+
+/*# sourceMappingURL=main.css.map*/
