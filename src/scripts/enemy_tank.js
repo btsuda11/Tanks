@@ -104,7 +104,7 @@ export default class EnemyTank extends Tank {
         if (this.type === 'red') {
             bullet = new Bullet({ pos: [this.barrelPos[0] + 20 + x, this.barrelPos[1] + 20 + y], speed: 3, angle: this.angle + (Math.PI / 2), tank: this });
         } else if (this.type === 'green') {
-            bullet = new Bullet({ pos: [this.barrelPos[0] + 20 + x, this.barrelPos[1] + 20 + y], speed: 6, angle: this.angle + (Math.PI / 2), tank: this });
+            bullet = new Bullet({ pos: [this.barrelPos[0] + 20 + x, this.barrelPos[1] + 20 + y], speed: 4.5, angle: this.angle + (Math.PI / 2), tank: this });
         }
         this.game.add(bullet);
     }

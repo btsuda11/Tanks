@@ -85,52 +85,52 @@ export default class Bullet {
 
     hasHit(otherObject) {
         if (otherObject instanceof Tank) {
-            // if ((this.pos[0] <= otherObject.bodyPos[0] + otherObject.width + 10 
-            //     && this.pos[0] >= otherObject.bodyPos[0] + otherObject.width) 
-            //         && (this.pos[1] + this.height >= otherObject.bodyPos[1] 
-            //     && this.pos[1] <= otherObject.bodyPos[1] + otherObject.height)) {
-            //         return true;
-            // } else if ((this.pos[0] + this.width >= otherObject.bodyPos[0] - 10 
-            //     && this.pos[0] + this.width <= otherObject.bodyPos[0]) 
-            //         && (this.pos[1] + this.height >= otherObject.bodyPos[1] 
-            //     && this.pos[1] <= otherObject.bodyPos[1] + otherObject.height)) {
-            //         return true;
-            // } else if ((this.pos[0] + this.width >= otherObject.bodyPos[0] 
-            //     && this.pos[0] <= otherObject.bodyPos[0] + otherObject.width) 
-            //         && (this.pos[1] + this.height >= otherObject.bodyPos[1] - 10 
-            //     && this.pos[1] + this.height <= otherObject.bodyPos[1])) {
-            //         return true;
-            // } else if ((this.pos[0] + this.width >= otherObject.bodyPos[0] 
-            //     && this.pos[0] <= otherObject.bodyPos[0] + otherObject.width) 
-            //         && (this.pos[1] <= otherObject.bodyPos[1] + otherObject.height + 10 
-            //     && this.pos[1] >= otherObject.bodyPos[1] + otherObject.height)) {
-            //         return true;
-            // } else {
-            //     return false;
-            // }
-            if ((this.pos[0] <= otherObject.bodyPos[0] + otherObject.width + 10
-                && this.pos[0] >= otherObject.bodyPos[0] + otherObject.width)
-                && (this.pos[1] >= otherObject.bodyPos[1]
-                    && this.pos[1] - this.width <= otherObject.bodyPos[1] + otherObject.height)) {
-                return true;
-            } else if ((this.pos[0] >= otherObject.bodyPos[0] - 10
-                && this.pos[0] <= otherObject.bodyPos[0])
-                && (this.pos[1] + this.width >= otherObject.bodyPos[1]
-                    && this.pos[1] <= otherObject.bodyPos[1] + otherObject.height)) {
-                return true;
-            } else if ((this.pos[0] >= otherObject.bodyPos[0]
-                && this.pos[0] - this.width <= otherObject.bodyPos[0] + otherObject.width)
-                && (this.pos[1] >= otherObject.bodyPos[1] - 10
-                    && this.pos[1] <= otherObject.bodyPos[1])) {
-                return true;
-            } else if ((this.pos[0] + this.width >= otherObject.bodyPos[0]
-                && this.pos[0] <= otherObject.bodyPos[0] + otherObject.width)
-                && (this.pos[1] <= otherObject.bodyPos[1] + otherObject.height + 10
-                    && this.pos[1] >= otherObject.bodyPos[1] + otherObject.height)) {
-                return true;
+            if ((this.pos[0] <= otherObject.bodyPos[0] + otherObject.width + 10 
+                && this.pos[0] >= otherObject.bodyPos[0] + otherObject.width) 
+                    && (this.pos[1] + this.height >= otherObject.bodyPos[1] 
+                && this.pos[1] <= otherObject.bodyPos[1] + otherObject.height)) {
+                    return true;
+            } else if ((this.pos[0] + this.width >= otherObject.bodyPos[0] - 10 
+                && this.pos[0] + this.width <= otherObject.bodyPos[0]) 
+                    && (this.pos[1] + this.height >= otherObject.bodyPos[1] 
+                && this.pos[1] <= otherObject.bodyPos[1] + otherObject.height)) {
+                    return true;
+            } else if ((this.pos[0] + this.width >= otherObject.bodyPos[0] 
+                && this.pos[0] <= otherObject.bodyPos[0] + otherObject.width) 
+                    && (this.pos[1] + this.height >= otherObject.bodyPos[1] - 10 
+                && this.pos[1] + this.height <= otherObject.bodyPos[1])) {
+                    return true;
+            } else if ((this.pos[0] + this.width >= otherObject.bodyPos[0] 
+                && this.pos[0] <= otherObject.bodyPos[0] + otherObject.width) 
+                    && (this.pos[1] <= otherObject.bodyPos[1] + otherObject.height + 10 
+                && this.pos[1] >= otherObject.bodyPos[1] + otherObject.height)) {
+                    return true;
             } else {
                 return false;
             }
+            // if ((this.pos[0] <= otherObject.bodyPos[0] + otherObject.width + 10
+            //     && this.pos[0] >= otherObject.bodyPos[0] + otherObject.width)
+            //     && (this.pos[1] >= otherObject.bodyPos[1]
+            //         && this.pos[1] - this.width <= otherObject.bodyPos[1] + otherObject.height)) {
+            //     return true;
+            // } else if ((this.pos[0] >= otherObject.bodyPos[0] - 10
+            //     && this.pos[0] <= otherObject.bodyPos[0])
+            //     && (this.pos[1] + this.width >= otherObject.bodyPos[1]
+            //         && this.pos[1] <= otherObject.bodyPos[1] + otherObject.height)) {
+            //     return true;
+            // } else if ((this.pos[0] >= otherObject.bodyPos[0]
+            //     && this.pos[0] - this.width <= otherObject.bodyPos[0] + otherObject.width)
+            //     && (this.pos[1] >= otherObject.bodyPos[1] - 10
+            //         && this.pos[1] <= otherObject.bodyPos[1])) {
+            //     return true;
+            // } else if ((this.pos[0] + this.width >= otherObject.bodyPos[0]
+            //     && this.pos[0] <= otherObject.bodyPos[0] + otherObject.width)
+            //     && (this.pos[1] <= otherObject.bodyPos[1] + otherObject.height + 10
+            //         && this.pos[1] >= otherObject.bodyPos[1] + otherObject.height)) {
+            //     return true;
+            // } else {
+            //     return false;
+            // }
         } else if (otherObject instanceof Bullet) {
             if ((this.pos[0] <= otherObject.pos[0] + otherObject.width && this.pos[0] + this.width >= otherObject.pos[0]) && (this.pos[1] + this.height >= otherObject.pos[1] && this.pos[1] <= otherObject.pos[1] + otherObject.height)) {
                 return true;
