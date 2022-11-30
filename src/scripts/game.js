@@ -18,14 +18,10 @@ export default class Game {
         this.getDOMElements();
         this.bindClickListeners();
         this.gameOff = false;
+        this.paused = false;
         this.levelOver = false;
         this.bindGameKeys = this.bindGameKeys.bind(this);
         this.update = this.update.bind(this);
-    }
-
-    showInstructions() {
-        this.startScreen.style.display = 'none';
-        this.instructions.style.display = 'flex';
     }
 
     resetStats() {
@@ -72,14 +68,6 @@ export default class Game {
         }, 4000); // if increased any more, this set timeout will mess up the collision animation
     }
 
-    returnHome() {
-        this.music[2].pause();
-        this.music[2].currentTime = 0;
-        this.endScreen[0].style.display = 'none';
-        this.canvas.style.display = 'none';
-        this.startScreen.style.display = 'flex';
-    }
-
     endLevel() {
         this.music[0].pause();
         this.music[0].currentTime = 0;
@@ -114,15 +102,6 @@ export default class Game {
     newGame() {
         let newGame = new Game(this.ctx);
         newGame.startLevel();
-    }
-
-    playAgain() {
-        this.music[0].currentTime = 0;
-        this.music[2].pause();
-        this.music[2].currentTime = 0;
-        this.endScreen[0].style.display = 'none';
-        this.canvas.style.display = 'none';
-        this.newGame();
     }
 
     add(object) {
@@ -224,14 +203,8 @@ export default class Game {
     }
 
     bindClickListeners() {
-        this.startButton.addEventListener('click', () => this.newGame());
-        this.returnHomeButton.addEventListener('click', () => this.returnHome());
-        this.playAgainButton.addEventListener('click', () => this.playAgain());
-        this.howToButton.addEventListener('click', () => this.showInstructions());
-        this.instructions.addEventListener('click', () => {
-            this.instructions.style.display = 'none';
-            this.startScreen.style.display = 'flex';
-        });
+        // this.startButton.addEventListener('click', () => this.newGame());
+
     }
 
     bindGameKeys() {
@@ -260,16 +233,11 @@ export default class Game {
         this.missionHeader = document.querySelector('.mission');
         this.enemyTanksHeader = document.querySelector('.enemy-tanks');
         this.startScreen = document.querySelector('#start-screen');
-        this.startButton = document.querySelector('#start-button');
         this.start = document.querySelector('#start');
         this.howToButton = document.querySelector('#how-to-button');
         this.missionFailed = document.getElementsByClassName('mission-failed');
-        this.endScreen = document.getElementsByClassName('end-screen');
-        this.playAgainButton = this.endScreen[0].children[0];
-        this.returnHomeButton = this.endScreen[0].children[1];
         this.instructions = document.querySelector('#how-to');
         this.gameMission = document.querySelector('#game-mission');
-        this.music = document.getElementsByClassName('music');
     }
 
     removeGameKeys() {

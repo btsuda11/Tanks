@@ -39,7 +39,7 @@
     top: 1%;
 }
 
-#button-container > input[type="button"] {
+#button-container > button {
     position: relative;
     top: 5%;
     width: 40%;
@@ -50,7 +50,7 @@
     border: 2px solid black;
 }
 
-#button-container > input[type="button"]:hover {
+#button-container > button:hover {
     background-color: black;
     color: white;
 }
