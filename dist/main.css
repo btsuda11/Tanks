@@ -10,6 +10,7 @@ html,
 body,
 div,
 span,
+button,
 applet,
 object,
 iframe,
@@ -91,6 +92,11 @@ video {
 }
 
 /* HTML5 display-role reset for older browsers */
+@font-face {
+    font-family: Chainwhacks;
+    src: url(../../assets/fonts/Chainwhacks-vm72E.ttf);
+}
+
 article,
 aside,
 details,
@@ -107,6 +113,7 @@ section {
 
 body {
     line-height: 1;
+    font-family: Chainwhacks;
 }
 
 ol,
@@ -134,14 +141,14 @@ table {
 /*!***************************************************************************************************!*\
   !*** css ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[1].use[1]!./src/styles/game.css ***!
   \***************************************************************************************************/
-body {
-    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
-}
-
 canvas {
     background-image: url('/Tanks/assets/images/wood_tile.jpeg');
     background-size: 100% 100%;
     opacity: 1;
+}
+
+.canvas-container {
+    height: 90vh;
 }
 
 #mission-screen {
@@ -210,9 +217,8 @@ h1, h2, h3, h4 {
   !*** css ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[1].use[1]!./src/styles/start_screen.css ***!
   \***********************************************************************************************************/
 #start-screen {
-    background-color: #ffebcd;
-    height: 100vh;
-    width: 100vw;
+    background-color: #deb887;
+    height: 100%;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -241,7 +247,6 @@ h1, h2, h3, h4 {
 }
 
 #start-content{
-    background-color: black;
     background-color: rgba(0, 0, 0, .8);
     width: 50%;
     border-radius: 5px;
@@ -266,7 +271,7 @@ h1, h2, h3, h4 {
     color: white;
 }
 
-#start-screen > h1, #how-to > h1 {
+#how-to > h1 {
     border-radius: 5px;
     background-color: #6495ED;
     border: 2px solid #0066b2;
@@ -349,7 +354,7 @@ h1, h2, h3, h4 {
     color: #6495ED;
 }
 
-button {
+#start-btn, #instructions-btn, #play-again-btn, #return-home-btn {
     border-radius: 5px;
     padding-top: 10px;
     padding-bottom: 10px;
@@ -371,7 +376,7 @@ button {
     display: flex;
     flex-direction: column;
     align-items: center;
-    background-color: #ffebcd;
+    background-color: #deb887;
 }
 
 .square {
@@ -436,8 +441,64 @@ strong {
   !*** css ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[1].use[1]!./src/styles/header.css ***!
   \*****************************************************************************************************/
 header {
-    background-color: black;
+    background-color: #deb887;
     color: white;
+    height: 10vh;
+}
+
+.header-div {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 100%;
+}
+
+.game-btns-div {
+    width: 15%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    margin-left: 5%;
+}
+
+.game-btns-div > button {
+    margin-right: 30%;
+    height: 50%;
+    padding: 10px 25px;
+    border-radius: 15px;
+    background-color: rgba(0, 0, 0, .8);
+    color: white;
+    cursor: pointer;
+}
+
+.logo-div {
+    height: 100%;
+    display: flex;
+    align-items: center;
+}
+
+.logo-div > h1 {
+    font-size: 50px;
+    text-shadow: -2px 0 black, 0 2px black, 2px 0 black, 0 -2px black;
+    margin: 0;
+}
+
+.about-links-div {
+    width: 15%;
+    height: 100%;
+    display: flex;
+    justify-content: flex-end;
+    margin-right: 5%;
+}
+
+.about-link {
+    display: flex;
+    align-items: center;
+    margin-left: 30%;
+}
+
+.about-link > img {
+    height: 50%;
 }
 /*!*************************************************************************************************************************************!*\
   !*** css ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[1].use[1]!./node_modules/sass-loader/dist/cjs.js!./src/index.scss ***!

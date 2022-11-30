@@ -1,11 +1,11 @@
-body {
-    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
-}
-
 canvas {
     background-image: url('/Tanks/assets/images/wood_tile.jpeg');
     background-size: 100% 100%;
     opacity: 1;
+}
+
+.canvas-container {
+    height: 90vh;
 }
 
 #mission-screen {

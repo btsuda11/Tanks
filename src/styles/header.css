@@ -1,4 +1,60 @@
 header {
-    background-color: black;
+    background-color: #deb887;
     color: white;
+    height: 10vh;
+}
+
+.header-div {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 100%;
+}
+
+.game-btns-div {
+    width: 15%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    margin-left: 5%;
+}
+
+.game-btns-div > button {
+    margin-right: 30%;
+    height: 50%;
+    padding: 10px 25px;
+    border-radius: 15px;
+    background-color: rgba(0, 0, 0, .8);
+    color: white;
+    cursor: pointer;
+}
+
+.logo-div {
+    height: 100%;
+    display: flex;
+    align-items: center;
+}
+
+.logo-div > h1 {
+    font-size: 50px;
+    text-shadow: -2px 0 black, 0 2px black, 2px 0 black, 0 -2px black;
+    margin: 0;
+}
+
+.about-links-div {
+    width: 15%;
+    height: 100%;
+    display: flex;
+    justify-content: flex-end;
+    margin-right: 5%;
+}
+
+.about-link {
+    display: flex;
+    align-items: center;
+    margin-left: 30%;
+}
+
+.about-link > img {
+    height: 50%;
 }

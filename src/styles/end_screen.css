@@ -40,7 +40,7 @@
     color: #6495ED;
 }
 
-button {
+#start-btn, #instructions-btn, #play-again-btn, #return-home-btn {
     border-radius: 5px;
     padding-top: 10px;
     padding-bottom: 10px;
