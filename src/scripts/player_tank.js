@@ -1,12 +1,11 @@
-import Game from "./game";
 import Tank from "./tank";
 import Wall from "./wall";
 
 export default class PlayerTank extends Tank {
     constructor(options) {
         super(options);
-        this.body.src = 'images/tanks/tankBody_blue_outline.png';
-        this.barrel.src = 'images/tanks/tankBlue_barrel2_outline.png';
+        this.body.src = 'assets/images/tanks/tankBody_blue_outline.png';
+        this.barrel.src = 'assets/images/tanks/tankBlue_barrel2_outline.png';
         this.height = this.body.height;
         this.width = this.body.width;
         this.barrelHeight = this.barrel.height;

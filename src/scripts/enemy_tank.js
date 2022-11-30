@@ -9,16 +9,16 @@ export default class EnemyTank extends Tank {
         this.type = options.type;
         this.allowedRicochets = 1;
         if (this.type === 'red') {
-            this.body.src = 'images/tanks/tankBody_red_outline.png';
-            this.barrel.src = 'images/tanks/tankRed_barrel2_outline.png';
+            this.body.src = 'assets/images/tanks/tankBody_red_outline.png';
+            this.barrel.src = 'assets/images/tanks/tankRed_barrel2_outline.png';
             this.maxBullets = 1;
             this.maxMines = 0;
             this.height = this.body.height;
             this.width = this.body.width;
         }
         if (this.type === 'green') {
-            this.body.src = 'images/tanks/tankBody_green_outline.png';
-            this.barrel.src = 'images/tanks/tankGreen_barrel2_outline.png';
+            this.body.src = 'assets/images/tanks/tankBody_green_outline.png';
+            this.barrel.src = 'assets/images/tanks/tankGreen_barrel2_outline.png';
             this.maxBullets = 2;
             this.maxMines = 0;
             this.height = this.body.height;
