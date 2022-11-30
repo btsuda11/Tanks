@@ -37,7 +37,7 @@ export default class Game {
         this.missionHeader.innerHTML = `Mission ${this.level.level}`;
         this.enemyTanksHeader.innerHTML = `Enemy Tanks: ${this.enemyTanks.length}`;
         this.gameMission.innerHTML = `Mission ${this.level.level}`;
-        
+
         GameView.toggleScreen('game-canvas', true);
         GameView.toggleScreen('start-screen', false);
         GameView.toggleScreen('mission-screen', true);
@@ -51,7 +51,7 @@ export default class Game {
                 setTimeout(() => GameView.toggleScreen('start', false), 2000);
                 this.bindGameKeys();
                 this.levelOver = false;
-                this.update(this.ctx);
+                window.requestAnimationFrame(this.update);
             }, 3400);
         }, 4000); // if increased any more, this set timeout will mess up the collision animation
     }
@@ -81,10 +81,10 @@ export default class Game {
         }
     }
 
-    draw(ctx) {
-        ctx.clearRect(0, 0, Game.DIM_X, Game.DIM_Y);
+    draw() {
+        this.ctx.clearRect(0, 0, Game.DIM_X, Game.DIM_Y);
         this.allObjects().forEach(object => {
-            object.draw(ctx);
+            object.draw(this.ctx);
         });
     }
 
@@ -94,12 +94,12 @@ export default class Game {
         });
     }
 
-    update(ctx) {
-        if (this.gameOver !== true && this.levelOver !== true) {
+    update() {
+        if (this.gameOver === false && this.levelOver === false && this.paused === false) {
             this.step();
-            this.draw(ctx);
+            this.draw();
         }
-        this.frameID = requestAnimationFrame(() => this.update(ctx));
+        this.frameID = window.requestAnimationFrame(this.update);
     }
 
     checkCollisions() {
