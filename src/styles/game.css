@@ -8,20 +8,20 @@ canvas {
     opacity: 1;
 }
 
-.mission-screen {
+#mission-screen {
     width: 100vw;
     height: 100vh;
     animation: fade 4s;
     background-color: #ffebcd;
 }
 
-.mission-screen > img {
+#mission-screen > img {
     position: absolute;
     top: 75%;
     left: 45%;
 }
 
-.mission-screen > h2 {
+#mission-screen > h2 {
     position: absolute;
     top: 72.5%;
     left: 54%;
@@ -30,7 +30,7 @@ canvas {
     -webkit-text-stroke: 2px #0066b2;
 }
 
-.mission-screen > div {
+#mission-screen > div {
     width: 100%;
     background-image: url('/Tanks/images/mission-background.jpeg');
     border-top: #f5c71a 8px solid;
