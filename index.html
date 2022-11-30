@@ -8,17 +8,34 @@
     <link rel="stylesheet" href="./dist/main.css" />
     <script src="./dist/main.js"></script>
     <title>Tanks</title>
+    <link rel="shortcut icon" type="image/png" href="./images/explosion/explosion3.png" />
 </head>
 
 <body>
     <audio controls preload="auto" hidden src="music/tank-music.mp3" class="music"></audio>
     <audio controls preload="auto" hidden src="music/end-level.mp3" class="music"></audio>
     <audio controls preload="auto" hidden src="music/game-over.mp3" class="music"></audio>
-    <img class="explosion" src="images/explosion/explosion1.png" hidden>
+    <!-- <img class="explosion" src="images/explosion/explosion1.png" hidden>
     <img class="explosion" src="images/explosion/explosion2.png" hidden>
     <img class="explosion" src="images/explosion/explosion3.png" hidden>
     <img class="explosion" src="images/explosion/explosion4.png" hidden>
-    <img class="explosion" src="images/explosion/explosion5.png" hidden>
+    <img class="explosion" src="images/explosion/explosion5.png" hidden> -->
+
+    <header>
+        <div>
+            <nav>
+                <button>Pause</button>
+                <button>Mute</button>
+            </nav>
+            <div>
+                <h1>Tanks</h1>
+            </div>
+            <nav>
+                <a href="https://github.com/btsuda11/Tanks"><img src="" /></a>
+                <a href="https://www.linkedin.com/in/brendan-tsuda/"><img src="" /></a>
+            </nav>
+        </div>
+    </header>
 
     <div id="start-screen">
         <h1>Tanks!</h1>
@@ -75,8 +92,8 @@
         <h2>Mission Cleared!</h2>
     </div>
     <canvas id="game-canvas" style="display: none;"></canvas>
-    <div style="display: none;">
-        <h4 id="game-mission"></h4>
+    <div id="game-mission" style="display: none;">
+        <h4></h4>
     </div>
 </body>
 

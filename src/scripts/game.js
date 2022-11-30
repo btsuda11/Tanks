@@ -36,7 +36,7 @@ export default class Game {
     startLevel() {
         this.missionHeader.innerHTML = `Mission ${this.level.level}`;
         this.enemyTanksHeader.innerHTML = `Enemy Tanks: ${this.enemyTanks.length}`;
-        this.gameMission.innerHTML = `Mission ${this.level.level}`;
+        this.gameMission.children[0].innerHTML = `Mission ${this.level.level}`;
 
         GameView.toggleScreen('game-canvas', true);
         GameView.toggleScreen('start-screen', false);
