@@ -10,6 +10,7 @@ export default class GameView {
         this.game = new Game(this.ctx);
         this.game.gameOff = false;
         this.game.paused = false;
+        this.music[0].play();
         document.getElementById('play-again-btn').addEventListener('click', this.restart);
         document.getElementById('return-home-btn').addEventListener('click', this.returnHome);
         this.game.startLevel();
@@ -19,19 +20,20 @@ export default class GameView {
         this.music[0].currentTime = 0;
         this.music[2].pause();
         this.music[2].currentTime = 0;
-        this.toggleScreen('end-screen', false);
-        this.toggleScreen('game-canvas', true);
+        GameView.toggleScreen('end-screen', false);
+        GameView.toggleScreen('game-canvas', true);
+        this.startGame();
     }
 
     returnHome() {
         this.music[2].pause();
         this.music[2].currentTime = 0;
-        this.toggleScreen('end-screen', false);
-        this.toggleScreen('game-canvas', false);
-        this.toggleScreen('start-screen', true);
+        GameView.toggleScreen('end-screen', false);
+        GameView.toggleScreen('game-canvas', false);
+        GameView.toggleScreen('start-screen', true);
     }
 
-    toggleScreen(id, toggle) {
+    static toggleScreen(id, toggle) {
         let element = document.getElementById(id);
         let display = (toggle) ? 'flex' : 'none';
         element.style.display = display;
