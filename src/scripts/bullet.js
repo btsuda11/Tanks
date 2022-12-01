@@ -1,7 +1,6 @@
 import Tank from "./tank";
 import Mine from "./mine";
 import Game from "./game";
-import Wall from "./wall";
 
 export default class Bullet {
     constructor(options) {
@@ -18,11 +17,15 @@ export default class Bullet {
     draw(ctx) {
         let bullet = new Image();
         bullet.src = 'assets/images/bullets/bulletDark2.png';
-        ctx.save();
-        ctx.translate(this.pos[0], this.pos[1]);
-        ctx.rotate(this.angle - ((3 * Math.PI) / 2));
-        ctx.drawImage(bullet, 0, 0);
-        ctx.restore();
+        // ctx.save();
+        // ctx.translate(this.pos[0], this.pos[1]);
+        // ctx.rotate(this.angle - ((3 * Math.PI) / 2));
+        // ctx.drawImage(bullet, 0, 0);
+        // ctx.restore();
+        ctx.beginPath();
+        ctx.arc(this.pos[0], this.pos[1], 4, 0, 2 * Math.PI);
+        ctx.fillStyle = 'black';
+        ctx.fill();
     }
 
     move() {
@@ -34,14 +37,10 @@ export default class Bullet {
     }
 
     checkRicochet() {
-        // let allowedRicochets;
-        // if (this.tank.type === 'player') {allowedRicochets = 2}
-        // else if (this.tank.type === 'red') {allowedRicochets = 2}
-        // else if (this.tank.type === 'green') {allowedRicochets = 1};
-
-        if (this.numRicochets >= 2) {
+        if (this.numRicochets >= this.tank.allowedRicochets) {
             this.tank.game.remove(this);
         }
+
         this.tank.game.walls.forEach(wall => {
             if ((this.pos[0] <= wall.pos[0] + wall.width + 5 && this.pos[0] >= wall.pos[0] + wall.width) && (this.pos[1] + this.height >= wall.pos[1] && this.pos[1] <= wall.pos[1] + wall.height)) {
                 this.vel[0] = -(this.vel[0]);
@@ -61,6 +60,7 @@ export default class Bullet {
                 this.numRicochets++;
             }
         });
+
         if (this.pos[0] < 0) {
             this.vel[0] = -(this.vel[0]);
             this.angle = -(this.angle);

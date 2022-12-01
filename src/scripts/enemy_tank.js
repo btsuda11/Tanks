@@ -1,13 +1,10 @@
 import Tank from "./tank";
 import Bullet from "./bullet"
-import { Util } from "./util";
-import Game from "./game";
 
 export default class EnemyTank extends Tank {
     constructor(options) {
         super(options);
         this.type = options.type;
-        this.allowedRicochets = 1;
         if (this.type === 'red') {
             this.body.src = 'assets/images/tanks/tankBody_red_outline.png';
             this.barrel.src = 'assets/images/tanks/tankRed_barrel2_outline.png';
@@ -15,20 +12,28 @@ export default class EnemyTank extends Tank {
             this.maxMines = 0;
             this.height = this.body.height;
             this.width = this.body.width;
+            this.allowedRicochets = 2;
+            setInterval(() => {
+                if (this.alive === true) {
+                    this.shoot();
+                }
+            }, 1500);
         }
         if (this.type === 'green') {
             this.body.src = 'assets/images/tanks/tankBody_green_outline.png';
             this.barrel.src = 'assets/images/tanks/tankGreen_barrel2_outline.png';
-            this.maxBullets = 2;
+            this.maxBullets = 1;
             this.maxMines = 0;
             this.height = this.body.height;
             this.width = this.body.width;
+            this.allowedRicochets = 1;
+            setInterval(() => {
+                if (this.alive === true) {
+                    this.shoot();
+                }
+            }, 3000);
         }
-        // setInterval(() => {
-        //     if (this.state === 'alive') {
-        //         this.shoot();
-        //     }
-        // }, 1500);
+        
     }
 
     draw(ctx) {
@@ -102,9 +107,9 @@ export default class EnemyTank extends Tank {
         let x = 50 * Math.cos(this.angle + (Math.PI / 2));
         let y = 50 * Math.sin(this.angle + (Math.PI / 2));
         if (this.type === 'red') {
-            bullet = new Bullet({ pos: [this.barrelPos[0] + 20 + x, this.barrelPos[1] + 20 + y], speed: 3, angle: this.angle + (Math.PI / 2), tank: this });
+            bullet = new Bullet({ pos: [this.barrelPos[0] + 20 + x, this.barrelPos[1] + 20 + y], speed: 3.5, angle: this.angle + (Math.PI / 2), tank: this });
         } else if (this.type === 'green') {
-            bullet = new Bullet({ pos: [this.barrelPos[0] + 20 + x, this.barrelPos[1] + 20 + y], speed: 4.5, angle: this.angle + (Math.PI / 2), tank: this });
+            bullet = new Bullet({ pos: [this.barrelPos[0] + 20 + x, this.barrelPos[1] + 20 + y], speed: 6, angle: this.angle + (Math.PI / 2), tank: this });
         }
         this.game.add(bullet);
     }
