@@ -83,8 +83,9 @@
     font-weight: 800;
     animation: fade 2s;
     position: absolute;
+    z-index: 30;
     top: 37.5%;
-    text-align: center;
+    justify-content: center;
     font-size: 40px;
 }
 
