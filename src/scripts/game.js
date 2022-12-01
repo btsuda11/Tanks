@@ -14,8 +14,8 @@ export default class Game {
         this.level = new Level(this, 2);
         this.bullets = [];
         this.mines = [];
-        this.cursorPos = [];
         this.getDOMElements();
+        this.cursorPos = [];
         this.gameOver = false;
         this.paused = false;
         this.levelOver = false;
@@ -161,15 +161,21 @@ export default class Game {
     }
 
     static get DIM_X() {
-        return window.innerWidth;
+        const canvasContainer = document.getElementById('canvas-container');
+        return window.innerWidth - 2 * parseInt(window.getComputedStyle(canvasContainer).marginLeft, 10);
     }
 
     static get DIM_Y() {
-        return window.innerHeight;
+        const canvasContainer = document.getElementById('canvas-container');
+        const header = document.getElementById('header-div');
+        return window.innerHeight - (2 * parseInt(window.getComputedStyle(canvasContainer).marginTop, 10) + header.offsetHeight);
     }
 
     mouseOnPage(e) {
-        this.cursorPos = [e.clientX, e.clientY];
+        this.cursorPos = [e.clientX - parseInt(window.getComputedStyle(this.canvasContainer).marginLeft, 10), e.clientY - (parseInt(window.getComputedStyle(this.canvasContainer).marginTop, 10) + this.header.offsetHeight)];
+        // console.log(this.cursorPos)
+        console.log(Game.DIM_X)
+        console.log(Game.DIM_Y)
     }
 
     bindGameKeys() {
@@ -194,6 +200,8 @@ export default class Game {
 
     getDOMElements() {
         this.music = document.getElementsByClassName('music');
+        this.canvasContainer = document.getElementById('canvas-container');
+        this.header = document.getElementById('header-div');
         this.missionScreen = document.getElementById('mission-screen');
         this.missionHeader = document.getElementById('mission-header');
         this.enemyTanksHeader = document.getElementById('enemy-tanks');

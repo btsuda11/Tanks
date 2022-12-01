@@ -9,13 +9,13 @@ canvas {
 }
 
 .canvas-section {
-    height: 90vh;
+    height: 92.5vh;
     display: flex;
     background-color: #deb887;
 }
 
 #canvas-container {
-    margin: 3% 10% 5% 10%;
+    margin: 1% 10% 3% 10%;
     width: 100%;
     border-radius: 15px;
     border: solid 4px black;
