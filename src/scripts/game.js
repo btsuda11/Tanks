@@ -173,13 +173,10 @@ export default class Game {
 
     mouseOnPage(e) {
         this.cursorPos = [e.clientX - parseInt(window.getComputedStyle(this.canvasContainer).marginLeft, 10), e.clientY - (parseInt(window.getComputedStyle(this.canvasContainer).marginTop, 10) + this.header.offsetHeight)];
-        // console.log(this.cursorPos)
-        console.log(Game.DIM_X)
-        console.log(Game.DIM_Y)
     }
 
     bindGameKeys() {
-        document.addEventListener('mousemove', e => this.mouseOnPage(e));
+        this.canvasContainer.addEventListener('mousemove', e => this.mouseOnPage(e));
         document.addEventListener('keydown', e => {
                 if (e.code === 'KeyA') this.playerTank.vel[0] = -1;
                 if (e.code === 'KeyD') this.playerTank.vel[1] = 1;
@@ -192,7 +189,7 @@ export default class Game {
                 if (e.code === 'KeyW') this.playerTank.vel[2] = 0;
                 if (e.code === 'KeyS') this.playerTank.vel[3] = 0;
         });
-        document.addEventListener('click', this.playerTank.shoot.myThrottle(this.playerTank, 2000));
+        this.canvasContainer.addEventListener('click', this.playerTank.shoot.myThrottle(this.playerTank, 2000));
         document.addEventListener('keydown', e => {
             if (e.code === 'Space') this.playerTank.placeMine();
         });
