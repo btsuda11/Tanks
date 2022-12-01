@@ -522,6 +522,7 @@ header {
 
 .about-link > img {
     height: 50%;
+    user-select: none;
 }
 /*!*************************************************************************************************************************************!*\
   !*** css ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[1].use[1]!./node_modules/sass-loader/dist/cjs.js!./src/index.scss ***!

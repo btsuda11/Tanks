@@ -36,7 +36,7 @@ export default class PlayerTank extends Tank {
         this.bodyPos[0] += this.vel[1];
         this.bodyPos[1] += this.vel[2];
         this.bodyPos[1] += this.vel[3];
-        this.angle = Math.atan2(this.game.cursorPos[1] - this.barrelPos[1], this.game.cursorPos[0] - this.barrelPos[0]) - (Math.PI / 1.95);
+        this.angle = Math.atan2(this.game.cursorPos[1] - this.barrelPos[1], this.game.cursorPos[0] - this.barrelPos[0]) - (Math.PI / 2);
 
         let wallsNTanks = this.game.walls.concat(this.game.tanks);
 

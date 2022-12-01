@@ -57,4 +57,5 @@ header {
 
 .about-link > img {
     height: 50%;
+    user-select: none;
 }

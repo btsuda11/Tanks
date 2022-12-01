@@ -24,11 +24,11 @@ export default class EnemyTank extends Tank {
             this.height = this.body.height;
             this.width = this.body.width;
         }
-        setInterval(() => {
-            if (this.state === 'alive') {
-                this.shoot();
-            }
-        }, 1500);
+        // setInterval(() => {
+        //     if (this.state === 'alive') {
+        //         this.shoot();
+        //     }
+        // }, 1500);
     }
 
     draw(ctx) {
@@ -43,21 +43,21 @@ export default class EnemyTank extends Tank {
     move() {
         // console.log(this.distToPlayer());
 
-        if (Math.abs(this.distToPlayer()[1]) < Math.abs(this.distToPlayer()[0]) && this.distToPlayer()[2] > 200 && Math.abs(this.distToPlayer()[1]) > 5) {
-            // console.log(this.distToPlayer()[0], 'xcomp');
-            // console.log(this.distToPlayer()[1], 'ycomp');
-            if (this.distToPlayer()[1] > 0) {
-                this.vel[3] = 0.75;
-            } else if (this.distToPlayer()[1] < 0) {
-                this.vel[2] = -0.75;
-            }
-        } else if (Math.abs(this.distToPlayer()[0]) < Math.abs(this.distToPlayer()[1]) && this.distToPlayer()[2] > 200 && Math.abs(this.distToPlayer()[0]) > 5) {
-            if (this.distToPlayer()[0] > 0) {
-                this.vel[1] = 0.75;
-            } else if (this.distToPlayer()[0] < 0) {
-                this.vel[0] = -0.75;
-            }
-        }
+        // if (Math.abs(this.distToPlayer()[1]) < Math.abs(this.distToPlayer()[0]) && this.distToPlayer()[2] > 200 && Math.abs(this.distToPlayer()[1]) > 5) {
+        //     // console.log(this.distToPlayer()[0], 'xcomp');
+        //     // console.log(this.distToPlayer()[1], 'ycomp');
+        //     if (this.distToPlayer()[1] > 0) {
+        //         this.vel[3] = 0.75;
+        //     } else if (this.distToPlayer()[1] < 0) {
+        //         this.vel[2] = -0.75;
+        //     }
+        // } else if (Math.abs(this.distToPlayer()[0]) < Math.abs(this.distToPlayer()[1]) && this.distToPlayer()[2] > 200 && Math.abs(this.distToPlayer()[0]) > 5) {
+        //     if (this.distToPlayer()[0] > 0) {
+        //         this.vel[1] = 0.75;
+        //     } else if (this.distToPlayer()[0] < 0) {
+        //         this.vel[0] = -0.75;
+        //     }
+        // }
 
         this.checkBounds();
         

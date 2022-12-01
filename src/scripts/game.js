@@ -10,9 +10,8 @@ export default class Game {
     constructor(ctx, gameView) {
         this.ctx = ctx;
         this.gameView = gameView;
-        this.playerTank = new PlayerTank({pos: [150, 650], game: this});
+        this.playerTank = new PlayerTank({pos: [Game.DIM_X * 0.10, Game.DIM_Y * 0.80], game: this});
         this.level = new Level(this, 1);
-        this.level.populateLevel();
         this.bullets = [];
         this.mines = [];
         this.cursorPos = [];
@@ -28,12 +27,14 @@ export default class Game {
         this.tanks.forEach(tank => {
             tank.vel = [0, 0, 0, 0];
         })
-        this.playerTank.bodyPos = [150, 650];
-        this.playerTank.barrelPos = [150, 650];
+        this.playerTank.bodyPos = [Game.DIM_X * 0.10, Game.DIM_Y * 0.80];
+        this.playerTank.barrelPos = [Game.DIM_X * 0.10, Game.DIM_Y * 0.80];
         this.bullets = [];
     }
 
     startLevel() {
+        this.music[0].play();
+        
         this.missionHeader.innerHTML = `Mission ${this.level.level}`;
         this.enemyTanksHeader.innerHTML = `Enemy Tanks: ${this.enemyTanks.length}`;
         this.gameMission.children[0].innerHTML = `Mission ${this.level.level}`;
@@ -41,6 +42,10 @@ export default class Game {
         GameView.toggleScreen('start-screen', false);
         GameView.toggleScreen('mission-screen', true);
         
+        // GameView.toggleScreen('game-canvas', true);
+        // this.bindGameKeys();
+        // window.requestAnimationFrame(this.update);
+
         setTimeout(() => {
             GameView.toggleScreen('mission-screen', false);
             GameView.toggleScreen('game-canvas', true);
@@ -60,12 +65,12 @@ export default class Game {
         this.music[0].pause();
         this.music[0].currentTime = 0;
         this.music[1].play();
-        this.gameMission.style.display = 'none';
-        let missionCleared = document.getElementsByClassName('mission-cleared')[0];
-        missionCleared.style.display = 'block';
-        this.level = new Level(this, this.level.level);
+        GameView.toggleScreen('game-mission', false);
+        GameView.toggleScreen('mission-cleared', true);
+        const currentLevel = this.level.level;
+        this.level = new Level(this, currentLevel + 1);
         setTimeout(() => {
-            missionCleared.style.display = 'none';
+            GameView.toggleScreen('mission-cleared', false);
             this.resetStats();
             this.startLevel();
         }, 5000);
@@ -168,7 +173,7 @@ export default class Game {
     }
 
     bindGameKeys() {
-        document.addEventListener('mousemove', (e) => this.mouseOnPage(e));
+        document.addEventListener('mousemove', e => this.mouseOnPage(e));
         document.addEventListener('keydown', e => {
                 if (e.code === 'KeyA') this.playerTank.vel[0] = -1;
                 if (e.code === 'KeyD') this.playerTank.vel[1] = 1;
@@ -188,6 +193,7 @@ export default class Game {
     }
 
     getDOMElements() {
+        this.music = document.getElementsByClassName('music');
         this.missionScreen = document.getElementById('mission-screen');
         this.missionHeader = document.getElementById('mission-header');
         this.enemyTanksHeader = document.getElementById('enemy-tanks');
