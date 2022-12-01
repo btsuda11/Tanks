@@ -11,7 +11,7 @@ export default class Game {
         this.ctx = ctx;
         this.gameView = gameView;
         this.playerTank = new PlayerTank({pos: [Game.DIM_X * 0.10, Game.DIM_Y * 0.80], game: this});
-        this.level = new Level(this, 1);
+        this.level = new Level(this, 2);
         this.bullets = [];
         this.mines = [];
         this.cursorPos = [];
@@ -34,31 +34,31 @@ export default class Game {
 
     startLevel() {
         this.music[0].play();
-        
+
         this.missionHeader.innerHTML = `Mission ${this.level.level}`;
         this.enemyTanksHeader.innerHTML = `Enemy Tanks: ${this.enemyTanks.length}`;
         this.gameMission.children[0].innerHTML = `Mission ${this.level.level}`;
 
         GameView.toggleScreen('start-screen', false);
-        GameView.toggleScreen('mission-screen', true);
+        // GameView.toggleScreen('mission-screen', true);
         
-        // GameView.toggleScreen('game-canvas', true);
-        // this.bindGameKeys();
-        // window.requestAnimationFrame(this.update);
+        GameView.toggleScreen('game-canvas', true);
+        this.bindGameKeys();
+        window.requestAnimationFrame(this.update);
 
-        setTimeout(() => {
-            GameView.toggleScreen('mission-screen', false);
-            GameView.toggleScreen('game-canvas', true);
-            this.draw(this.ctx);
-            GameView.toggleScreen('game-mission', true);
-            setTimeout(() => {
-                GameView.toggleScreen('start', true);
-                setTimeout(() => GameView.toggleScreen('start', false), 2000);
-                this.bindGameKeys();
-                this.levelOver = false;
-                window.requestAnimationFrame(this.update);
-            }, 3400);
-        }, 4000); // if increased any more, this set timeout will mess up the collision animation
+        // setTimeout(() => {
+        //     GameView.toggleScreen('mission-screen', false);
+        //     GameView.toggleScreen('game-canvas', true);
+        //     this.draw(this.ctx);
+        //     GameView.toggleScreen('game-mission', true);
+        //     setTimeout(() => {
+        //         GameView.toggleScreen('start', true);
+        //         setTimeout(() => GameView.toggleScreen('start', false), 2000);
+        //         this.bindGameKeys();
+        //         this.levelOver = false;
+        //         window.requestAnimationFrame(this.update);
+        //     }, 3400);
+        // }, 4000); // if increased any more, this set timeout will mess up the collision animation
     }
 
     endLevel() {
