@@ -4,6 +4,8 @@ export default class GameView {
     constructor(ctx) {
         this.ctx = ctx;
         this.music = document.getElementsByClassName('music');
+        document.getElementById('mute-btn').addEventListener('click', this.toggleMute.bind(this));
+        document.getElementById('pause-btn').addEventListener('click', this.togglePause.bind(this));
     }
     
     startGame() {
@@ -37,6 +39,22 @@ export default class GameView {
         GameView.toggleScreen('end-screen', false);
         GameView.toggleScreen('game-canvas', true);
         this.startGame();
+    }
+
+    togglePause() {
+        const currentSound = Array.from(this.music).find(sound => !sound.playing);
+        if (this.game.paused) {
+            this.game.paused = false;
+            currentSound.play();
+        } else {
+            this.game.paused = true;
+            currentSound.pause();
+        }
+    }
+
+    toggleMute() {
+        const currentSound = Array.from(this.music).find(sound => !sound.playing);
+        if (currentSound) currentSound.muted = !currentSound.muted;
     }
 
     returnHome() {
