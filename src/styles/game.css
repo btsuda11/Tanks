@@ -1,27 +1,37 @@
-body {
-    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
-}
-
 canvas {
-    background-image: url('/Tanks/images/wood_tile.jpeg');
+    background-image: url('/Tanks/assets/images/wood_tile.jpeg');
     background-size: 100% 100%;
     opacity: 1;
 }
 
-.mission-screen {
-    width: 100vw;
-    height: 100vh;
+.canvas-section {
+    height: 90vh;
+    display: flex;
+    background-color: #deb887;
+}
+
+#canvas-container {
+    margin: 3% 10% 5% 10%;
+    width: 100%;
+    border-radius: 15px;
+    border: solid 4px black;
+}
+
+#mission-screen {
+    width: 100%;
+    height: 100%;
+    border-radius: 15px;
     animation: fade 4s;
     background-color: #ffebcd;
 }
 
-.mission-screen > img {
+#mission-screen > img {
     position: absolute;
     top: 75%;
     left: 45%;
 }
 
-.mission-screen > h2 {
+#mission-screen > h2 {
     position: absolute;
     top: 72.5%;
     left: 54%;
@@ -30,9 +40,9 @@ canvas {
     -webkit-text-stroke: 2px #0066b2;
 }
 
-.mission-screen > div {
+#mission-screen > div {
     width: 100%;
-    background-image: url('/Tanks/images/mission-background.jpeg');
+    background-image: url('/Tanks/assets/images/mission-background.jpeg');
     border-top: #f5c71a 8px solid;
     border-bottom: #f5c71a 8px solid;
     position: absolute;
@@ -45,7 +55,7 @@ canvas {
 
 #game-mission {
     width: 25%;
-    background-image: url('/Tanks/images/mission-background.jpeg');
+    background-image: url('/Tanks/assets/images/mission-background.jpeg');
     padding: 5px;
     font-size: 32px;
     color: lightyellow;

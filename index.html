@@ -8,76 +8,95 @@
     <link rel="stylesheet" href="./dist/main.css" />
     <script src="./dist/main.js"></script>
     <title>Tanks</title>
+    <link rel="shortcut icon" type="image/png" href="assets/images/explosion/explosion3.png" />
 </head>
 
 <body>
-    <audio controls preload="auto" hidden src="music/tank-music.mp3" class="music"></audio>
-    <audio controls preload="auto" hidden src="music/end-level.mp3" class="music"></audio>
-    <audio controls preload="auto" hidden src="music/game-over.mp3" class="music"></audio>
-    <img class="explosion" src="images/explosion/explosion1.png" hidden>
-    <img class="explosion" src="images/explosion/explosion2.png" hidden>
-    <img class="explosion" src="images/explosion/explosion3.png" hidden>
-    <img class="explosion" src="images/explosion/explosion4.png" hidden>
-    <img class="explosion" src="images/explosion/explosion5.png" hidden>
+    <audio controls preload="auto" hidden src="assets/sounds/tank-music.mp3" class="music"></audio>
+    <audio controls preload="auto" hidden src="assets/sounds/end-level.mp3" class="music"></audio>
+    <audio controls preload="auto" hidden src="assets/sounds/game-over.mp3" class="music"></audio>
+    <!-- <img class="explosion" src="assets/images/explosion/explosion1.png" hidden>
+    <img class="explosion" src="assets/images/explosion/explosion2.png" hidden>
+    <img class="explosion" src="assets/images/explosion/explosion3.png" hidden>
+    <img class="explosion" src="assets/images/explosion/explosion4.png" hidden>
+    <img class="explosion" src="assets/images/explosion/explosion5.png" hidden> -->
 
-    <div id="start-screen">
-        <h1>Tanks!</h1>
-        <div id="start-content">
-            <img id="gameplay" src="images/gameplay.png">
-            <div id="button-container">
-                <input id="start-button" type="button" value="New Game">
-                <input id="how-to-button" type="button" value="How-To-Play">
+    <header>
+        <div class="header-div">
+            <nav class="game-btns-div">
+                <button id="pause-btn">Pause</button>
+                <button id="mute-btn">Mute</button>
+            </nav>
+            <div class="logo-div">
+                <h1>Tanks</h1>
+            </div>
+            <nav class="about-links-div">
+                <a class="about-link" href="https://github.com/btsuda11/Tanks" target="_blank"><img src="assets/images/header/github.png" /></a>
+                <a class="about-link" href="https://www.linkedin.com/in/brendan-tsuda/" target="_blank"><img src="assets/images/header/linkedin.png" /></a>
+            </nav>
+        </div>
+    </header>
+    <section class="canvas-section">
+        <div id="canvas-container">
+            <div id="start-screen">
+                <div id="start-content">
+                    <img id="gameplay" src="assets/images/gameplay.png">
+                    <div id="button-container">
+                        <button id="start-btn">New Game</button>
+                        <button id="instructions-btn">Instructions</button>
+                    </div>
+                </div>
+            </div>
+            <div id="instructions" style="display: none;">
+                <h1>Controls</h1>
+                <div id="how-to-div">
+                    <div>
+                        <img class="square" src="assets/images/instructions/key_images.png">
+                        <h2>Move Tank</h2>
+                    </div>
+                    <div>
+                        <img class="square" src="assets/images/instructions/mouse.jpeg">
+                        <h2>Fire Bullets</h2>
+                    </div>
+                    <div>
+                        <img id="spacebar" src="assets/images/instructions/space.png">
+                        <h2>Place Mine</h2>
+                    </div>
+                    <div id="rules">
+                        <h2>Rules</h2>
+                        <p><strong>Your goal is to destroy all enemy tanks without getting destroyed.</strong></p>
+                        <br>
+                        <p>Bullets can ricochet off of walls and destroy other bullets and detonate mines. Mines detonate after 10 seconds and destroy any tanks in their radius.</p>
+                    </div>
+                </div>
+            </div>
+            <div id="mission-screen" style="display: none;">
+                <div>
+                    <h2 id="mission-header"></h2>
+                    <h3 id="enemy-tanks"></h3>
+                </div>
+                <img src="assets/images/tanks/tank_blue_2.png">
+                <h2>x 1</h2>
+            </div>
+            <div id="start" style="display: none;">
+                <h2>Start!</h2>
+            </div>
+            <div id="mission-failed" style="display: none;">
+                <h2>Mission Failed!</h2>
+            </div>
+            <div id="end-screen" style="display: none;">
+                <button id="play-again-btn">Play Again</button>
+                <button id="return-home-btn">Return Home</button>
+            </div>
+            <div id="mission-cleared" style="display: none;">
+                <h2>Mission Cleared!</h2>
+            </div>
+            <canvas id="game-canvas" style="display: none;"></canvas>
+            <div id="game-mission" style="display: none;">
+                <h4></h4>
             </div>
         </div>
-    </div>
-    <div id="how-to" style="display: none;">
-        <h1>Controls</h1>
-        <div id="how-to-div">
-            <div>
-                <img class="square" src="images/instructions/key_images.png">
-                <h2>Move Tank</h2>
-            </div>
-            <div>
-                <img class="square" src="images/instructions/mouse.jpeg">
-                <h2>Fire Bullets</h2>
-            </div>
-            <div>
-                <img id="spacebar" src="images/instructions/space.png">
-                <h2>Place Mine</h2>
-            </div>
-            <div class="rules">
-                <h2>Rules</h2>
-                <p><strong>Your goal is to destroy all enemy tanks without getting destroyed.</strong></p>
-                <br>
-                <p>Bullets can ricochet off of walls and destroy other bullets and detonate mines. Mines detonate after 10 seconds and destroy any tanks in their radius.</p>
-            </div>
-        </div>
-    </div>
-    <div class="mission-screen" style="display: none;">
-        <div>
-            <h2 class="mission"></h2>
-            <h3 class="enemy-tanks"></h3>
-        </div>
-        <img src="images/tanks/tank_blue_2.png">
-        <h2>x 1</h2>
-    </div>
-    <div id="start" style="display: none;">
-        <h2>Start!</h2>
-    </div>
-    <div class="mission-failed" style="display: none;">
-        <h2>Mission Failed!</h2>
-    </div>
-    <div class="end-screen" style="display: none;">
-        <input type="button" value="Play Again">
-        <input type="button" value="Return Home">
-    </div>
-    <div class="mission-cleared" style="display: none;">
-        <h2>Mission Cleared!</h2>
-    </div>
-    <canvas id="game-canvas" style="display: none;"></canvas>
-    <div id="game-mission" style="display: none;">
-        <h4></h4>
-    </div>
+    </section>
 </body>
 
 </html>

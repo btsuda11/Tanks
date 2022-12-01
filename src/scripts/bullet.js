@@ -17,7 +17,7 @@ export default class Bullet {
 
     draw(ctx) {
         let bullet = new Image();
-        bullet.src = 'images/bullets/bulletDark2.png';
+        bullet.src = 'assets/images/bullets/bulletDark2.png';
         ctx.save();
         ctx.translate(this.pos[0], this.pos[1]);
         ctx.rotate(this.angle - ((3 * Math.PI) / 2));

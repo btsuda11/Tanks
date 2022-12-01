@@ -7,6 +7,7 @@ html,
 body,
 div,
 span,
+button,
 applet,
 object,
 iframe,
@@ -88,6 +89,11 @@ video {
 }
 
 /* HTML5 display-role reset for older browsers */
+@font-face {
+    font-family: Chainwhacks;
+    src: url(../../assets/fonts/Chainwhacks-vm72E.ttf);
+}
+
 article,
 aside,
 details,
@@ -104,6 +110,7 @@ section {
 
 body {
     line-height: 1;
+    font-family: Chainwhacks;
 }
 
 ol,
