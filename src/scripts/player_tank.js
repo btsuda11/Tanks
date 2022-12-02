@@ -16,12 +16,14 @@ export default class PlayerTank extends Tank {
     }
 
     draw(ctx) {
-        ctx.drawImage(this.body, this.bodyPos[0], this.bodyPos[1]);
-        ctx.save();
-        ctx.translate(this.barrelPos[0] + 20, this.barrelPos[1] + 20);
-        ctx.rotate(this.angle);
-        ctx.drawImage(this.barrel, -5, -5);
-        ctx.restore();
+        // ctx.drawImage(this.body, this.bodyPos[0], this.bodyPos[1]);
+        // ctx.save();
+        // ctx.translate(this.barrelPos[0] + 20, this.barrelPos[1] + 20);
+        // ctx.rotate(this.angle);
+        // ctx.drawImage(this.barrel, -5, -5);
+        // ctx.restore();
+        ctx.fillStyle = "black";
+        ctx.fillRect(this.bodyPos[0], this.bodyPos[1], 35, 35);
     }
 
     move() {

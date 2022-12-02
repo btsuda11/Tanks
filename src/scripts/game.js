@@ -5,13 +5,14 @@ import Tank from "./tank";
 import Mine from "./mine";
 import Level from "./level";
 import GameView from "./game_view";
+import Function from "./util";
 
 export default class Game {
     constructor(ctx, gameView) {
         this.ctx = ctx;
         this.gameView = gameView;
         this.playerTank = new PlayerTank({pos: [Game.DIM_X * 0.10, Game.DIM_Y * 0.80], game: this});
-        this.level = new Level(this, 2);
+        this.level = new Level(this, 1);
         this.bullets = [];
         this.mines = [];
         this.getDOMElements();
@@ -104,10 +105,10 @@ export default class Game {
             this.step();
             this.draw();
         }
-        this.frameID = window.requestAnimationFrame(this.update);
+        window.requestAnimationFrame(this.update);
     }
 
-    checkCollisions() {
+    checkTankCollisions() {
         for (let i = 0; i < this.bullets.length; i++) {
             for (let j = 0; j < this.tanks.length; j++) {
                 if (this.bullets[i].hasHit(this.tanks[j]) && !(this.bullets[i].tank instanceof EnemyTank && this.tanks[j] instanceof EnemyTank)) {
@@ -115,14 +116,11 @@ export default class Game {
                     return;
                 }
             }
-            for (let j = 0; j < this.bullets.length; j++) {
-                if (this.bullets[i] !== this.bullets[j]) {
-                    if (this.bullets[i].hasHit(this.bullets[j])) {
-                        this.bullets[i].hits(this.bullets[j]);
-                        return;
-                    }
-                }
-            }
+        }
+    }
+
+    checkMineCollisions() {
+        for (let i = 0; i < this.bullets.length; i++) {
             for (let j = 0; j < this.mines.length; j++) {
                 if (this.bullets[i].hasHit(this.mines[j])) {
                     this.bullets[i].hits(this.mines[j]);
@@ -132,9 +130,24 @@ export default class Game {
         }
     }
 
+    checkBulletCollisions() {
+        for (let i = 0; i < this.bullets.length; i++) {
+            for (let j = 0; j < this.bullets.length; j++) {
+                if (this.bullets[i] !== this.bullets[j]) {
+                    if (this.bullets[i].hasHit(this.bullets[j])) {
+                        this.bullets[i].hits(this.bullets[j]);
+                        return;
+                    }
+                }
+            }
+        }
+    }
+
     step() {
         this.moveObjects();
-        this.checkCollisions();
+        this.checkTankCollisions();
+        this.checkBulletCollisions();
+        this.checkMineCollisions();
     }
 
     remove(object) {
