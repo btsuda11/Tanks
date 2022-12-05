@@ -19,7 +19,6 @@ export default class Game {
         this.cursorPos = [];
         this.gameOver = false;
         this.paused = false;
-        this.levelOver = false;
         this.bindGameKeys = this.bindGameKeys.bind(this);
         this.update = this.update.bind(this);
     }
@@ -56,7 +55,6 @@ export default class Game {
         //         GameView.toggleScreen('start', true);
         //         setTimeout(() => GameView.toggleScreen('start', false), 2000);
         //         this.bindGameKeys();
-        //         this.levelOver = false;
         //         window.requestAnimationFrame(this.update);
         //     }, 3400);
         // }, 4000); // if increased any more, this set timeout will mess up the collision animation
@@ -72,7 +70,7 @@ export default class Game {
         this.level = new Level(this, currentLevel + 1);
         setTimeout(() => {
             GameView.toggleScreen('mission-cleared', false);
-            this.resetStats();
+            // this.resetStats();
             this.startLevel();
         }, 5000);
     }
@@ -101,7 +99,7 @@ export default class Game {
     }
 
     update() {
-        if (this.gameOver === false && this.levelOver === false && this.paused === false) {
+        if (this.gameOver === false && this.paused === false) {
             this.step();
             this.draw();
         }
@@ -161,7 +159,6 @@ export default class Game {
             }
             this.tanks.splice(this.tanks.indexOf(object), 1);
             if (this.enemyTanks.length === 0) {
-                this.levelOver = true;
                 this.endLevel();
             }
         } else if (object instanceof Mine) {

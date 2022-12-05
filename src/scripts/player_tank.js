@@ -4,10 +4,12 @@ import Wall from "./wall";
 export default class PlayerTank extends Tank {
     constructor(options) {
         super(options);
+        this.body.onload = () => {
+            this.height = this.body.height;
+            this.width = this.body.width;
+        }
         this.body.src = 'assets/images/tanks/tankBody_blue_outline.png';
         this.barrel.src = 'assets/images/tanks/tankBlue_barrel2_outline.png';
-        this.height = this.body.height;
-        this.width = this.body.width;
         this.barrelHeight = this.barrel.height;
         this.barrelWidth = this.barrel.width;
         this.maxBullets = 5;
@@ -16,14 +18,14 @@ export default class PlayerTank extends Tank {
     }
 
     draw(ctx) {
-        // ctx.drawImage(this.body, this.bodyPos[0], this.bodyPos[1]);
-        // ctx.save();
-        // ctx.translate(this.barrelPos[0] + 20, this.barrelPos[1] + 20);
-        // ctx.rotate(this.angle);
-        // ctx.drawImage(this.barrel, -5, -5);
-        // ctx.restore();
-        ctx.fillStyle = "black";
-        ctx.fillRect(this.bodyPos[0], this.bodyPos[1], 35, 35);
+        ctx.drawImage(this.body, this.bodyPos[0], this.bodyPos[1]);
+        ctx.save();
+        ctx.translate(this.barrelPos[0] + 20, this.barrelPos[1] + 20);
+        ctx.rotate(this.angle);
+        ctx.drawImage(this.barrel, -5, -5);
+        ctx.restore();
+        // ctx.fillStyle = "black";
+        // ctx.fillRect(this.bodyPos[0], this.bodyPos[1], 35, 35);
     }
 
     move() {

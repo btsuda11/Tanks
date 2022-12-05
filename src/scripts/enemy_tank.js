@@ -5,13 +5,15 @@ export default class EnemyTank extends Tank {
     constructor(options) {
         super(options);
         this.type = options.type;
+        this.body.onload = () => {
+            this.height = this.body.height;
+            this.width = this.body.width;
+        }
         if (this.type === 'red') {
             this.body.src = 'assets/images/tanks/tankBody_red_outline.png';
             this.barrel.src = 'assets/images/tanks/tankRed_barrel2_outline.png';
             this.maxBullets = 1;
             this.maxMines = 0;
-            this.height = this.body.height;
-            this.width = this.body.width;
             this.allowedRicochets = 2;
             // setInterval(() => {
             //     if (this.alive === true) {
@@ -24,8 +26,6 @@ export default class EnemyTank extends Tank {
             this.barrel.src = 'assets/images/tanks/tankGreen_barrel2_outline.png';
             this.maxBullets = 1;
             this.maxMines = 0;
-            this.height = this.body.height;
-            this.width = this.body.width;
             this.allowedRicochets = 1;
             // setInterval(() => {
             //     if (this.alive === true) {
