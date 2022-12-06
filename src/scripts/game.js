@@ -23,15 +23,7 @@ export default class Game {
         this.boundHandleKeyUp = this.handleKeyUp.bind(this);
         this.boundHandleClick = this.handleClick.bind(this);
         this.update = this.update.bind(this);
-    }
-
-    resetStats() {
-        this.tanks.forEach(tank => {
-            tank.vel = [0, 0, 0, 0];
-        })
-        this.playerTank.bodyPos = [Game.DIM_X * 0.10, Game.DIM_Y * 0.80];
-        this.playerTank.barrelPos = [Game.DIM_X * 0.10, Game.DIM_Y * 0.80];
-        this.bullets = [];
+        window.requestAnimationFrame(this.update);
     }
 
     startLevel() {
@@ -42,32 +34,28 @@ export default class Game {
         this.gameMission.children[0].innerHTML = `Mission ${this.level.level}`;
 
         GameView.toggleScreen('start-screen', false);
-        // GameView.toggleScreen('mission-screen', true);
+        GameView.toggleScreen('mission-screen', true);
         
-        GameView.toggleScreen('game-canvas', true);
-        this.canvasContainer.addEventListener('mousemove', this.boundMouseOnPage);
-        document.addEventListener('keydown', this.boundHandleKeyDown);
-        document.addEventListener('keyup', this.boundHandleKeyUp);
-        this.canvasContainer.addEventListener('click', this.boundHandleClick);
-        window.requestAnimationFrame(this.update);
+        // GameView.toggleScreen('game-canvas', true);
+        // this.canvasContainer.addEventListener('mousemove', this.boundMouseOnPage);
+        // document.addEventListener('keydown', this.boundHandleKeyDown);
+        // document.addEventListener('keyup', this.boundHandleKeyUp);
+        // this.canvasContainer.addEventListener('click', this.boundHandleClick);
 
-        // setTimeout(() => {
-        //     GameView.toggleScreen('mission-screen', false);
-        //     GameView.toggleScreen('game-canvas', true);
-        //     this.draw(this.ctx);
-        //     GameView.toggleScreen('game-mission', true);
-        //     setTimeout(() => {
-        //         GameView.toggleScreen('start', true);
-        //         setTimeout(() => GameView.toggleScreen('start', false), 1900);
+        setTimeout(() => {
+            GameView.toggleScreen('mission-screen', false);
+            GameView.toggleScreen('game-canvas', true);
+            GameView.toggleScreen('game-mission', true);
+            setTimeout(() => {
+                GameView.toggleScreen('start', true);
+                setTimeout(() => GameView.toggleScreen('start', false), 1900);
 
-        //         this.canvasContainer.addEventListener('mousemove', this.boundMouseOnPage);
-        //         document.addEventListener('keydown', this.boundHandleKeyDown);
-        //         document.addEventListener('keyup', this.boundHandleKeyUp);
-        //         this.canvasContainer.addEventListener('click', this.boundHandleClick);
-
-        //         window.requestAnimationFrame(this.update);
-        //     }, 3300);
-        // }, 4000);
+                this.canvasContainer.addEventListener('mousemove', this.boundMouseOnPage);
+                document.addEventListener('keydown', this.boundHandleKeyDown);
+                document.addEventListener('keyup', this.boundHandleKeyUp);
+                this.canvasContainer.addEventListener('click', this.boundHandleClick);
+            }, 3300);
+        }, 4000);
     }
 
     endLevel() {
