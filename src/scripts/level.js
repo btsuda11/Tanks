@@ -7,6 +7,7 @@ export default class Level {
     constructor(game, level) {
         this.game = game;
         this.level = level;
+        this.game.levelOver = false;
         this.populateLevel();
     }
 

@@ -60,6 +60,7 @@ export default class Game {
     }
 
     endLevel() {
+        this.levelOver = true;
         this.music[0].pause();
         this.music[0].currentTime = 0;
         this.music[1].play();
@@ -98,7 +99,7 @@ export default class Game {
     }
 
     update() {
-        if (this.gameOver === false && this.paused === false) {
+        if (this.gameOver === false && this.paused === false && this.levelOver === false) {
             this.step();
             this.draw();
         }
