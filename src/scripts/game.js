@@ -18,7 +18,10 @@ export default class Game {
         this.cursorPos = [];
         this.gameOver = false;
         this.paused = false;
-        this.bindGameKeys = this.bindGameKeys.bind(this);
+        this.boundMouseOnPage = this.mouseOnPage.bind(this);
+        this.boundHandleKeyDown = this.handleKeyDown.bind(this);
+        this.boundHandleKeyUp = this.handleKeyUp.bind(this);
+        this.boundHandleClick = this.handleClick.bind(this);
         this.update = this.update.bind(this);
     }
 
@@ -42,7 +45,10 @@ export default class Game {
         // GameView.toggleScreen('mission-screen', true);
         
         GameView.toggleScreen('game-canvas', true);
-        this.bindGameKeys();
+        this.canvasContainer.addEventListener('mousemove', this.boundMouseOnPage);
+        document.addEventListener('keydown', this.boundHandleKeyDown);
+        document.addEventListener('keyup', this.boundHandleKeyUp);
+        this.canvasContainer.addEventListener('click', this.boundHandleClick);
         window.requestAnimationFrame(this.update);
 
         // setTimeout(() => {
@@ -52,11 +58,16 @@ export default class Game {
         //     GameView.toggleScreen('game-mission', true);
         //     setTimeout(() => {
         //         GameView.toggleScreen('start', true);
-        //         setTimeout(() => GameView.toggleScreen('start', false), 2000);
-        //         this.bindGameKeys();
+        //         setTimeout(() => GameView.toggleScreen('start', false), 1900);
+
+        //         this.canvasContainer.addEventListener('mousemove', this.boundMouseOnPage);
+        //         document.addEventListener('keydown', this.boundHandleKeyDown);
+        //         document.addEventListener('keyup', this.boundHandleKeyUp);
+        //         this.canvasContainer.addEventListener('click', this.boundHandleClick);
+
         //         window.requestAnimationFrame(this.update);
-        //     }, 3400);
-        // }, 4000); // if increased any more, this set timeout will mess up the collision animation
+        //     }, 3300);
+        // }, 4000);
     }
 
     endLevel() {
@@ -64,13 +75,20 @@ export default class Game {
         this.music[0].pause();
         this.music[0].currentTime = 0;
         this.music[1].play();
+
         GameView.toggleScreen('game-mission', false);
         GameView.toggleScreen('mission-cleared', true);
-        const currentLevel = this.level.level;
-        this.level = new Level(this, currentLevel + 1);
+
+        this.canvasContainer.removeEventListener('mousemove', this.boundMouseOnPage);
+        document.removeEventListener('keydown', this.boundHandleKeyDown);
+        document.removeEventListener('keyup', this.boundHandleKeyUp);
+        this.canvasContainer.removeEventListener('click', this.boundHandleClick);
+
         setTimeout(() => {
             GameView.toggleScreen('mission-cleared', false);
-            // this.resetStats();
+            GameView.toggleScreen('game-canvas', false);
+            const currentLevel = this.level.level;
+            this.level = new Level(this, currentLevel + 1);
             this.startLevel();
         }, 5000);
     }
@@ -185,24 +203,23 @@ export default class Game {
         this.cursorPos = [e.clientX - parseInt(window.getComputedStyle(this.canvasContainer).marginLeft, 10), e.clientY - (parseInt(window.getComputedStyle(this.canvasContainer).marginTop, 10) + this.header.offsetHeight)];
     }
 
-    bindGameKeys() {
-        this.canvasContainer.addEventListener('mousemove', e => this.mouseOnPage(e));
-        document.addEventListener('keydown', e => {
-                if (e.code === 'KeyA') this.playerTank.vel[0] = -1;
-                if (e.code === 'KeyD') this.playerTank.vel[1] = 1;
-                if (e.code === 'KeyW') this.playerTank.vel[2] = -1;
-                if (e.code === 'KeyS') this.playerTank.vel[3] = 1;
-        });
-        document.addEventListener('keyup', e => {
-                if (e.code === 'KeyA') this.playerTank.vel[0] = 0;
-                if (e.code === 'KeyD') this.playerTank.vel[1] = 0;
-                if (e.code === 'KeyW') this.playerTank.vel[2] = 0;
-                if (e.code === 'KeyS') this.playerTank.vel[3] = 0;
-        });
-        this.canvasContainer.addEventListener('click', this.playerTank.shoot.myThrottle(this.playerTank, 2000));
-        document.addEventListener('keydown', e => {
-            if (e.code === 'Space') this.playerTank.placeMine();
-        });
+    handleKeyDown(e) {
+        if (e.code === 'KeyA') this.playerTank.vel[0] = -1;
+        if (e.code === 'KeyD') this.playerTank.vel[1] = 1;
+        if (e.code === 'KeyW') this.playerTank.vel[2] = -1;
+        if (e.code === 'KeyS') this.playerTank.vel[3] = 1;
+        if (e.code === 'Space') this.playerTank.placeMine();
+    }
+
+    handleKeyUp(e) {
+        if (e.code === 'KeyA') this.playerTank.vel[0] = 0;
+        if (e.code === 'KeyD') this.playerTank.vel[1] = 0;
+        if (e.code === 'KeyW') this.playerTank.vel[2] = 0;
+        if (e.code === 'KeyS') this.playerTank.vel[3] = 0;
+    }
+
+    handleClick() {
+        return this.playerTank.shoot.myThrottle(this.playerTank, 2000)();
     }
 
     getDOMElements() {
@@ -214,24 +231,5 @@ export default class Game {
         this.enemyTanksHeader = document.getElementById('enemy-tanks');
         this.missionFailed = document.getElementsByClassName('mission-failed');
         this.gameMission = document.getElementById('game-mission');
-    }
-
-    removeGameKeys() {
-        document.removeEventListener('keydown', e => {
-            if (e.code === 'KeyA') this.playerTank.vel[0] = -1;
-            if (e.code === 'KeyD') this.playerTank.vel[1] = 1;
-            if (e.code === 'KeyW') this.playerTank.vel[2] = -1;
-            if (e.code === 'KeyS') this.playerTank.vel[3] = 1;
-        });
-        document.removeEventListener('keyup', e => {
-            if (e.code === 'KeyA') this.playerTank.vel[0] = 0;
-            if (e.code === 'KeyD') this.playerTank.vel[1] = 0;
-            if (e.code === 'KeyW') this.playerTank.vel[2] = 0;
-            if (e.code === 'KeyS') this.playerTank.vel[3] = 0;
-        });
-        document.removeEventListener('click', this.playerTank.shoot.myThrottle(this.playerTank, 2000));
-        document.removeEventListener('keydown', e => {
-            if (e.code === 'Space') this.playerTank.placeMine();
-        });
     }
 }

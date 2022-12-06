@@ -30,7 +30,6 @@ export default class Bullet {
     }
 
     move() {
-        // console.log(this.vel);
         this.checkRicochet();
 
         this.pos[0] += this.vel[0];
