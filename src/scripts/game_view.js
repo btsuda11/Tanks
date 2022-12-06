@@ -10,7 +10,6 @@ export default class GameView {
     
     startGame() {
         this.game = new Game(this.ctx, this);
-        this.music[0].play();
         this.game.startLevel();
     }
 

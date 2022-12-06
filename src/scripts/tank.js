@@ -1,7 +1,6 @@
 import Bullet from "./bullet";
 import Game from "./game";
 import Wall from "./wall"
-import Function from "./util";
 import Mine from "./mine";
 
 export default class Tank {
@@ -12,7 +11,7 @@ export default class Tank {
         this.vel = [0, 0, 0, 0]; // [vx(left), vx(right), vy(up), vy(down)]
         this.body = new Image();
         this.barrel = new Image();
-        this.state = 'alive';
+        this.alive = true;
         this.game = options.game;
     }
 
@@ -66,7 +65,7 @@ export default class Tank {
         let bullet;
         let x = 50 * Math.cos(this.angle + (Math.PI / 2));
         let y = 50 * Math.sin(this.angle + (Math.PI / 2));
-        bullet = new Bullet({pos: [this.barrelPos[0] + 20 + x, this.barrelPos[1] + 20 + y], speed: 3, angle: this.angle + (Math.PI / 2), tank: this});
+        bullet = new Bullet({pos: [this.barrelPos[0] + 20 + x, this.barrelPos[1] + 20 + y], speed: 3.5, angle: this.angle + (Math.PI / 2), tank: this});
         this.game.add(bullet);
     }
 

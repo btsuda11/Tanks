@@ -4,15 +4,17 @@ import Wall from "./wall";
 export default class PlayerTank extends Tank {
     constructor(options) {
         super(options);
+        this.body.onload = () => {
+            this.height = this.body.height;
+            this.width = this.body.width;
+        }
         this.body.src = 'assets/images/tanks/tankBody_blue_outline.png';
         this.barrel.src = 'assets/images/tanks/tankBlue_barrel2_outline.png';
-        this.height = this.body.height;
-        this.width = this.body.width;
         this.barrelHeight = this.barrel.height;
         this.barrelWidth = this.barrel.width;
         this.maxBullets = 5;
         this.maxMines = 1;
-        this.allowedRicochets = 0;
+        this.allowedRicochets = 2;
     }
 
     draw(ctx) {
@@ -22,6 +24,8 @@ export default class PlayerTank extends Tank {
         ctx.rotate(this.angle);
         ctx.drawImage(this.barrel, -5, -5);
         ctx.restore();
+        // ctx.fillStyle = "black";
+        // ctx.fillRect(this.bodyPos[0], this.bodyPos[1], 35, 35);
     }
 
     move() {
@@ -36,7 +40,7 @@ export default class PlayerTank extends Tank {
         this.bodyPos[0] += this.vel[1];
         this.bodyPos[1] += this.vel[2];
         this.bodyPos[1] += this.vel[3];
-        this.angle = Math.atan2(this.game.cursorPos[1] - this.barrelPos[1], this.game.cursorPos[0] - this.barrelPos[0]) - (Math.PI / 1.95);
+        this.angle = Math.atan2(this.game.cursorPos[1] - this.barrelPos[1], this.game.cursorPos[0] - this.barrelPos[0]) - (Math.PI / 2);
 
         let wallsNTanks = this.game.walls.concat(this.game.tanks);
 

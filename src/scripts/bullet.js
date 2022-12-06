@@ -1,7 +1,6 @@
 import Tank from "./tank";
 import Mine from "./mine";
 import Game from "./game";
-import Wall from "./wall";
 
 export default class Bullet {
     constructor(options) {
@@ -13,6 +12,7 @@ export default class Bullet {
         this.height = 12;
         this.width = 8;
         this.numRicochets = 0;
+        console.log(this.tank)
     }
 
     draw(ctx) {
@@ -23,10 +23,13 @@ export default class Bullet {
         ctx.rotate(this.angle - ((3 * Math.PI) / 2));
         ctx.drawImage(bullet, 0, 0);
         ctx.restore();
+        // ctx.beginPath();
+        // ctx.arc(this.pos[0], this.pos[1], 4, 0, 2 * Math.PI);
+        // ctx.fillStyle = 'black';
+        // ctx.fill();
     }
 
     move() {
-        // console.log(this.vel);
         this.checkRicochet();
 
         this.pos[0] += this.vel[0];
@@ -34,14 +37,10 @@ export default class Bullet {
     }
 
     checkRicochet() {
-        // let allowedRicochets;
-        // if (this.tank.type === 'player') {allowedRicochets = 2}
-        // else if (this.tank.type === 'red') {allowedRicochets = 2}
-        // else if (this.tank.type === 'green') {allowedRicochets = 1};
-
-        if (this.numRicochets >= 2) {
+        if (this.numRicochets >= this.tank.allowedRicochets) {
             this.tank.game.remove(this);
         }
+
         this.tank.game.walls.forEach(wall => {
             if ((this.pos[0] <= wall.pos[0] + wall.width + 5 && this.pos[0] >= wall.pos[0] + wall.width) && (this.pos[1] + this.height >= wall.pos[1] && this.pos[1] <= wall.pos[1] + wall.height)) {
                 this.vel[0] = -(this.vel[0]);
@@ -61,6 +60,7 @@ export default class Bullet {
                 this.numRicochets++;
             }
         });
+
         if (this.pos[0] < 0) {
             this.vel[0] = -(this.vel[0]);
             this.angle = -(this.angle);
@@ -85,24 +85,24 @@ export default class Bullet {
 
     hasHit(otherObject) {
         if (otherObject instanceof Tank) {
-            if ((this.pos[0] <= otherObject.bodyPos[0] + otherObject.width + 10 
+            if ((this.pos[0] <= otherObject.bodyPos[0] + otherObject.width + 5 
                 && this.pos[0] >= otherObject.bodyPos[0] + otherObject.width) 
                     && (this.pos[1] + this.height >= otherObject.bodyPos[1] 
                 && this.pos[1] <= otherObject.bodyPos[1] + otherObject.height)) {
                     return true;
-            } else if ((this.pos[0] + this.width >= otherObject.bodyPos[0] - 10 
+            } else if ((this.pos[0] + this.width >= otherObject.bodyPos[0] - 5 
                 && this.pos[0] + this.width <= otherObject.bodyPos[0]) 
                     && (this.pos[1] + this.height >= otherObject.bodyPos[1] 
                 && this.pos[1] <= otherObject.bodyPos[1] + otherObject.height)) {
                     return true;
             } else if ((this.pos[0] + this.width >= otherObject.bodyPos[0] 
                 && this.pos[0] <= otherObject.bodyPos[0] + otherObject.width) 
-                    && (this.pos[1] + this.height >= otherObject.bodyPos[1] - 10 
+                    && (this.pos[1] + this.height >= otherObject.bodyPos[1] - 5 
                 && this.pos[1] + this.height <= otherObject.bodyPos[1])) {
                     return true;
             } else if ((this.pos[0] + this.width >= otherObject.bodyPos[0] 
                 && this.pos[0] <= otherObject.bodyPos[0] + otherObject.width) 
-                    && (this.pos[1] <= otherObject.bodyPos[1] + otherObject.height + 10 
+                    && (this.pos[1] <= otherObject.bodyPos[1] + otherObject.height + 5 
                 && this.pos[1] >= otherObject.bodyPos[1] + otherObject.height)) {
                     return true;
             } else {
@@ -131,6 +131,18 @@ export default class Bullet {
             // } else {
             //     return false;
             // }
+            // const distX = Math.abs(this.pos[0] - otherObject.bodyPos[0] - otherObject.width / 2);
+            // const distY = Math.abs(this.pos[1] - otherObject.bodyPos[1] - otherObject.height / 2);
+
+            // if (distX > (otherObject.width / 2 + 4)) { return false; }
+            // if (distY > (otherObject.height / 2 + 4)) { return false; }
+
+            // if (distX <= (otherObject.width / 2)) { return true; }
+            // if (distY <= (otherObject.height / 2)) { return true; }
+
+            // const dx = distX - otherObject.width / 2;
+            // const dy = distY - otherObject.height / 2;
+            // return (dx * dx + dy * dy <= (16));
         } else if (otherObject instanceof Bullet) {
             if ((this.pos[0] <= otherObject.pos[0] + otherObject.width && this.pos[0] + this.width >= otherObject.pos[0]) && (this.pos[1] + this.height >= otherObject.pos[1] && this.pos[1] <= otherObject.pos[1] + otherObject.height)) {
                 return true;
