@@ -11,7 +11,6 @@ export default class Game {
     constructor(ctx, gameView) {
         this.ctx = ctx;
         this.gameView = gameView;
-        this.playerTank = new PlayerTank({pos: [Game.DIM_X * 0.10, Game.DIM_Y * 0.80], game: this});
         this.level = new Level(this, 1);
         this.bullets = [];
         this.mines = [];

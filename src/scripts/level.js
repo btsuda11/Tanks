@@ -1,4 +1,5 @@
 import EnemyTank from "./enemy_tank";
+import PlayerTank from "./player_tank";
 import Wall from "./wall";
 import Game from "./game";
 
@@ -10,6 +11,7 @@ export default class Level {
     }
 
     populateLevel() {
+        this.game.playerTank = new PlayerTank({ pos: [Game.DIM_X * 0.10, Game.DIM_Y * 0.80], game: this.game });
         if (this.level === 1) {
             this.game.enemyTanks = [new EnemyTank({ pos: [Game.DIM_X * 0.85, Game.DIM_Y * 0.15], game: this.game, type: 'red' })];
             this.game.tanks = [this.game.playerTank].concat(this.game.enemyTanks);
