@@ -39,17 +39,6 @@
     color: white;
 }
 
-#how-to > h1 {
-    border-radius: 5px;
-    background-color: #6495ED;
-    border: 2px solid #0066b2;
-    color: white;
-    text-align: center;
-    padding-top: 7px;
-    padding-bottom: 7px;
-    width: 50%;
-}
-
 #start-content > h1 {
     font-size: 75px;
     color: black;
