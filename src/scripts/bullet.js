@@ -12,7 +12,6 @@ export default class Bullet {
         this.height = 12;
         this.width = 8;
         this.numRicochets = 0;
-        console.log(this)
     }
 
     draw(ctx) {
