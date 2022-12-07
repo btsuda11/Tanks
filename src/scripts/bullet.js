@@ -175,7 +175,7 @@ export default class Bullet {
             this.tank.game.remove(this);
             return;
         } else if (otherObject instanceof Tank) {
-            otherObject.state = 'dead';
+            otherObject.alive = false;
         }
         this.tank.game.remove(this);
         this.tank.game.remove(otherObject);
