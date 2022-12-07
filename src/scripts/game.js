@@ -11,7 +11,7 @@ export default class Game {
     constructor(ctx, gameView) {
         this.ctx = ctx;
         this.gameView = gameView;
-        this.level = new Level(this, 1);
+        this.level = new Level(this, 3);
         this.bullets = [];
         this.mines = [];
         this.getDOMElements();
