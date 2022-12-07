@@ -21,7 +21,6 @@ export default class Game {
         this.boundMouseOnPage = this.mouseOnPage.bind(this);
         this.boundHandleKeyDown = this.handleKeyDown.bind(this);
         this.boundHandleKeyUp = this.handleKeyUp.bind(this);
-        this.boundHandleClick = this.handleClick.bind(this);
         this.update = this.update.bind(this);
         window.requestAnimationFrame(this.update);
         // this.explosion = [new Image(), new Image(), new Image(), new Image(), new Image()];
@@ -47,6 +46,7 @@ export default class Game {
         this.canvasContainer.addEventListener('mousemove', this.boundMouseOnPage);
         document.addEventListener('keydown', this.boundHandleKeyDown);
         document.addEventListener('keyup', this.boundHandleKeyUp);
+        this.boundHandleClick = this.playerTank.shoot.myThrottle(this.playerTank, 2000);
         this.canvasContainer.addEventListener('click', this.boundHandleClick);
 
         // setTimeout(() => {
