@@ -12,7 +12,6 @@ export default class Bullet {
         this.height = 12;
         this.width = 8;
         this.numRicochets = 0;
-        console.log(this.tank)
     }
 
     draw(ctx) {
@@ -175,7 +174,7 @@ export default class Bullet {
             this.tank.game.remove(this);
             return;
         } else if (otherObject instanceof Tank) {
-            otherObject.state = 'dead';
+            otherObject.alive = false;
         }
         this.tank.game.remove(this);
         this.tank.game.remove(otherObject);

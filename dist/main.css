@@ -149,6 +149,7 @@ canvas {
     width: 100%;
     border-radius: 15px;
     position: absolute;
+    cursor: crosshair;
 }
 
 .canvas-section {
@@ -192,7 +193,7 @@ canvas {
 
 #mission-screen > div {
     width: 100%;
-    background-image: url('/Tanks/assets/images/mission-background.jpeg');
+    background-color: #BA0021;
     border-top: #f5c71a 8px solid;
     border-bottom: #f5c71a 8px solid;
     position: absolute;
@@ -205,15 +206,12 @@ canvas {
 
 #game-mission {
     width: 100%;
-    background-image: url('/Tanks/assets/images/mission-background.jpeg');
-    padding: 5px;
     font-size: 32px;
     color: lightyellow;
     text-shadow: 4px 4px 4px #000000;
     justify-content: center;
     position: absolute;
-    bottom: 5%;
-    border-radius: 5px;
+    bottom: 7%;
     opacity: 0.8;
 }
 
@@ -233,48 +231,33 @@ h1, h2, h3, h4 {
   !*** css ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[1].use[1]!./src/styles/start_screen.css ***!
   \***********************************************************************************************************/
 #start-screen {
-    background-color: #deb887;
+    background-color: #ffebcd;
     height: 100%;
     display: flex;
     flex-direction: column;
     align-items: center;
+    justify-content: center;
     border-radius: 15px;
 }
 
 #button-container {
     width: 100%;
-    background-color: white;
-    position: relative;
-    top: 80px;
-    border-radius: 5px;
-    padding-top: 10px;
-    padding-bottom: 30px;
 }
 
-#start-content, #button-container {
+#button-container {
     display: flex;
     flex-direction: column;
     align-items: center;
 }
 
-#gameplay {
-    width: 500px;
-    height: 300px;
-    border-radius: 5px;
-}
-
-#start-content{
-    background-color: rgba(0, 0, 0, .8);
-    width: 50%;
-    border-radius: 5px;
-    padding-top: 100px;
-    position: relative;
-    top: 1%;
+#start-content {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    margin-bottom: 5%;
 }
 
 #button-container > button {
-    position: relative;
-    top: 5%;
     width: 40%;
     margin: 15px;
     background-color: white;
@@ -288,26 +271,10 @@ h1, h2, h3, h4 {
     color: white;
 }
 
-#how-to > h1 {
-    border-radius: 5px;
-    background-color: #6495ED;
-    border: 2px solid #0066b2;
-    color: white;
-    text-align: center;
-    padding-top: 7px;
-    padding-bottom: 7px;
-    width: 50%;
-}
-
-#start-content > h2 {
-    border-radius: 5px;
-    background-color: #6495ED;
-    border: 2px solid #0066b2;
-    color: white;
-    padding-top: 7px;
-    padding-bottom: 7px;
-    width: 5%;
-    text-align: center;
+#start-content > h1 {
+    font-size: 75px;
+    color: black;
+    margin: 0 2% 0 0;
 }
 
 #start {
@@ -333,6 +300,7 @@ h1, h2, h3, h4 {
 #mission-failed {
     width: 100%;
     background-image: linear-gradient(to right, rgba(255, 0, 0, 0), rgba(255, 255, 191, 1), rgba(255, 0, 0, 0));
+
     background-size: 100% 100%;
     font-size: 32px;
     color: #4682B4;
@@ -356,6 +324,28 @@ h1, h2, h3, h4 {
     z-index: 30;
     top: 37.5%;
     animation: fade 7s;
+}
+
+#mission-complete {
+    width: 100%;
+    height: 100%;
+    border-radius: 15px;
+    animation: fade 5s;
+    position: absolute;
+    z-index: 30;
+}
+
+#mission-complete > div {
+    width: 100%;
+    background-color: #BA0021;
+    border-top: #f5c71a 8px solid;
+    border-bottom: #f5c71a 8px solid;
+    position: absolute;
+    top: 37.5%;
+    font-size: 32px;
+    color: lightyellow;
+    text-shadow: 4px 4px 4px #000000;
+    text-align: center;
 }
 
 #end-screen {
@@ -397,67 +387,52 @@ h1, h2, h3, h4 {
     width: 100%;
     display: flex;
     flex-direction: column;
+    justify-content: center;
     align-items: center;
-    background-color: #deb887;
+    background-color: #ffebcd;
     border-radius: 15px;
+    position: absolute;
 }
 
-.square {
-    height: 100px;
-    width: 100px;
+#instructions > h1 {
+    font-size: 60px;
+    color: black;
+    margin: 0;
 }
 
 strong {
     font-weight: bolder;
 }
 
-#how-to-div > :nth-last-child(1) {
-    background-color: black;
-    background-color: rgba(0, 0, 0, .8);
-    border-radius: 5px;
-    width: 100%;
-    margin: 0;
-    color: white;
-    display: flex;
-    justify-content: center;
-    text-align: center;
-}
-
-.rules > p {
-    display: none;
-}
-
-.rules:hover > h2 {
-    display: none;
-}
-
-.rules:hover > p {
-    display: block;
-    padding: 2px;
-}
-
-#spacebar {
-    height: 20px;
-    width: 60px;
-}
-
 #how-to-div {
-    width: 50%;
+    margin-top: 2%;
+    width: 75%;
+    height: 65%;
     border-radius: 5px;
     background-color: white;
-    display: flex;
-    flex-wrap: wrap;
+    display: grid;
+    grid-template-columns: 50% 50%;
+    grid-template-rows: 50% 50%;
+    border: 2px solid black;
 }
 
 #how-to-div > div {
-    margin: 50px;
     display: flex;
     flex-direction: column;
+    justify-content: center;
     align-items: center;
 }
 
-#how-to-div > * {
-    flex: 1 1 150px;
+#how-to-div h2 {
+    margin: 2.5% 0 0 0;
+}
+
+.square {
+    height: 40%;
+}
+
+#spacebar {
+    height: 15%;
 }
 
 /*!*****************************************************************************************************!*\

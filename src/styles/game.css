@@ -6,6 +6,7 @@ canvas {
     width: 100%;
     border-radius: 15px;
     position: absolute;
+    cursor: crosshair;
 }
 
 .canvas-section {
@@ -49,7 +50,7 @@ canvas {
 
 #mission-screen > div {
     width: 100%;
-    background-image: url('/Tanks/assets/images/mission-background.jpeg');
+    background-color: #BA0021;
     border-top: #f5c71a 8px solid;
     border-bottom: #f5c71a 8px solid;
     position: absolute;
@@ -62,15 +63,12 @@ canvas {
 
 #game-mission {
     width: 100%;
-    background-image: url('/Tanks/assets/images/mission-background.jpeg');
-    padding: 5px;
     font-size: 32px;
     color: lightyellow;
     text-shadow: 4px 4px 4px #000000;
     justify-content: center;
     position: absolute;
-    bottom: 5%;
-    border-radius: 5px;
+    bottom: 7%;
     opacity: 0.8;
 }
 

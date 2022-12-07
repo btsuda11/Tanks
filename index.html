@@ -15,11 +15,6 @@
     <audio controls preload="auto" hidden src="assets/sounds/tank-music.mp3" class="music"></audio>
     <audio controls preload="auto" hidden src="assets/sounds/end-level.mp3" class="music"></audio>
     <audio controls preload="auto" hidden src="assets/sounds/game-over.mp3" class="music"></audio>
-    <!-- <img class="explosion" src="assets/images/explosion/explosion1.png" hidden>
-    <img class="explosion" src="assets/images/explosion/explosion2.png" hidden>
-    <img class="explosion" src="assets/images/explosion/explosion3.png" hidden>
-    <img class="explosion" src="assets/images/explosion/explosion4.png" hidden>
-    <img class="explosion" src="assets/images/explosion/explosion5.png" hidden> -->
 
     <header>
         <div id="header-div">
@@ -40,11 +35,12 @@
         <div id="canvas-container">
             <div id="start-screen">
                 <div id="start-content">
-                    <img id="gameplay" src="assets/images/gameplay.png">
-                    <div id="button-container">
-                        <button id="start-btn">New Game</button>
-                        <button id="instructions-btn">Instructions</button>
-                    </div>
+                    <h1>Tanks</h1>
+                    <img id="gameplay" src="assets/images/explosion/explosion3.png">
+                </div>
+                <div id="button-container">
+                    <button id="start-btn">New Game</button>
+                    <button id="instructions-btn">Instructions</button>
                 </div>
             </div>
             <div id="instructions" style="display: none;">
@@ -62,12 +58,6 @@
                         <img id="spacebar" src="assets/images/instructions/space.png">
                         <h2>Place Mine</h2>
                     </div>
-                    <div id="rules">
-                        <h2>Rules</h2>
-                        <p><strong>Your goal is to destroy all enemy tanks without getting destroyed.</strong></p>
-                        <br>
-                        <p>Bullets can ricochet off of walls and destroy other bullets and detonate mines. Mines detonate after 10 seconds and destroy any tanks in their radius.</p>
-                    </div>
                 </div>
             </div>
             <div id="mission-screen" style="display: none;">
@@ -83,6 +73,11 @@
             </div>
             <div id="mission-failed" style="display: none;">
                 <h2>Mission Failed!</h2>
+            </div>
+            <div id="mission-complete" style="display: none;">
+                <div>
+                    <h2>Mission Complete!</h2>
+                </div>
             </div>
             <div id="end-screen" style="display: none;">
                 <button id="play-again-btn">Play Again</button>

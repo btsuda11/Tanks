@@ -1,6 +1,7 @@
 #mission-failed {
     width: 100%;
     background-image: linear-gradient(to right, rgba(255, 0, 0, 0), rgba(255, 255, 191, 1), rgba(255, 0, 0, 0));
+
     background-size: 100% 100%;
     font-size: 32px;
     color: #4682B4;
@@ -24,6 +25,28 @@
     z-index: 30;
     top: 37.5%;
     animation: fade 7s;
+}
+
+#mission-complete {
+    width: 100%;
+    height: 100%;
+    border-radius: 15px;
+    animation: fade 5s;
+    position: absolute;
+    z-index: 30;
+}
+
+#mission-complete > div {
+    width: 100%;
+    background-color: #BA0021;
+    border-top: #f5c71a 8px solid;
+    border-bottom: #f5c71a 8px solid;
+    position: absolute;
+    top: 37.5%;
+    font-size: 32px;
+    color: lightyellow;
+    text-shadow: 4px 4px 4px #000000;
+    text-align: center;
 }
 
 #end-screen {
