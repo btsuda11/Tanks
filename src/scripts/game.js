@@ -24,6 +24,13 @@ export default class Game {
         this.boundHandleClick = this.handleClick.bind(this);
         this.update = this.update.bind(this);
         window.requestAnimationFrame(this.update);
+        // this.explosion = [new Image(), new Image(), new Image(), new Image(), new Image()];
+        // for (let i = 0; i < this.explosion.length; i++) {
+        //     this.explosion[i].src = `../../assets/images/explosion/explosion${i + 1}.png`
+        // }
+        // this.explosion = [...this.explosion, ...this.explosion.reverse()];
+        // this.drawExplosion = this.drawExplosion.bind(this);
+        // this.frameDuration = 1000 / 60;
     }
 
     startLevel() {
@@ -34,28 +41,28 @@ export default class Game {
         this.gameMission.children[0].innerHTML = `Mission ${this.level.level}`;
 
         GameView.toggleScreen('start-screen', false);
-        GameView.toggleScreen('mission-screen', true);
+        // GameView.toggleScreen('mission-screen', true);
         
-        // GameView.toggleScreen('game-canvas', true);
-        // this.canvasContainer.addEventListener('mousemove', this.boundMouseOnPage);
-        // document.addEventListener('keydown', this.boundHandleKeyDown);
-        // document.addEventListener('keyup', this.boundHandleKeyUp);
-        // this.canvasContainer.addEventListener('click', this.boundHandleClick);
+        GameView.toggleScreen('game-canvas', true);
+        this.canvasContainer.addEventListener('mousemove', this.boundMouseOnPage);
+        document.addEventListener('keydown', this.boundHandleKeyDown);
+        document.addEventListener('keyup', this.boundHandleKeyUp);
+        this.canvasContainer.addEventListener('click', this.boundHandleClick);
 
-        setTimeout(() => {
-            GameView.toggleScreen('mission-screen', false);
-            GameView.toggleScreen('game-canvas', true);
-            GameView.toggleScreen('game-mission', true);
-            setTimeout(() => {
-                GameView.toggleScreen('start', true);
-                setTimeout(() => GameView.toggleScreen('start', false), 1900);
+        // setTimeout(() => {
+        //     GameView.toggleScreen('mission-screen', false);
+        //     GameView.toggleScreen('game-canvas', true);
+        //     GameView.toggleScreen('game-mission', true);
+        //     setTimeout(() => {
+        //         GameView.toggleScreen('start', true);
+        //         setTimeout(() => GameView.toggleScreen('start', false), 1900);
 
-                this.canvasContainer.addEventListener('mousemove', this.boundMouseOnPage);
-                document.addEventListener('keydown', this.boundHandleKeyDown);
-                document.addEventListener('keyup', this.boundHandleKeyUp);
-                this.canvasContainer.addEventListener('click', this.boundHandleClick);
-            }, 3300);
-        }, 4000);
+        //         this.canvasContainer.addEventListener('mousemove', this.boundMouseOnPage);
+        //         document.addEventListener('keydown', this.boundHandleKeyDown);
+        //         document.addEventListener('keyup', this.boundHandleKeyUp);
+        //         this.canvasContainer.addEventListener('click', this.boundHandleClick);
+        //     }, 3300);
+        // }, 4000);
     }
 
     endLevel() {
@@ -116,6 +123,7 @@ export default class Game {
         for (let i = 0; i < this.bullets.length; i++) {
             for (let j = 0; j < this.tanks.length; j++) {
                 if (this.bullets[i].hasHit(this.tanks[j]) && !(this.bullets[i].tank instanceof EnemyTank && this.tanks[j] instanceof EnemyTank)) {
+                    // this.drawExplosion(this.tanks[j].barrelPos);
                     this.bullets[i].hits(this.tanks[j]);
                     return;
                 }
@@ -146,6 +154,18 @@ export default class Game {
             }
         }
     }
+    
+    // async drawExplosion(pos) {
+    //     this.ctx.clearRect(pos[0], pos[1], this.explosion[0].width, this.explosion[0].height);
+    //     for (const image of this.explosion) {
+    //         // Draw the current image onto the canvas
+    //         this.ctx.drawImage(image, pos[0], pos[1]);
+
+    //         // Use await to pause the execution of the code for the calculated frame duration
+    //         await new Promise(resolve => setTimeout(resolve, this.frameDuration));
+    //     }
+    //     requestAnimationFrame(this.drawExplosion);
+    // }
 
     step() {
         this.moveObjects();
