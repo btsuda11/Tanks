@@ -40,29 +40,32 @@ export default class Game {
         this.gameMission.children[0].innerHTML = `Mission ${this.level.level}`;
 
         GameView.toggleScreen('start-screen', false);
-        // GameView.toggleScreen('mission-screen', true);
+        GameView.toggleScreen('mission-screen', true);
         
-        GameView.toggleScreen('game-canvas', true);
-        this.canvasContainer.addEventListener('mousemove', this.boundMouseOnPage);
-        document.addEventListener('keydown', this.boundHandleKeyDown);
-        document.addEventListener('keyup', this.boundHandleKeyUp);
-        this.boundHandleClick = this.playerTank.shoot.myThrottle(this.playerTank, 2000);
-        this.canvasContainer.addEventListener('click', this.boundHandleClick);
+        // GameView.toggleScreen('game-canvas', true);
+        // this.canvasContainer.addEventListener('mousemove', this.boundMouseOnPage);
+        // document.addEventListener('keydown', this.boundHandleKeyDown);
+        // document.addEventListener('keyup', this.boundHandleKeyUp);
+        // this.boundHandleClick = this.playerTank.shoot.myThrottle(this.playerTank, 2000);
+        // this.canvasContainer.addEventListener('click', this.boundHandleClick);
 
-        // setTimeout(() => {
-        //     GameView.toggleScreen('mission-screen', false);
-        //     GameView.toggleScreen('game-canvas', true);
-        //     GameView.toggleScreen('game-mission', true);
-        //     setTimeout(() => {
-        //         GameView.toggleScreen('start', true);
-        //         setTimeout(() => GameView.toggleScreen('start', false), 1900);
+        setTimeout(() => {
+            GameView.toggleScreen('mission-screen', false);
+            GameView.toggleScreen('game-canvas', true);
+            this.draw();
+            GameView.toggleScreen('game-mission', true);
+            setTimeout(() => {
+                GameView.toggleScreen('start', true);
+                setTimeout(() => GameView.toggleScreen('start', false), 1900);
+                this.levelOver = false;
 
-        //         this.canvasContainer.addEventListener('mousemove', this.boundMouseOnPage);
-        //         document.addEventListener('keydown', this.boundHandleKeyDown);
-        //         document.addEventListener('keyup', this.boundHandleKeyUp);
-        //         this.canvasContainer.addEventListener('click', this.boundHandleClick);
-        //     }, 3300);
-        // }, 4000);
+                this.canvasContainer.addEventListener('mousemove', this.boundMouseOnPage);
+                document.addEventListener('keydown', this.boundHandleKeyDown);
+                document.addEventListener('keyup', this.boundHandleKeyUp);
+                this.boundHandleClick = this.playerTank.shoot.myThrottle(this.playerTank, 2000);
+                this.canvasContainer.addEventListener('click', this.boundHandleClick);
+            }, 3300);
+        }, 4000);
     }
 
     endLevel() {
