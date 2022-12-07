@@ -11,7 +11,7 @@ export default class Game {
     constructor(ctx, gameView) {
         this.ctx = ctx;
         this.gameView = gameView;
-        this.level = new Level(this, 3);
+        this.level = new Level(this, 1);
         this.bullets = [];
         this.mines = [];
         this.getDOMElements();
@@ -72,10 +72,16 @@ export default class Game {
         this.levelOver = true;
         this.music[0].pause();
         this.music[0].currentTime = 0;
-        this.music[1].play();
+        const currentLevel = this.level.level;
+        if (currentLevel < 3) {
+            this.music[1].play();
+            GameView.toggleScreen('mission-cleared', true);
+        } else {
+            this.music[2].play();
+            GameView.toggleScreen('mission-complete', true);
+        }
 
         GameView.toggleScreen('game-mission', false);
-        GameView.toggleScreen('mission-cleared', true);
 
         this.canvasContainer.removeEventListener('mousemove', this.boundMouseOnPage);
         document.removeEventListener('keydown', this.boundHandleKeyDown);
@@ -83,13 +89,13 @@ export default class Game {
         this.canvasContainer.removeEventListener('click', this.boundHandleClick);
 
         setTimeout(() => {
-            GameView.toggleScreen('mission-cleared', false);
-            const currentLevel = this.level.level;
             if (currentLevel < 3) {
+                GameView.toggleScreen('mission-cleared', false);
                 GameView.toggleScreen('game-canvas', false);
                 this.level = new Level(this, currentLevel + 1);
                 this.startLevel();
             } else {
+                GameView.toggleScreen('mission-complete', false)
                 GameView.toggleScreen('end-screen', true);
             }
         }, 5000);
