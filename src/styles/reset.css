@@ -91,7 +91,7 @@ video {
 /* HTML5 display-role reset for older browsers */
 @font-face {
     font-family: Chainwhacks;
-    src: url(../../assets/fonts/Chainwhacks-vm72E.ttf);
+    src: url(/Tanks/assets/fonts/Chainwhacks-vm72E.ttf);
 }
 
 article,

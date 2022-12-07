@@ -1,5 +1,5 @@
 canvas {
-    background-image: url('/assets/images/wood_tile.jpeg'); /* change back to /Tanks/assets for production */
+    background-image: url('/Tanks/assets/images/wood_tile.jpeg'); /* change back to /Tanks/assets for production */
     background-size: 100% 100%;
     opacity: 1;
     height: 100%;
