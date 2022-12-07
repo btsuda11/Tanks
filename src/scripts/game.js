@@ -81,10 +81,14 @@ export default class Game {
 
         setTimeout(() => {
             GameView.toggleScreen('mission-cleared', false);
-            GameView.toggleScreen('game-canvas', false);
             const currentLevel = this.level.level;
-            this.level = new Level(this, currentLevel + 1);
-            this.startLevel();
+            if (currentLevel < 3) {
+                GameView.toggleScreen('game-canvas', false);
+                this.level = new Level(this, currentLevel + 1);
+                this.startLevel();
+            } else {
+                GameView.toggleScreen('end-screen', true);
+            }
         }, 5000);
     }
 

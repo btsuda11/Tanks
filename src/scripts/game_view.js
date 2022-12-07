@@ -6,6 +6,8 @@ export default class GameView {
         this.music = document.getElementsByClassName('music');
         document.getElementById('mute-btn').addEventListener('click', this.toggleMute.bind(this));
         document.getElementById('pause-btn').addEventListener('click', this.togglePause.bind(this));
+        document.getElementById('play-again-btn').addEventListener('click', this.restart.bind(this));
+        document.getElementById('return-home-btn').addEventListener('click', this.returnHome.bind(this));
     }
     
     startGame() {
@@ -21,9 +23,6 @@ export default class GameView {
 
         GameView.toggleScreen('game-mission', false);
         GameView.toggleScreen('mission-failed', true);
-
-        document.getElementById('play-again-btn').addEventListener('click', this.restart.bind(this));
-        document.getElementById('return-home-btn').addEventListener('click', this.returnHome.bind(this));
         
         setTimeout(() => {
             GameView.toggleScreen('mission-failed', false);
