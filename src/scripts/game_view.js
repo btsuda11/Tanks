@@ -40,18 +40,17 @@ export default class GameView {
     }
 
     togglePause() {
-        const currentSound = Array.from(this.music).find(sound => !sound.playing);
+        this.toggleMute();
         if (this.game.paused) {
             this.game.paused = false;
-            currentSound.play();
         } else {
             this.game.paused = true;
-            currentSound.pause();
         }
     }
 
     toggleMute() {
-        const currentSound = Array.from(this.music).find(sound => !sound.playing);
+        const currentSound = Array.from(this.music).find(sound => !sound.paused);
+        console.log(currentSound)
         if (currentSound) currentSound.muted = !currentSound.muted;
     }
 
