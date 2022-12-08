@@ -27,16 +27,13 @@ export default class Mine {
     }
 
     explode() {
-        // console.log(this.explosion[0])
 
         // this.drawExplosion();
-        // console.log(this.explosion)
         // let index = Math.floor(this.tank.game.frame / 5) % 4;
         // setInterval(() => {
         //     this.ctx.drawImage(this.explosion[index], this.pos[0], this.pos[1]);
         // })
 
-        // console.log(index);
         
         this.exploded = true;
         
@@ -76,7 +73,6 @@ export default class Mine {
     }
 
     async drawExplosion() {
-        // console.log(this.explosion);
         for (let i = 0; i < this.explosion.length; i++) {
             // this.explosion[i].style.display = 'block';
             await this.timeout(1000);

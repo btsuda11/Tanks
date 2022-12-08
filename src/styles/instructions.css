@@ -32,7 +32,7 @@ strong {
     border: 2px solid black;
 }
 
-#how-to-div > div {
+.icon-div {
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -49,4 +49,25 @@ strong {
 
 #spacebar {
     height: 15%;
+}
+
+#how-to-div > div:last-of-type {
+    display: flex;
+    flex-direction: column;
+    background-color: white;
+    border-radius: 5px;
+}
+
+.instructions-title {
+    font-size: 28px;
+    color: #BA0021;
+    text-align: center;
+    margin-top: 10%;
+}
+
+.instructions-text {
+    font-size: 20px;
+    color: black;
+    text-align: center;
+    margin-top: 10%;
 }
