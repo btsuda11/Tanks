@@ -59,15 +59,15 @@ strong {
 }
 
 .instructions-title {
-    font-size: 28px;
+    font-size: 3vh;
     color: #BA0021;
     text-align: center;
-    margin-top: 10%;
+    margin: 10% 3% 0 3%;
 }
 
 .instructions-text {
-    font-size: 20px;
+    font-size: 2vh;
     color: black;
     text-align: center;
-    margin-top: 10%;
+    margin: 7.5% 5% 0 5%;
 }
