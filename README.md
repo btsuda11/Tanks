@@ -16,6 +16,8 @@ A tank shooting game built with JavaScript, HTML, and CSS based off of Wii Play'
 
 ## Features
 ### **Smooth Movement and Barrel Rotation**
+
+![](/assets/README/barrel-movement.gif)
 * Created smooth tank movement using different velocity components and specific key bindings.
 * Barrel of tank rotates to cursor location by using a separate tank barrel and body image and trigonometric angles.
 <br>
@@ -69,6 +71,8 @@ explode() {
 ```
 
 ### **Enemy Tank Movement**
+
+![](/assets/README/enemy-movement.gif)
 * Will move according to player tank location in the direction that will reach the player tank quicker.
 <br>
 
