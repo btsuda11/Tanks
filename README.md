@@ -1,35 +1,23 @@
-# Table of Contents
-* [Introduction](#background)
-* [How To Play](#how-to-play)
-* [Features](#features)
-    * [Smooth Movement and Barrel Rotation](#smooth-movement-and-barrel-rotation)
-    * [Mine Placement and Detonation](#mine-placement-and-detonation)
-    * [Enemy Tank Movement](#enemy-tank-movement)
-* [Technologies, Libraries, APIs](#technologies-libraries-apis)
-* [Bonus Features](#bonus-features)
-<br>
-<br>
+# Tanks
 
-# Introduction
+[Click to view!](https://btsuda11.github.io/Tanks/)
+
+## Technologies Implemented
+This project implemented the following technologies:
+
+* the `Canvas API` to render the game board
+* `Webpack` to bundle the source JavaScript code
+* `npm` to manage project dependencies
+* sprites to render the tanks and bullets
+
+## Background
 A tank shooting game built with JavaScript, HTML, and CSS based off of Wii Play's minigame, Tanks! Each level of Tanks! plays out on a rectangular map that is sectioned off by walls and houses the player's tank and a certain number of enemy tanks. The player completes the level by destroying all enemy tanks without losing all of its lives. 
 <br>
-<br>
 
-# How To Play
-[Click Here To Play](https://btsuda11.github.io/Tanks/)
-| **Key**           | **Control** |
-| ----------------- | ----------- |
-| WASD              | Move Tank   |
-| Space Bar         | Place Mine  |
-| Cursor Movement   | Rotate barrel to fire in direction |
-| Mouse Click       | Fire Bullet |
-<br>
-
-# Features
-## **Smooth Movement and Barrel Rotation**
+## Features
+### **Smooth Movement and Barrel Rotation**
 * Created smooth tank movement using different velocity components and specific key bindings.
 * Barrel of tank rotates to cursor location by using a separate tank barrel and body image and trigonometric angles.
-<br>
 <br>
 
 ```javascript
@@ -52,13 +40,10 @@ bindGameKeys() {
 };
 ```
 
-<br>
-
-## **Mine Placement and Detonation**
+### **Mine Placement and Detonation**
 * Mines detonate after 10 seconds if not prematurely hit.
 * Detonated mines prematurely upon being hit by oncoming bullets.
 * Expanded the radius of the mine so that will destroy all tanks in a given radius.
-<br>
 <br>
 
 ```javascript
@@ -83,11 +68,8 @@ explode() {
 };
 ```
 
-<br>
-
-## **Enemy Tank Movement**
+### **Enemy Tank Movement**
 * Will move according to player tank location in the direction that will reach the player tank quicker.
-<br>
 <br>
 
 ```javascript
@@ -111,19 +93,7 @@ move() {
 };
 ```
 
-<br>
-
-# Technologies, Libraries, APIs
-This project implemented the following technologies:
-
-* the `Canvas API` to render the game board
-* `Webpack` to bundle the source JavaScript code
-* `npm` to manage project dependencies
-* sprites to render the tanks and bullets
-<br>
-<br>
-
-# Bonus Features
+## Bonus Features
 
 Some anticipated updates are:
 
